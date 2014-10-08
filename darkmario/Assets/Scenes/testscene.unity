@@ -649,7 +649,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 868890f87aa264540b82248a5544bfd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  angleDelta: 100
+  speed: 15
+  wobbling: 15
 --- !u!23 &1801007593
 Renderer:
   m_ObjectHideFlags: 0
@@ -847,6 +848,7 @@ GameObject:
   - 33: {fileID: 2050365453}
   - 135: {fileID: 2050365452}
   - 23: {fileID: 2050365451}
+  - 114: {fileID: 2050365454}
   m_Layer: 0
   m_Name: methane
   m_TagString: Untagged
@@ -912,3 +914,16 @@ MeshFilter:
   m_PrefabInternal: {fileID: 848202978}
   m_GameObject: {fileID: 2050365449}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &2050365454
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2050365449}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 868890f87aa264540b82248a5544bfd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 3
+  wobbling: 6
