@@ -1,12 +1,8 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="../../StarBlocks/Assets/CameraScript.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\ProtagonistMovement.cs">
     <Files>
-      <File FileName="Assets/Scripts/ProtagonistMovement.cs" Line="8" Column="21" />
-      <File FileName="../../StarBlocks/Assets/Fyssaliikuttelu.cs" Line="72" Column="3" />
-      <File FileName="../../StarBlocks/Assets/MoveScript.cs" Line="21" Column="2" />
-      <File FileName="../../StarBlocks/Assets/TestiOsuma.cs" Line="28" Column="3" />
-      <File FileName="../../StarBlocks/Assets/CameraScript.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\ProtagonistMovement.cs" Line="73" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

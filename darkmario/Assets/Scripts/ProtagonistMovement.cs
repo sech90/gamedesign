@@ -3,9 +3,9 @@ using System.Collections;
 
 public class ProtagonistMovement : MonoBehaviour 
 {
-	float maxSpeed = 400.0F;
-	float accelleration = 20.0F;
-	float jumpSpeed = 800.0f;
+	public float maxSpeed = 400.0F;
+	public float accelleration = 20.0F;
+	public float jumpSpeed = 800.0f;
 
 
 	bool isOnGround = true;
