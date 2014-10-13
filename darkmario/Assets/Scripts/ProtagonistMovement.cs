@@ -19,16 +19,17 @@ public class ProtagonistMovement : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
-
 		Vector2 velocity = rigidbody2D.velocity;
 
-		if (Input.GetKey (KeyCode.UpArrow) && isOnGround ) 
+
+		if (UserInput.Jump() && isOnGround ) 
 		{
 			velocity.y = jumpSpeed;
 		}
 		
 
-		if (Input.GetKey (KeyCode.RightArrow))
+	
+		if ( UserInput.Right() )
 		{
 			velocity.x += accelleration;
 
@@ -37,7 +38,7 @@ public class ProtagonistMovement : MonoBehaviour
 
 		}
 
-		if (Input.GetKey (KeyCode.LeftArrow))
+		if ( UserInput.Left() )
 		{
 			velocity.x -= accelleration;
 			
