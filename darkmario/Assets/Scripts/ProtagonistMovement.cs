@@ -3,12 +3,21 @@ using System.Collections;
 
 public class ProtagonistMovement : MonoBehaviour 
 {
-	public float maxSpeed = 400.0F;
-	public float accelleration = 20.0F;
-	public float jumpSpeed = 800.0f;
+	// pixels / s
+	float maxWalkSpeed = 468.75F;
+	float walkAccelleration = 2000.0F;
+	float gravity = 112.5F;
 
 
-	bool isOnGround = true;
+	float jumpSpeed = 800.0f;
+
+	// if there is a collision higher than this coordinate, it's a head collision
+	private float headCollisionY = 35.0f;
+	// if there is a collision lower than this coordinate, it's a ground collision
+	private float feetCollisionY = -35.0f;
+
+
+	bool isOnGround = false;
 
 	// Use this for initialization
 	void Start () 
@@ -22,42 +31,55 @@ public class ProtagonistMovement : MonoBehaviour
 		Vector2 velocity = rigidbody2D.velocity;
 
 
-		if (UserInput.Jump() && isOnGround ) 
+		if (UserInput.JumpDown() && isOnGround ) 
 		{
 			velocity.y = jumpSpeed;
+			Debug.Log("Jump");
 		}
 		
 
-	
 		if ( UserInput.Right() )
 		{
-			velocity.x += accelleration;
+			velocity.x += walkAccelleration * Time.deltaTime;
 
-			if (velocity.x > maxSpeed)
-				velocity.x = maxSpeed;
+			if (velocity.x > maxWalkSpeed)
+				velocity.x = maxWalkSpeed;
 
 		}
 
 		if ( UserInput.Left() )
 		{
-			velocity.x -= accelleration;
+			velocity.x -= walkAccelleration * Time.deltaTime;
 			
-			if (velocity.x < -maxSpeed)
-				velocity.x = -maxSpeed;
+			if (velocity.x < -maxWalkSpeed)
+				velocity.x = -maxWalkSpeed;
 			
 		}
+
+		//if (!isOnGround)
+		//		velocity.y -= gravity * Time.deltaTime;
 
 		rigidbody2D.velocity = velocity;
 	}
 
+/*
+	void OnTriggerEnter2D(Collider2D collider)
+	{
+		BoxCollider2D box = (BoxCollider2D)collider;
+		Debug.Log("Pum!");
 
-
-
+	}
+*/
 	void OnCollisionEnter2D(Collision2D collision)
 	{
 		if (collision.gameObject.tag == "Ground") 
 		{
-			isOnGround = true;
+			Debug.Log("Pam!");
+			if ( IsFeetCollision(collision) )
+			{
+				isOnGround = true;
+				rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x, 0.0f);
+			}
 		}
 	}
 
@@ -67,6 +89,42 @@ public class ProtagonistMovement : MonoBehaviour
 		{
 			isOnGround = false;
 		}
+	}
+
+	// Check if collision is to the lower part of character
+	bool IsFeetCollision(Collision2D collision)
+	{
+		for (int i=0; i<collision.contacts.Length; i++) 
+		{
+			Vector2 localCollPoint = WorldToLocal2D( collision.contacts[i].point );
+ 			
+			if (localCollPoint.y <= feetCollisionY )
+				return true;
+		}
+	
+		return false;
+	}
+
+	// Check if collision is to the upper part of character
+	bool IsHeadCollision(Collision2D collision)
+	{
+		for (int i=0; i<collision.contacts.Length; i++) 
+		{
+			Vector2 localCollPoint = WorldToLocal2D( collision.contacts[i].point );
+
+			if (localCollPoint.y >= headCollisionY )
+				return true;
+		}
+		
+		return false;
+	}
+
+
+	// Transform world 2d coordinates to local coordinates
+	Vector2 WorldToLocal2D( Vector2 worldCoords )
+	{
+		Vector2 localCoords = transform.InverseTransformPoint(worldCoords.x, worldCoords.y, 0);
+		return localCoords;
 	}
 
 

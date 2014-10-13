@@ -29,5 +29,12 @@ public class UserInput : MonoBehaviour
 		return false;
 	}
 
+	static public bool JumpDown()
+	{
+		if (Input.GetButtonDown("Vertical"))
+			return true;
+		
+		return false;
+	}
 
 }
