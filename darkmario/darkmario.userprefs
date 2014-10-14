@@ -1,16 +1,12 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/UserInput.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Enemies\Enemy.cs">
     <Files>
-      <File FileName="Assets/Scripts/ProtagonistMovement.cs" Line="25" Column="21" />
-      <File FileName="../../StarBlocks/Assets/Fyssaliikuttelu.cs" Line="1" Column="1" />
-      <File FileName="../../StarBlocks/Assets/MoveScript.cs" Line="1" Column="1" />
-      <File FileName="../../StarBlocks/Assets/TestiOsuma.cs" Line="7" Column="1" />
-      <File FileName="../../StarBlocks/Assets/CameraScript.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/CameraFollow.cs" Line="1" Column="1" />
-      <File FileName="Assets/TestFolder/readme.txt" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/UserInput.cs" Line="20" Column="3" />
-      <File FileName="Assets/Scripts/TestScript.cs" Line="1" Column="1" />
+      <File FileName="darkmario.sln" Line="42" Column="10" />
+      <File FileName="Assets\Scripts\Motion\AISimpleMovement.cs" Line="8" Column="25" />
+      <File FileName="Assets\Scripts\Enemies\Enemy.cs" Line="9" Column="95" />
+      <File FileName="Assets\Scripts\Motion\AISimpleJump.cs" Line="24" Column="7" />
+      <File FileName="Assets\Scripts\Motion\ProtagonistMovement.cs" Line="56" Column="2" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
