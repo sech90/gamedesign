@@ -9,32 +9,59 @@ public class ProtagonistMovement : MonoBehaviour
 	float gravity = 500.5F;
 
 
+	private Transform groundCheck;
+	private Collider2D[] hits;
+
 	float jumpSpeed = 450.0f;
 
-	// if there is a collision higher than this coordinate, it's a head collision
-	private float headCollisionY = 35.0f;
-	// if there is a collision lower than this coordinate, it's a ground collision
-	private float feetCollisionY = -35.0f;
 
+	private Vector3 velocity;
+
+	private enum COLLISIONPOINT {GROUND1, GROUND2,  GROUNDED1, GROUNDED2, RIGHT1, RIGHT2, LEFT1, LEFT2, HEAD1, HEAD2};
+	private Transform[] collisionPoints;
 
 	bool isOnGround = false;
 
-	// Use this for initialization
 	void Start () 
 	{
 	
 	}
-	
+
+	void Awake()
+	{
+		// Initialize array of collision points
+		collisionPoints = new Transform[10];
+		collisionPoints[(int)COLLISIONPOINT.GROUND1]   	 = transform.Find ("groundCheck1").transform;
+		collisionPoints[(int)COLLISIONPOINT.GROUND2]   	 = transform.Find ("groundCheck2").transform;
+		collisionPoints[(int)COLLISIONPOINT.GROUNDED1]   = transform.Find ("groundedCheck1").transform;
+		collisionPoints[(int)COLLISIONPOINT.GROUNDED2]   = transform.Find ("groundedCheck2").transform;
+		collisionPoints[(int)COLLISIONPOINT.LEFT1]   	 = transform.Find ("leftCheck1").transform;
+		collisionPoints[(int)COLLISIONPOINT.LEFT2]   	 = transform.Find ("leftCheck2").transform;
+		collisionPoints[(int)COLLISIONPOINT.RIGHT1]   	 = transform.Find ("rightCheck1").transform;
+		collisionPoints[(int)COLLISIONPOINT.RIGHT2]   	 = transform.Find ("rightCheck2").transform;
+		collisionPoints[(int)COLLISIONPOINT.HEAD1]    	 = transform.Find ("headCheck1").transform;
+		collisionPoints[(int)COLLISIONPOINT.HEAD2]  	 = transform.Find ("headCheck2").transform;
+
+
+		velocity = new Vector3 (0.0f, 0.0f, 0.0f);
+
+		hits = new Collider2D[5];
+
+	}
+
+
+
 	// Update is called once per frame
 	void Update () 
 	{
-		Vector2 velocity = rigidbody2D.velocity;
+		// Update Mario's position
+		transform.position = new Vector2(transform.position.x + velocity.x * Time.deltaTime, transform.position.y + velocity.y * Time.deltaTime);
 
 
-		if (UserInput.JumpDown() && isOnGround ) 
+
+		if (UserInput.JumpDown() && IsGrounded() ) 
 		{
 			velocity.y = jumpSpeed;
-			Debug.Log("Jump");
 		}
 		
 
@@ -56,129 +83,53 @@ public class ProtagonistMovement : MonoBehaviour
 			
 		}
 
-		if (!isOnGround)
-				velocity.y -= gravity * Time.deltaTime;
 
-		rigidbody2D.velocity = velocity;
+
+		// Gravity pulls Mario down
+		velocity.y -= gravity * Time.deltaTime;
+
+
+
+		// Check collision from different direction and move Mario accordingly
+		while (ObstacleCollision(COLLISIONPOINT.HEAD1) || ObstacleCollision(COLLISIONPOINT.HEAD2) )
+		{
+			transform.position = new Vector2(transform.position.x, transform.position.y - 1.0f);
+			velocity.y = 0.0f;
+		}
+
+		while (ObstacleCollision(COLLISIONPOINT.RIGHT1) || ObstacleCollision(COLLISIONPOINT.RIGHT2) )
+		{
+			transform.position = new Vector2(transform.position.x - 1.0f, transform.position.y);
+			velocity.x = 0.0f;
+		}
+
+		while (ObstacleCollision(COLLISIONPOINT.LEFT1) || ObstacleCollision(COLLISIONPOINT.LEFT2) )
+		{
+			transform.position = new Vector2(transform.position.x + 1.0f, transform.position.y);
+			velocity.x = 0.0f;
+		}
+
+		while ( ObstacleCollision(COLLISIONPOINT.GROUND1) || ObstacleCollision(COLLISIONPOINT.GROUND2) )
+		{
+			transform.position = new Vector2(transform.position.x, transform.position.y + 1.0F);
+			velocity.y = 0.0f;
+		}
 	}
 
 
-	void OnTriggerStay2D(Collider2D collider)
+	// Check if given collision point is in collision with ANYTHING (to be changed)
+	bool ObstacleCollision(COLLISIONPOINT cp)
 	{
-		BoxCollider2D mariosBox = gameObject.GetComponent<BoxCollider2D>();
-		BoxCollider2D otherBox = (BoxCollider2D)collider; //Should check if successful
-
-
-		while (IsPointIntBoxCollider (new Vector2 (0.0f, -40.0f), otherBox)) 
-		{
-			transform.position = new Vector2(transform.position.x, transform.position.y + 1.0f);
-		}
-
-		if (IsPointIntBoxCollider (new Vector2 (0.0f, -42.0f), otherBox)) 
-		{
-			isOnGround = true;
-		} 
-		else 
-		{
-			isOnGround = false;
-		}
-
-
-		
-		//	Vector2 intersection = GetBoxCollIntersectionDepth (mariosBox, otherBox);
-
-	}
-
-	bool IsPointIntBoxCollider( Vector2 pointIn, BoxCollider2D box )
-	{
-		// Transform to world coordinates
-		Vector2 boxCenter = box.transform.TransformPoint (box.center);
-		Vector2 boxSize = box.size; //box.transform.TransformPoint (box.size);
-		Vector2 point = transform.TransformPoint (pointIn);
-
-		Vector2 min = new Vector2(boxCenter.x - boxSize.x/2.0f, boxCenter.y - boxSize.y/2.0f);
-		Vector2 max = new Vector2(boxCenter.x + boxSize.x/2.0f, boxCenter.y + boxSize.y/2.0f);
-
-		Debug.Log (boxSize);
-		//Debug.Log ("JEE");
-		//Debug.Log (min.y);
-		//Debug.Log (point.y);
-		//Debug.Log (max.y);
-
-//		Debug.Log ( point.x >= min.x && point.x <= max.x );
-//		Debug.Log (point.y >= min.y && point.y <= max.y);
-
-		if (point.x >= min.x && point.x <= max.x && 
-		    point.y >= min.y && point.y <= max.y)
-				return true;
+		if ( Physics2D.OverlapPointNonAlloc (collisionPoints [(int)cp].position, hits) > 0)
+			return true;
 
 		return false;
 	}
 
 
-	Vector2 GetBoxCollIntersectionDepth( BoxCollider2D a, BoxCollider2D b )
+	bool IsGrounded()
 	{
-		// Transform to world coordinates
-		Vector2 aCenter = a.transform.TransformPoint (a.center);
-		Vector2 aSize = a.transform.TransformPoint (a.size);
-		Vector2 bCenter = b.transform.TransformPoint (b.center);
-		Vector2 bSize = b.transform.TransformPoint (b.size);
-
-		Debug.Log (aSize );
-		Debug.Log (bSize );
-
-		
-		return aSize;
-
-	}
-
-	void OnCollisionEnter2D(Collision2D collision)
-	{
-		if (collision.gameObject.tag == "Ground") 
-		{
-			Debug.Log("Pam!");
-			if ( IsFeetCollision(collision) )
-			{
-				isOnGround = true;
-				rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x, 0.0f);
-			}
-		}
-	}
-
-	void OnCollisionExit2D(Collision2D collision)
-	{
-		if (collision.gameObject.tag == "Ground") 
-		{
-			isOnGround = false;
-		}
-	}
-
-	// Check if collision is to the lower part of character
-	bool IsFeetCollision(Collision2D collision)
-	{
-		for (int i=0; i<collision.contacts.Length; i++) 
-		{
-			Vector2 localCollPoint = WorldToLocal2D( collision.contacts[i].point );
- 			
-			if (localCollPoint.y <= feetCollisionY )
-				return true;
-		}
-	
-		return false;
-	}
-
-	// Check if collision is to the upper part of character
-	bool IsHeadCollision(Collision2D collision)
-	{
-		for (int i=0; i<collision.contacts.Length; i++) 
-		{
-			Vector2 localCollPoint = WorldToLocal2D( collision.contacts[i].point );
-
-			if (localCollPoint.y >= headCollisionY )
-				return true;
-		}
-		
-		return false;
+		return (ObstacleCollision (COLLISIONPOINT.GROUNDED1) || ObstacleCollision (COLLISIONPOINT.GROUNDED2));
 	}
 
 
