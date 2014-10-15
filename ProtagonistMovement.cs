@@ -6,10 +6,10 @@ public class ProtagonistMovement : MonoBehaviour
 	// pixels / s
 	float maxWalkSpeed = 468.75F;
 	float walkAccelleration = 2000.0F;
-	float gravity = 500.5F;
+	float gravity = 300.5F;
 
 
-	float jumpSpeed = 450.0f;
+	float jumpSpeed = 250.0f;
 
 	// if there is a collision higher than this coordinate, it's a head collision
 	private float headCollisionY = 35.0f;
