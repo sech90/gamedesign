@@ -1,6 +1,6 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Motion/ProtagonistMovement.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Motion/ObstacleCollision.cs">
     <Files>
       <File FileName="../../StarBlocks/Assets/Fyssaliikuttelu.cs" Line="1" Column="1" />
       <File FileName="../../StarBlocks/Assets/MoveScript.cs" Line="1" Column="1" />
@@ -17,10 +17,9 @@
       <File FileName="Assets/Scripts/GameElements/Item.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/GameElements/Spawner.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/Motion/CameraFollow.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Motion/SMBPhysicsBody.cs" Line="35" Column="3" />
-      <File FileName="Assets/Scripts/Motion/MarioMovement.cs" Line="22" Column="48" />
-      <File FileName="Assets/Scripts/Motion/ObstacleCollision.cs" Line="33" Column="22" />
-      <File FileName="Assets/Scripts/Motion/ProtagonistMovement.cs" Line="23" Column="2" />
+      <File FileName="Assets/Scripts/Motion/SMBPhysicsBody.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Motion/MarioMovement.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Motion/ObstacleCollision.cs" Line="25" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

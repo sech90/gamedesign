@@ -5,12 +5,17 @@ using System.Collections;
 public class MarioMovement : MonoBehaviour 
 {
 	// pixels / s
-	float maxWalkSpeed = 468.75F;
-	float walkAccelleration = 2000.0F;
-	float jumpSpeed = 450.0f;
-	
+	float maxWalkSpeed 			= 468.75F;
+	float jumpSpeed 			= 1200.0f;
+
+	// pixels / s^2
+	float walkAccelleration 	= 668.0F;
+	float releaseDecelleration 	= 703.0F;
+	float skiddingDecelleration = 1828.0F;
+
+
 	private SMBPhysicsBody body;
-	//private ObstacleCollision collisionHandler;
+	private ObstacleCollision obsColls;
 	
 	void Start () 
 	{
@@ -20,7 +25,7 @@ public class MarioMovement : MonoBehaviour
 	void Awake()
 	{
 		body = gameObject.GetComponent<SMBPhysicsBody>();
-		//collisionHandler = gameObject.GetComponent<CollisionHandler>();
+		obsColls = gameObject.GetComponent<ObstacleCollision>();
 	}
 	
 	
@@ -28,14 +33,26 @@ public class MarioMovement : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
-		
-		if (UserInput.JumpDown() )//&& collisionHandler.IsGrounded() ) 
+		// If Jump-button is just pressed down and Mario is standing on ground
+		if (UserInput.JumpDown() && obsColls.IsGrounded() ) 
 		{
 			body.velocity.y = jumpSpeed;
 		}
+
+
+		// If jump-button is being held down, gravity is lower making jump higher
+		if (UserInput.Jump() ) 
+		{
+			body.marioGravity = 2250.0f;
+		}
+		else
+		{
+			body.marioGravity = 7875.0f;
+		}
 		
-		
-		if ( UserInput.Right() )
+
+
+		if ( UserInput.Right() && body.velocity.x >= 0.0f )
 		{
 			body.velocity.x += walkAccelleration * Time.deltaTime;
 			
@@ -44,16 +61,59 @@ public class MarioMovement : MonoBehaviour
 			
 		}
 		
-		if ( UserInput.Left() )
+		if ( UserInput.Left() && body.velocity.x <= 0.0f)
 		{
 			body.velocity.x -= walkAccelleration * Time.deltaTime;
 			
 			if (body.velocity.x < -maxWalkSpeed)
 				body.velocity.x = -maxWalkSpeed;
-			
+		}
+
+
+		// If player let's go of controller, Mario decellerates slowly
+		if (!UserInput.Left () && !UserInput.Right ()) 
+		{
+			Decellerate( releaseDecelleration * Time.deltaTime );
+		}
+
+
+		// If Mario is moving other way and plahyer steeres other way, Mario skids and decellerates faster
+		if ( UserInput.Right() && body.velocity.x < 0.0f )
+		{
+			body.velocity.x += skiddingDecelleration * Time.deltaTime;
 		}
 		
-		
+		if ( UserInput.Left() && body.velocity.x > 0.0f)
+		{
+			body.velocity.x -= skiddingDecelleration * Time.deltaTime;
+		}
+
+
+	
+
+	}
+
+
+
+
+
+	void Decellerate( float deltaV )
+	{
+		if ( Mathf.Abs(body.velocity.x) < deltaV )
+		{
+			body.velocity.x = 0;
+		}
+		else
+		{
+			if (body.velocity.x < 0.0f)
+			{
+				body.velocity.x += deltaV;
+			}
+			else
+			{
+				body.velocity.x -= deltaV;
+			}	
+		}
 	}
 	
 	

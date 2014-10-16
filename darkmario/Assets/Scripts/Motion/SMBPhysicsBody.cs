@@ -11,8 +11,9 @@ public class SMBPhysicsBody : MonoBehaviour
 {
 	
 	// Default gravity
-	private float gravity = 500.5F; // pixels / sec ^ 2
-	
+	public float marioGravity = 7875.0F; // pixels / sec ^ 2
+//	private float gravity = 2250.0F; // pixels / sec ^ 2
+
 	public Vector2 velocity;
 	
 	
@@ -30,7 +31,7 @@ public class SMBPhysicsBody : MonoBehaviour
 		
 		
 		// Gravity pulls object down
-		velocity.y -= gravity * Time.deltaTime;
+		velocity.y -= marioGravity * Time.deltaTime;
 		
 		
 	}
