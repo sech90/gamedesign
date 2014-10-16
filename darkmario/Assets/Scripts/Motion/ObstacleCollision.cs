@@ -9,9 +9,10 @@ public class ObstacleCollision : MonoBehaviour
 	
 	private Transform[] collisionPoints;
 	private Collider2D[] hits;
-	
 	private SMBPhysicsBody body;
-	
+
+	private int layermask;
+
 	public bool IsGrounded()
 	{
 		return (ObstacleCollisionAt (COLLISIONPOINT.GROUNDED1) || ObstacleCollisionAt (COLLISIONPOINT.GROUNDED2));
@@ -20,6 +21,10 @@ public class ObstacleCollision : MonoBehaviour
 	
 	void Awake () 
 	{
+
+		layermask = (1 << LayerMask.NameToLayer("Obstacles")) | (1 << LayerMask.NameToLayer("Ground"));
+
+
 		// Initialize array of collision points
 		collisionPoints = new Transform[10];
 		collisionPoints[(int)COLLISIONPOINT.GROUND1]   	 = transform.Find ("groundCheck1").transform;
@@ -78,7 +83,8 @@ public class ObstacleCollision : MonoBehaviour
 	// Check if given collision point is in collision with ANYTHING (to be changed)
 	bool ObstacleCollisionAt(COLLISIONPOINT cp)
 	{
-		if ( Physics2D.OverlapPointNonAlloc (collisionPoints [(int)cp].position, hits) > 0)
+		Vector2 position = collisionPoints [(int)cp].position;
+		if ( Physics2D.OverlapPointNonAlloc (position, hits, layermask) > 0)
 			return true;
 		
 		return false;

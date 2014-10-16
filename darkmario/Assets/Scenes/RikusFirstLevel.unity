@@ -83,7 +83,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 34625234}
   - 61: {fileID: 34625235}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Pipe2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -122,7 +122,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 174401829}
   - 61: {fileID: 174401830}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: MisteryBlock
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -188,7 +188,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 185541669}
   - 61: {fileID: 185541670}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Floor4
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -287,7 +287,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 252685434}
   - 61: {fileID: 252685433}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Block
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -326,7 +326,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 264545303}
   - 61: {fileID: 264545304}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Block
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -452,7 +452,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d23152937a1b4c1b98d6dbf7ef49a68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
+  target: {fileID: 536324320}
 --- !u!1 &378207047
 GameObject:
   m_ObjectHideFlags: 0
@@ -462,7 +462,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 378207048}
   - 61: {fileID: 378207049}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Pipe5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -629,7 +629,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 680879134}
   - 61: {fileID: 680879135}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: MisteryBlock
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -695,7 +695,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 822231457}
   - 68: {fileID: 822231456}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: DeathPit1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -762,7 +762,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 891771590}
   - 68: {fileID: 891771591}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: DeathPit3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -802,7 +802,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 911104941}
   - 61: {fileID: 911104942}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Floor2
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -841,7 +841,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 980583462}
   - 68: {fileID: 980583463}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: DeathPit2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -881,7 +881,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 1046089479}
   - 61: {fileID: 1046089480}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Block
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -920,7 +920,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 1073064887}
   - 61: {fileID: 1073064885}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Floor1
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -959,7 +959,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 1124189464}
   - 61: {fileID: 1124189465}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Pipe4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1069,7 +1069,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 1327266075}
   - 61: {fileID: 1327266076}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Pipe1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1165,7 +1165,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 1468300226}
   - 68: {fileID: 1468300227}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1205,7 +1205,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 1519192257}
   - 68: {fileID: 1519192258}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1272,7 +1272,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 1845244671}
   - 61: {fileID: 1845244672}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Pipe3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1311,7 +1311,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 1870972314}
   - 61: {fileID: 1870972315}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Floor3
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -1521,7 +1521,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 2076806221}
   - 61: {fileID: 2076806222}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Pipe6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1560,7 +1560,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 2111485435}
   - 61: {fileID: 2111485436}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: MisteryBlock
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -1599,7 +1599,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 2129433553}
   - 61: {fileID: 2129433554}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: MisteryBlock
   m_TagString: Ground
   m_Icon: {fileID: 0}
