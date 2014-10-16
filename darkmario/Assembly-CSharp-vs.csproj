@@ -55,10 +55,8 @@
      <Compile Include="Assets\Scripts\Motion\AISimpleJump.cs" />
      <Compile Include="Assets\Scripts\Motion\AISimpleMovement.cs" />
      <Compile Include="Assets\Scripts\Motion\CameraFollow.cs" />
-     <Compile Include="Assets\Scripts\Motion\MarioMovement.cs" />
-     <Compile Include="Assets\Scripts\Motion\MariosMovement.cs" />
-     <Compile Include="Assets\Scripts\Motion\ObstacleCollision.cs" />
-     <Compile Include="Assets\Scripts\Motion\SMBPhysicsBody.cs" />
+     <Compile Include="Assets\Scripts\Motion\MarioCollisions.cs" />
+     <Compile Include="Assets\Scripts\Motion\ProtagonistMovement.cs" />
      <Compile Include="Assets\Scripts\Motion\UserInput.cs" />
      <None Include="Assets\Audio\audioplaceholder.txt" />
      <None Include="Assets\TestFolder\readme.txt" />
