@@ -20,7 +20,7 @@ public class ProtagonistMovement : MonoBehaviour
 	private enum COLLISIONPOINT {GROUND1, GROUND2,  GROUNDED1, GROUNDED2, RIGHT1, RIGHT2, LEFT1, LEFT2, HEAD1, HEAD2};
 	private Transform[] collisionPoints;
 
-	bool isOnGround = false;
+
 
 	void Start () 
 	{
