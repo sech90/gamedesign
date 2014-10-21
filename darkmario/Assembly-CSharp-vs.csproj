@@ -48,17 +48,10 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\Enemies\Enemy.cs" />
      <Compile Include="Assets\Scripts\GameElements\Block.cs" />
-     <Compile Include="Assets\Scripts\GameElements\Brick.cs" />
      <Compile Include="Assets\Scripts\GameElements\Destructible.cs" />
      <Compile Include="Assets\Scripts\GameElements\Item.cs" />
      <Compile Include="Assets\Scripts\GameElements\Spawner.cs" />
      <Compile Include="Assets\Scripts\GameState.cs" />
-     <Compile Include="Assets\Scripts\MarioSkills\BigPower.cs" />
-     <Compile Include="Assets\Scripts\MarioSkills\FirePower.cs" />
-     <Compile Include="Assets\Scripts\MarioSkills\ItemCollector.cs" />
-     <Compile Include="Assets\Scripts\MarioSkills\Mario.cs" />
-     <Compile Include="Assets\Scripts\MarioSkills\StarPower.cs" />
-     <Compile Include="Assets\Scripts\MarioSkills\SuperPower.cs" />
      <Compile Include="Assets\Scripts\Motion\AISimpleJump.cs" />
      <Compile Include="Assets\Scripts\Motion\AISimpleMovement.cs" />
      <Compile Include="Assets\Scripts\Motion\CameraFollow.cs" />

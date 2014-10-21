@@ -16,8 +16,6 @@ public class MarioMovement : MonoBehaviour
 
 	private SMBPhysicsBody body;
 	private ObstacleCollision obsColls;
-
-	Animator anim;
 	
 	void Start () 
 	{
@@ -28,7 +26,6 @@ public class MarioMovement : MonoBehaviour
 	{
 		body = gameObject.GetComponent<SMBPhysicsBody>();
 		obsColls = gameObject.GetComponent<ObstacleCollision>();
-		anim = GetComponent<Animator> (); 
 	}
 	
 	
@@ -36,26 +33,10 @@ public class MarioMovement : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
-
-
-		if (obsColls.IsGrounded ()) 
-		{
-			if (Mathf.Abs (body.velocity.x) < 1.0f) 
-			{
-				anim.SetTrigger ("Idle");
-			} 
-			else 
-			{
-				anim.SetTrigger ("Run");
-			}
-		}
-
-
 		// If Jump-button is just pressed down and Mario is standing on ground
 		if (UserInput.JumpDown() && obsColls.IsGrounded() ) 
 		{
 			body.velocity.y = jumpSpeed;
-			anim.SetTrigger("Jump");
 		}
 
 
@@ -63,13 +44,10 @@ public class MarioMovement : MonoBehaviour
 		if (UserInput.Jump() ) 
 		{
 			body.marioGravity = 2250.0f;
-
-		
 		}
 		else
 		{
 			body.marioGravity = 7875.0f;
-	
 		}
 		
 
