@@ -1,18 +1,25 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/GameState.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Motion/ObstacleCollision.cs">
     <Files>
-      <File FileName="Assets/Scripts/Motion/MarioMovement.cs" Line="122" Column="2" />
-      <File FileName="Assets/Scripts/Motion/SMBPhysicsBody.cs" Line="1" Column="1" />
+      <File FileName="../../StarBlocks/Assets/Fyssaliikuttelu.cs" Line="1" Column="1" />
+      <File FileName="../../StarBlocks/Assets/MoveScript.cs" Line="1" Column="1" />
+      <File FileName="../../StarBlocks/Assets/TestiOsuma.cs" Line="1" Column="1" />
+      <File FileName="../../StarBlocks/Assets/CameraScript.cs" Line="1" Column="1" />
+      <File FileName="Assets/TestFolder/readme.txt" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/GameState.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/Motion/UserInput.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Motion/ObstacleCollision.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/Motion/AISimpleMovement.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/GameState.cs" Line="27" Column="39" />
-      <File FileName="Assets/Scripts/MarioSkills/Mario.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Motion/AISimpleJump.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Enemies/Enemy.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/GameElements/Block.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/GameElements/Brick.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/GameElements/Destructible.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/GameElements/Item.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/GameElements/Spawner.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Motion/CameraFollow.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Motion/SMBPhysicsBody.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Motion/MarioMovement.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Motion/ObstacleCollision.cs" Line="25" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
