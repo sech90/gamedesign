@@ -147,8 +147,6 @@ GameObject:
   - 114: {fileID: 11400004}
   - 114: {fileID: 11400002}
   - 114: {fileID: 11400000}
-  - 114: {fileID: 11400006}
-  - 95: {fileID: 9500000}
   m_Layer: 0
   m_Name: Mario
   m_TagString: Untagged
@@ -313,21 +311,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 400018}
   m_RootOrder: 5
---- !u!95 &9500000
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100018}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 00cfdf80987064727a4fecf034341295, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 1
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -361,20 +344,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f7e1da3155b04778ae796c4130b399a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  marioGravity: 7875
   velocity: {x: 0, y: 0}
---- !u!114 &11400006
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100018}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 515336668db4f894dbdd6be605c683c4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _itemLayer: {}
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -395,7 +365,7 @@ SpriteRenderer:
   m_ScaleInLightmap: 1
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: b306ac9b8cd6441d5a3b47504f268416, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 5cf8cccc46a8e4df68eff86f73483a93, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000
 Prefab:
