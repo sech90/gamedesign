@@ -1,15 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Destructible : MonoBehaviour {
+public class Destructible : Brick {
 
-	// Use this for initialization
-	void Start () {
-	
+	override public void OnHit(GameObject hitter){
+		if(hitter.GetComponent<BigPower>() != null){
+			Debug.Log("Destroyed brick");
+			Destroy(gameObject);
+		}
 	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+
 }

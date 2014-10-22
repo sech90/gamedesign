@@ -6,6 +6,8 @@ TagManager:
   - Ground
   - Obstacle
   - Platform
+  - MarioHead
+  - MarioFeet
   - 
   Builtin Layer 0: Default
   Builtin Layer 1: TransparentFX
