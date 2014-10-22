@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class Spawner : Brick {
@@ -6,8 +6,13 @@ public class Spawner : Brick {
 	public Item item;
 	public int numberOfCoins = 0;
 	private bool _isSolid = false;
+	private Vector3 _spawnPosition;
 
 	void Start(){
+		float yExtent = renderer.bounds.extents.y;
+		_spawnPosition = transform.position;
+		_spawnPosition.y += yExtent;
+
 		if(item != null && numberOfCoins > 0){
 			Debug.LogWarning("Spawner only requires the Item or the coins. Assuming this is a coin spawner");
 			item = null;
@@ -17,7 +22,7 @@ public class Spawner : Brick {
 	override public void OnHit(GameObject hitter){
 		if(!_isSolid){
 			if(item != null){
-				Instantiate(item);
+				Instantiate(item,_spawnPosition,transform.rotation);
 				TurnSolid();
 			}
 			else{
