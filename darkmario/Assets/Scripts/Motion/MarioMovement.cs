@@ -16,9 +16,14 @@ public class MarioMovement : MonoBehaviour
 
 	private SMBPhysicsBody body;
 	private ObstacleCollision obsColls;
-	
+
+	Animator anim;
+	bool  isJumping = false;
+
+
 	void Start () 
 	{
+		anim = GetComponent<Animator> (); 
 		
 	}
 	
@@ -37,8 +42,15 @@ public class MarioMovement : MonoBehaviour
 		if (UserInput.JumpDown() && obsColls.IsGrounded() ) 
 		{
 			body.velocity.y = jumpSpeed;
+			anim.SetTrigger ("Jump");
+			isJumping = true;
 		}
 
+		if (isJumping && body.velocity.y <= 0.0f && obsColls.IsGrounded() )
+		{
+			isJumping = false;
+			anim.SetTrigger("Run");
+		}
 
 		// If jump-button is being held down, gravity is lower making jump higher
 		if (UserInput.Jump() ) 
