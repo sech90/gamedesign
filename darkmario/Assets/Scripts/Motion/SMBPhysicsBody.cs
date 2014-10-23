@@ -15,21 +15,20 @@ public class SMBPhysicsBody : MonoBehaviour
 //	private float gravity = 2250.0F; // pixels / sec ^ 2
 
 	public Vector2 velocity;
-	
-	
+
 	void Awake()
 	{	
 		velocity = new Vector2 (0.0f, 0.0f);
 	}	
-	
-	
+
+
 	void Update () 
 	{
 		// Integrate velocity into position
 		transform.position = new Vector2( transform.position.x + velocity.x * Time.deltaTime, 
-		                                 transform.position.y + velocity.y * Time.deltaTime );
+		                                 transform.position.y + velocity.y * Time.deltaTime);
 		
-		
+
 		// Gravity pulls object down
 		if(velocity.y > -2000)
 			velocity.y -= marioGravity * Time.deltaTime;

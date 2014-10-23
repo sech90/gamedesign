@@ -61,8 +61,8 @@ public class ObstacleCollision : MonoBehaviour
 
 		while ( ObstacleCollisionAt(COLLISIONPOINT.GROUND1) || ObstacleCollisionAt(COLLISIONPOINT.GROUND2) )
 		{
-			transform.position = new Vector2(transform.position.x, transform.position.y + 1.0F);
 			body.velocity.y = 0.0f;
+			transform.position = new Vector2(transform.position.x, transform.position.y + 1.0f);
 		}  
 		
 		

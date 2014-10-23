@@ -6,18 +6,22 @@ public class Mario : MonoBehaviour {
 	private int _score;
 	private int _coins;
 	private int _lives = 3;
-	
+
+	private BoxCollider2D _marioCollider;
 	private ItemCollector _collector = null;
 	private MarioMovement _motion = null;
 	private SuperPower big, fire, star;
 	private LayerMask bricksLayer, enemyLayer;
+	private bool _alreadyHitBrick = false;
+	private Vector2 _topR, _botL;
+	private float _lastY, _currentY=0;
 
 	public int Score{get{return _score;}}
 	public int Coins{get{return _coins;}}
 	public int Lives{get{return _lives;}}
 	
 	public float DelayAfterHit = 3.0f;
-
+	private bool alive = true;
 	void Start(){
 		Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"),LayerMask.NameToLayer("Player"),true);
 		big = star = fire = null;
@@ -27,52 +31,127 @@ public class Mario : MonoBehaviour {
 		_motion = GetComponent<MarioMovement>();
 		_collector = GetComponent<ItemCollector>();
 		_collector.OnItemCollision += pickItem;
-		Debug.Log((int)bricksLayer);
+
+		_marioCollider = GetComponent<BoxCollider2D>();
+		_currentY = transform.position.y;
 	}
+
+	void LateUpdate(){
+		if(_currentY != 0)
+			_lastY = _currentY;
+		_currentY = transform.position.y;
+		Debug.Log(_lastY+" - "+ _currentY);
+
+		if(_alreadyHitBrick && _motion.Grounded)
+			_alreadyHitBrick = false;
+	}
+
 
 	void OnCollisionEnter2D(Collision2D coll){
 		if(coll == null)
 			return;
 
-		//Hit an enemy
-		if(coll.gameObject.layer == enemyLayer){
-			//Stomped an enemy with feet
-			Debug.Log("**** Enemy! Contacts: "+coll.contacts.Length);
-			bool isStomped = false;
-			int i = 0;
-			while(i < coll.contacts.Length && !isStomped){
-				Debug.Log(coll.contacts[i].otherCollider.name);
-				Debug.Log(coll.contacts[i].normal);
+		//Hit a brick 
+		if(coll.gameObject.layer == bricksLayer && _alreadyHitBrick != true){
+			Brick brick = HitBrickWithHead();
+			if(brick != null){
+				brick.OnHit(gameObject);
+				_alreadyHitBrick = true;
+			}
+		}
 
-				if(coll.contacts[i].otherCollider.tag == "MarioFeet" || coll.contacts[i].normal.y == 1)
-					isStomped = true;
-				i++;
-			}
-			Debug.Log("**** Stomped: "+isStomped);
-			if(isStomped){
-			//if(coll.contacts[0].normal.y == 1){
-				Enemy enemy = coll.contacts[0].collider.gameObject.GetComponent<Enemy>();
-				if(enemy != null){
-					_motion.Jump();
-					_score += enemy.Hit();
-				}
-			}
-			//Hit by an enemy
-			else
+		//Hit an enemy
+		else if(coll.gameObject.layer == enemyLayer){
+			if(!HasStomped(coll))
 				hitByEnemy();
 		}
-			
+	}
 
-		//Hit a brick 
-		else if(coll.gameObject.layer == bricksLayer){
-			if(coll.contacts[0].otherCollider.tag == "MarioHead"){
-			//if(coll.contacts[0].normal.y == -1){
-				Brick brick = coll.contacts[0].collider.gameObject.GetComponent<Brick>();
-				if(brick != null){
-					brick.OnHit(gameObject);
-				}
+	private bool HasStomped(Collision2D coll){
+
+		//if moving straight or jumping up
+		if(_lastY <= _currentY){
+			Debug.Log("Not jumping down.. prev: "+_lastY+" curr: "+_currentY);
+			return false;
+		}
+
+		//HACK: correct previous Y if OnCollision was called before Update
+		/*if(_currentY != transform.position.y){
+			_lastY = _currentY;
+			_currentY = transform.position.y;
+			Debug.Log("correct. Prev: "+_lastY+" Curr: "+_currentY);
+		}*/
+
+		float feetBefore = _lastY - _marioCollider.bounds.extents.y;
+		float enemyHead  = coll.gameObject.transform.position.y + coll.collider.bounds.extents.y; 
+
+		//Before, mario's feet were below enemy's head
+		if(feetBefore <= enemyHead){
+			Debug.Log("feetBefore "+feetBefore+" enemy: "+enemyHead);
+			return false;
+		}
+		/*/
+		//Check Collision normal vector. If vertical facing down, we stomped the enemy
+		Debug.Log("**** Enemy! Contacts: "+coll.contacts.Length);
+		bool isStomped = false;
+		for(int i=0; i< coll.contacts.Length && isStomped == false; i++){
+
+			if(coll.contacts[i].normal.y == 1.0f)
+				isStomped = true;
+		}
+
+		if(isStomped){
+			Debug.Log("**** Stomped: "+isStomped);
+			Enemy enemy = coll.contacts[0].collider.gameObject.GetComponent<Enemy>();
+			if(enemy != null){
+				_motion.Jump();
+				_score += enemy.Hit();
 			}
 		}
+
+		return isStomped;
+		/*/
+		Enemy enemy = coll.contacts[0].collider.gameObject.GetComponent<Enemy>();
+		if(enemy != null){
+			_motion.Jump();
+			_score += enemy.Hit();
+		}
+		return true;
+		//*/
+	}
+
+	private Brick HitBrickWithHead(){
+		//shrink width by 20% so it doesn't collide on sides
+		float shrinkAmount = _marioCollider.bounds.extents.x * 0.2f;
+		
+		//Calculate triggering area for the head
+		_botL.x = transform.position.x - _marioCollider.bounds.extents.x + shrinkAmount;
+		_botL.y = transform.position.y + _marioCollider.bounds.extents.y-1;
+		
+		_topR.x = transform.position.x + _marioCollider.bounds.extents.x - shrinkAmount;
+		_topR.y = _botL.y + 4;
+		
+		//if(coll.contacts[0].otherCollider.tag == "MarioHead"){
+		Collider2D[] colliders = Physics2D.OverlapAreaAll(_topR,_botL,LayerMask.GetMask("Obstacles"));
+
+		if(colliders.Length == 0)
+			return null;
+
+		if(colliders.Length == 1){
+			return colliders[0].GetComponent<Brick>();
+		}
+		//hit more than one brick. take the one closer to the center of the head
+		float distance;
+		float minDistance = Mathf.Abs(colliders[0].transform.position.x - transform.position.x);
+		int theBrick = 0;
+		for(int i=1; i<colliders.Length;i++){
+			distance = Mathf.Abs(colliders[i].transform.position.x - transform.position.x);
+			if(distance < minDistance){
+				minDistance = distance;
+				theBrick = i;
+			}
+		}
+		return colliders[theBrick].GetComponent<Brick>();
 	}
 
 	void OnTriggerEnter2D(Collider2D coll){

@@ -25,7 +25,7 @@ public class MarioMovement : MonoBehaviour
 
 	private enum DIRECTION {RIGHT, LEFT};
 	private DIRECTION direction = DIRECTION.RIGHT;
-
+	public bool Grounded{get{return IsGrounded();}}
 
 	void Start () 
 	{
