@@ -65,15 +65,17 @@ public class MarioMovement : MonoBehaviour
 	}
 
 
-	
+	public void Jump(){
+		body.velocity.y = jumpSpeed;
+		SetState(STATE.JUMPING);
+	}
 	// Update is called once per frame
 	void Update () 
 	{
 		// If Jump-button is just pressed down and Mario is standing on ground
 		if (UserInput.JumpDown() && IsGrounded() ) 
 		{
-			body.velocity.y = jumpSpeed;
-			SetState(STATE.JUMPING);
+			Jump();
 		}
 
 		if ( IsGrounded() )

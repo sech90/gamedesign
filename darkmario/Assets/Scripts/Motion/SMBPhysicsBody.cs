@@ -31,7 +31,8 @@ public class SMBPhysicsBody : MonoBehaviour
 		
 		
 		// Gravity pulls object down
-		velocity.y -= marioGravity * Time.deltaTime;
+		if(velocity.y > -2000)
+			velocity.y -= marioGravity * Time.deltaTime;
 		
 		
 	}
