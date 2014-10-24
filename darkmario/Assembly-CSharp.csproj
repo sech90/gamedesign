@@ -67,6 +67,7 @@
      <Compile Include="Assets\Scripts\Motion\ObstacleCollision.cs" />
      <Compile Include="Assets\Scripts\Motion\SMBPhysicsBody.cs" />
      <Compile Include="Assets\Scripts\Motion\UserInput.cs" />
+     <Compile Include="Assets\Scripts\Scrolling.cs" />
      <None Include="Assets\Audio\audioplaceholder.txt" />
      <None Include="Assets\TestFolder\readme.txt" />
  <Reference Include="UnityEngine.UI">
