@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
+//using UnityEngine.UI;
 using System.Collections;
 
 public class GameState : MonoBehaviour {
@@ -8,9 +8,9 @@ public class GameState : MonoBehaviour {
 	private int timeLeft = 400;
 	private float endTime;
 	private Mario _mario;
-	public Text score;
-	public Text coins;
-	public Text timer;
+//	public Text score;
+//	public Text coins;
+//	public Text timer;
 
 
 	void Start () {
@@ -22,9 +22,9 @@ public class GameState : MonoBehaviour {
 	void Update () {
 		if(timeLeft > 0){
 			timeLeft = (int)(endTime - Time.time);
-			score.text = _mario.Score.ToString();
-			coins.text = _mario.Coins.ToString();
-			timer.text = timeLeft.ToString();
+//			score.text = _mario.Score.ToString();
+//			coins.text = _mario.Coins.ToString();
+//			timer.text = timeLeft.ToString();
 		}
 		else if(timeLeft == 0)
 		{
