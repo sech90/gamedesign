@@ -19,7 +19,7 @@ public class Spawner : Brick {
 		}
 	}
 
-	override public void OnHit(GameObject hitter){
+	override public void SpecialEffect(GameObject hitter){
 		if(!_isSolid){
 			if(item != null){
 				Instantiate(item,_spawnPosition,transform.rotation);

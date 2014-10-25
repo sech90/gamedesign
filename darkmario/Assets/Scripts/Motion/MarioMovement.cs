@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-
+public enum STATE { STANDING, RUNNING, JUMPING, SKIDDING, DIED };
 public class MarioMovement : MonoBehaviour 
 {
 	// pixels / s
@@ -20,7 +20,6 @@ public class MarioMovement : MonoBehaviour
 
 	Animator anim;
 	
-	private enum STATE { STANDING, RUNNING, JUMPING, SKIDDING };
 	private STATE state;
 
 	private enum DIRECTION {RIGHT, LEFT};
@@ -40,7 +39,7 @@ public class MarioMovement : MonoBehaviour
 		obsColls = gameObject.GetComponent<ObstacleCollision>();
 	}
 
-	void SetState( STATE newState )
+	public void SetState( STATE newState )
 	{
 		if (state == newState)
 			return;
@@ -61,6 +60,10 @@ public class MarioMovement : MonoBehaviour
 				case STATE.SKIDDING: 
 						anim.SetTrigger ("Skidding");
 						break;
+				case STATE.DIED:
+						anim.SetTrigger ("Died");
+						break;
+
 		}
 	}
 
@@ -72,6 +75,7 @@ public class MarioMovement : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
+
 		// If Jump-button is just pressed down and Mario is standing on ground
 		if (UserInput.JumpDown() && IsGrounded() ) 
 		{

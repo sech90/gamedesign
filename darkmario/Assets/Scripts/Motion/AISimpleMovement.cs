@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+public enum DIRECTION {RIGHT, LEFT};
 public class AISimpleMovement : MonoBehaviour {
 
-	public enum DIRECTION {RIGHT, LEFT};
 	public DIRECTION direction = DIRECTION.RIGHT;
 	public float speed = 15.0f;
 	public LayerMask layermask;
@@ -40,6 +40,7 @@ public class AISimpleMovement : MonoBehaviour {
 		Vector3 currentScale = transform.localScale;
 		currentScale.x *= -1;
 		transform.localScale = currentScale;
+		direction = direction == DIRECTION.RIGHT ? DIRECTION.LEFT : DIRECTION.RIGHT;
 	}
 
 

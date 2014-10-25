@@ -8,6 +8,7 @@ public class FirePower : SuperPower {
 	}
 	
 	override public void Remove(){
+		Destroy(this);
 		Debug.Log("Mario not on fire anymore");
 	}
 

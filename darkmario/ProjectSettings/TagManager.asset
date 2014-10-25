@@ -23,8 +23,8 @@ TagManager:
   User Layer 10: Ground
   User Layer 11: Enemies
   User Layer 12: Items
-  User Layer 13: 
-  User Layer 14: 
+  User Layer 13: RunningEnemies
+  User Layer 14: DyingEnemies
   User Layer 15: 
   User Layer 16: 
   User Layer 17: 
@@ -43,6 +43,10 @@ TagManager:
   User Layer 30: 
   User Layer 31: 
   m_SortingLayers:
+  - name: Default
+    userID: 0
+    uniqueID: 0
+    locked: 0
   - name: UI
     userID: 1
     uniqueID: 2396439219
@@ -55,7 +59,7 @@ TagManager:
     userID: 2
     uniqueID: 3930233985
     locked: 0
-  - name: Default
-    userID: 0
-    uniqueID: 0
+  - name: DyingEnemies
+    userID: 4
+    uniqueID: 3724988691
     locked: 0

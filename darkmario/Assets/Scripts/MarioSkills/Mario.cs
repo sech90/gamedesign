@@ -1,32 +1,36 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+
 public class Mario : MonoBehaviour {
-	
+
+	public Callback OnMarioDie;
+
 	private int _score;
 	private int _coins;
 	private int _lives = 3;
 
-	private BoxCollider2D _marioCollider;
+	private Collider2D _marioCollider;
 	private ItemCollector _collector = null;
 	private MarioMovement _motion = null;
 	private SuperPower big, fire, star;
-	private LayerMask bricksLayer, enemyLayer;
+	private LayerMask bricksLayer, enemyLayer,runningEnemyLayer;
 	private bool _alreadyHitBrick = false;
 	private Vector2 _topR, _botL;
 	private float _lastY, _currentY=0;
+	private bool _died = false;
 
 	public int Score{get{return _score;}}
 	public int Coins{get{return _coins;}}
 	public int Lives{get{return _lives;}}
-	
+
 	public float DelayAfterHit = 3.0f;
 	private bool alive = true;
 	void Start(){
-		Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"),LayerMask.NameToLayer("Player"),true);
 		big = star = fire = null;
 		bricksLayer = LayerMask.NameToLayer("Obstacles");
 		enemyLayer  = LayerMask.NameToLayer("Enemies");
+		runningEnemyLayer = LayerMask.NameToLayer("RunningEnemies");
 
 		_motion = GetComponent<MarioMovement>();
 		_collector = GetComponent<ItemCollector>();
@@ -40,7 +44,7 @@ public class Mario : MonoBehaviour {
 		if(_currentY != 0)
 			_lastY = _currentY;
 		_currentY = transform.position.y;
-		Debug.Log(_lastY+" - "+ _currentY);
+//		Debug.Log(_lastY+" - "+ _currentY);
 
 		if(_alreadyHitBrick && _motion.Grounded)
 			_alreadyHitBrick = false;
@@ -53,7 +57,9 @@ public class Mario : MonoBehaviour {
 
 		//Hit a brick 
 		if(coll.gameObject.layer == bricksLayer && _alreadyHitBrick != true){
+
 			Brick brick = HitBrickWithHead();
+			Debug.Log("hit "+coll.gameObject.name+" "+(brick==null));
 			if(brick != null){
 				brick.OnHit(gameObject);
 				_alreadyHitBrick = true;
@@ -61,9 +67,18 @@ public class Mario : MonoBehaviour {
 		}
 
 		//Hit an enemy
-		else if(coll.gameObject.layer == enemyLayer){
-			if(!HasStomped(coll))
-				hitByEnemy();
+		else if(coll.gameObject.layer == enemyLayer || coll.gameObject.layer == runningEnemyLayer){
+			Enemy enemy = coll.contacts[0].collider.gameObject.GetComponent<Enemy>();
+			if(enemy != null){
+				//mario stomped the enemy
+				if(HasStomped(coll)){
+					_motion.Jump();
+					_score += enemy.Stomped(this);
+				}
+				//mario collided with the enemy 
+				else
+					enemy.OnMarioContact(this,coll);
+			}
 		}
 	}
 
@@ -99,28 +114,15 @@ public class Mario : MonoBehaviour {
 			if(coll.contacts[i].normal.y == 1.0f)
 				isStomped = true;
 		}
-
-		if(isStomped){
-			Debug.Log("**** Stomped: "+isStomped);
-			Enemy enemy = coll.contacts[0].collider.gameObject.GetComponent<Enemy>();
-			if(enemy != null){
-				_motion.Jump();
-				_score += enemy.Hit();
-			}
-		}
-
-		return isStomped;
 		/*/
-		Enemy enemy = coll.contacts[0].collider.gameObject.GetComponent<Enemy>();
-		if(enemy != null){
-			_motion.Jump();
-			_score += enemy.Hit();
-		}
+
 		return true;
 		//*/
 	}
 
 	private Brick HitBrickWithHead(){
+		_marioCollider = GetComponent<BoxCollider2D>();
+
 		//shrink width by 20% so it doesn't collide on sides
 		float shrinkAmount = _marioCollider.bounds.extents.x * 0.2f;
 		
@@ -129,10 +131,12 @@ public class Mario : MonoBehaviour {
 		_botL.y = transform.position.y + _marioCollider.bounds.extents.y-1;
 		
 		_topR.x = transform.position.x + _marioCollider.bounds.extents.x - shrinkAmount;
-		_topR.y = _botL.y + 4;
+		_topR.y = _botL.y + 20;
 		
 		//if(coll.contacts[0].otherCollider.tag == "MarioHead"){
 		Collider2D[] colliders = Physics2D.OverlapAreaAll(_topR,_botL,LayerMask.GetMask("Obstacles"));
+
+		Debug.Log("collisions "+colliders.Length+": "+_topR+" "+_botL);
 
 		if(colliders.Length == 0)
 			return null;
@@ -140,6 +144,9 @@ public class Mario : MonoBehaviour {
 		if(colliders.Length == 1){
 			return colliders[0].GetComponent<Brick>();
 		}
+
+
+
 		//hit more than one brick. take the one closer to the center of the head
 		float distance;
 		float minDistance = Mathf.Abs(colliders[0].transform.position.x - transform.position.x);
@@ -159,14 +166,25 @@ public class Mario : MonoBehaviour {
 			if(coll.tag == "DeathPit")
 				Die();
 	}
+	
+	void Update(){
+		if(_died){
 
-	public void Die(){
-		Debug.Log("Mario Died");
-		//Destroy(gameObject);
-		gameObject.SetActive(false);
+		}
 	}
 
-	private void hitByEnemy(){
+	public void Die(){
+		_lives--;
+		_died = true;
+		_motion.SetState(STATE.DIED);
+		rigidbody2D.isKinematic = true;
+		Destroy(_marioCollider);
+
+
+		OnMarioDie();
+	}
+
+	public void HitByEnemy(){
 		if(star == null){
 			if(fire != null){
 				fire.Remove();
@@ -224,10 +242,8 @@ public class Mario : MonoBehaviour {
 	
 	IEnumerator ApplyInvulnerability()
 	{
-		Debug.Log("Inulnerable");
 		Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"),LayerMask.NameToLayer("Enemies"),true);
 		yield return new WaitForSeconds(DelayAfterHit);
-		Debug.Log("Vulnerable again");
 		Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"),LayerMask.NameToLayer("Enemies"),false);
 	}
 }

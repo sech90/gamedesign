@@ -3,7 +3,8 @@ using System.Collections;
 
 public class Destructible : Brick {
 
-	override public void OnHit(GameObject hitter){
+	override public void SpecialEffect(GameObject hitter){
+		Debug.Log("Destructible ");
 		if(hitter.GetComponent<BigPower>() != null){
 			Debug.Log("Destroyed brick");
 			Destroy(GetComponent<SpriteRenderer>());

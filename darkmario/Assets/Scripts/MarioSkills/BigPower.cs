@@ -15,5 +15,6 @@ public class BigPower : SuperPower {
 		scale.y /= 2;
 		
 		transform.localScale = scale;
+		Destroy(this);
 	}
 }
