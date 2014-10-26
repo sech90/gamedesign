@@ -8,7 +8,7 @@ public class Turtle : Enemy {
 		GameObject shell = Resources.Load("Shell", typeof(GameObject)) as GameObject;
 		Vector3 pos = transform.position;
 		Quaternion rot = transform.rotation;
-		Kill ();
+		Kill (mario);
 		Instantiate(shell,pos,rot);
 		return 0;
 	}

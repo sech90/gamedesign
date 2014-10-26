@@ -18,7 +18,7 @@ public class Enemy : MonoBehaviour {
 	public virtual int Stomped(Mario mario){
 		lives--;
 		if(lives == 0){
-			Kill();
+			Kill(mario);
 			return pointsWhenKilled;
 		}
 		return 0;

@@ -18,14 +18,13 @@ public class Mario : MonoBehaviour {
 	private bool _alreadyHitBrick = false;
 	private Vector2 _topR, _botL;
 	private float _lastY, _currentY=0;
-	private bool _died = false;
 
 	public int Score{get{return _score;}}
 	public int Coins{get{return _coins;}}
 	public int Lives{get{return _lives;}}
 
 	public float DelayAfterHit = 3.0f;
-	private bool alive = true;
+
 	void Start(){
 		big = star = fire = null;
 		bricksLayer = LayerMask.NameToLayer("Obstacles");
@@ -166,16 +165,9 @@ public class Mario : MonoBehaviour {
 			if(coll.tag == "DeathPit")
 				Die();
 	}
-	
-	void Update(){
-		if(_died){
-
-		}
-	}
 
 	public void Die(){
 		_lives--;
-		_died = true;
 		_motion.SetState(STATE.DIED);
 		rigidbody2D.isKinematic = true;
 		Destroy(_marioCollider);

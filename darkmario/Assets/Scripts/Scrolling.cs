@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Scrolling : MonoBehaviour 
 {
-	public Transform camera;
+	public Transform Maincamera;
 	
 	public float scrollFactor = 1.0f;
 	
@@ -14,6 +14,6 @@ public class Scrolling : MonoBehaviour
 	void Update() 
 	{
 		//	float offset = Time.time * scrollSpeed;
-		renderer.material.SetTextureOffset("_MainTex", new Vector2( camera.position.x/2048.0F * scrollFactor, 0.0f));
+		renderer.material.SetTextureOffset("_MainTex", new Vector2( Maincamera.position.x/2048.0F * scrollFactor, 0.0f));
 	}
 }
