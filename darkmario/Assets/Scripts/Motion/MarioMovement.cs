@@ -159,6 +159,10 @@ public class MarioMovement : MonoBehaviour
 			body.marioGravity = 7875.0f;
 		}
 
+		if (UserInput.Exit ()) {
+			Application.LoadLevel("StartScreen");		
+		}
+
 
 	}
 

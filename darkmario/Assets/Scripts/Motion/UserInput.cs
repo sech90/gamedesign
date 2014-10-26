@@ -37,4 +37,13 @@ public class UserInput : MonoBehaviour
 		return false;
 	}
 
+	static public bool Exit()
+	{
+		if (Input.GetKeyDown(KeyCode.Escape))
+			return true;
+
+		return false;
+	}
+
+
 }
