@@ -1,12 +1,11 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/GameState.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Enemies\Goomba.cs">
     <Files>
-      <File FileName="../../StarBlocks/Assets/BackgroundScript.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Scrolling.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Motion/CameraFollow.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/GameState.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/MarioSkills/Mario.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\GameElements\Spawner.cs" Line="42" Column="54" />
+      <File FileName="Assets\Scripts\Enemies\Goomba.cs" Line="11" Column="45" />
+      <File FileName="Assets\Scripts\Enemies\Turtle.cs" Line="16" Column="2" />
+      <File FileName="Assets\Scripts\Enemies\Enemy.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

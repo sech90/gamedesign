@@ -20,6 +20,7 @@ public class GameState : MonoBehaviour {
 
 	void Awake(){
 		Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"),LayerMask.NameToLayer("Player"),true);
+		Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Items"),LayerMask.NameToLayer("Items"));
 		Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Enemies"),LayerMask.NameToLayer("Enemies"));
 		Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Enemies"),LayerMask.NameToLayer("Items"));
 		Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("RunningEnemies"),LayerMask.NameToLayer("Items"));

@@ -5,9 +5,12 @@ public abstract class Brick : MonoBehaviour {
 
 	private float _force = 3f;
 	private Collider2D _collider;
+	protected Animator _animator;
+
 
 	void Awake(){
 		_collider = GetComponent<BoxCollider2D>();
+		_animator = GetComponent<Animator>();
 	}
 
 	public virtual void OnHit(GameObject hitter){
@@ -51,9 +54,6 @@ public abstract class Brick : MonoBehaviour {
 
 			}
 		}
-	}
-	private void MakeItemsJump(){
-
 	}
 
 	/*void OnCollisionEnter2D(Collision2D coll){

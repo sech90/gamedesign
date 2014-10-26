@@ -2,9 +2,12 @@ using UnityEngine;
 using System.Collections;
 
 public class Spawner : Brick {
-
+	
 	public Item item;
 	public int numberOfCoins = 0;
+	public AudioClip SpawnAudio;
+	public AudioClip CoinAudio;
+
 	private bool _isSolid = false;
 	private Vector3 _spawnPosition;
 
@@ -23,21 +26,24 @@ public class Spawner : Brick {
 		if(!_isSolid){
 			if(item != null){
 				Instantiate(item,_spawnPosition,transform.rotation);
+				AudioSource.PlayClipAtPoint(SpawnAudio,transform.position);
 				TurnSolid();
 			}
 			else{
+				AudioSource.PlayClipAtPoint(CoinAudio,transform.position);
 				numberOfCoins--;
 				if(numberOfCoins <= 0)
 					TurnSolid();
 				if(numberOfCoins >= 0)
 					hitter.GetComponent<Mario>().GetCoin();
 			}
+			_animator.SetTrigger("Bounce");
 		}
 	}
 
 	private void TurnSolid(){
 		_isSolid = true;
-		Sprite blockSprite = Resources.Load("block", typeof(Sprite)) as Sprite;
-		GetComponent<SpriteRenderer>().sprite = blockSprite;
+		_animator.SetTrigger("TurnSolid");
+		Destroy(GetComponent<Spawner>());
 	}
 }
