@@ -16,8 +16,11 @@ public class SMBPhysicsBody : MonoBehaviour
 
 	public Vector2 velocity;
 
+	private MarioMovement movement;
+
 	void Awake()
 	{	
+		movement = gameObject.GetComponent<MarioMovement>();
 		velocity = new Vector2 (0.0f, 0.0f);
 	}	
 
@@ -30,7 +33,7 @@ public class SMBPhysicsBody : MonoBehaviour
 		
 
 		// Gravity pulls object down
-		if(velocity.y > -2000)
+		if(velocity.y > -2000 && !movement.IsGrounded())
 			velocity.y -= marioGravity * Time.deltaTime;
 		
 		
