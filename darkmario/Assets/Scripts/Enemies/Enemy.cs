@@ -5,7 +5,7 @@ public class Enemy : MonoBehaviour {
 
 	public int lives = 1;
 	public int pointsWhenKilled = 100;
-	
+
 	void OnTriggerEnter2D(Collider2D coll){
 		if(coll.tag == "DeathPit")
 			Kill();

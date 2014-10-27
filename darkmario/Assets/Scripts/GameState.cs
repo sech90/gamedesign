@@ -54,7 +54,6 @@ public class GameState : MonoBehaviour {
 		if(_marioDied){
 			if(_timeAfterDeath == -1)
 				_timeAfterDeath = Time.time;
-			Debug.Log(Time.time - _timeAfterDeath);
 			if(Time.time - _timeAfterDeath >= _reloadTimer){
 				Time.timeScale = 1;
 				Application.LoadLevel(Application.loadedLevel);
@@ -71,7 +70,6 @@ public class GameState : MonoBehaviour {
 	}
 
 	void ReloadLevel(object source, ElapsedEventArgs e){
-		Debug.Log("Reload level");
 		_clockTimer.Stop();
 		Time.timeScale = 1;
 		//Application.LoadLevel(Application.loadedLevel);

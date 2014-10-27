@@ -18,10 +18,18 @@ public class Mario : MonoBehaviour {
 	private bool _alreadyHitBrick = false;
 	private Vector2 _topR, _botL;
 	private float _lastY, _currentY=0;
+	private AudioSource _audio;
 
 	public int Score{get{return _score;}}
 	public int Coins{get{return _coins;}}
 	public int Lives{get{return _lives;}}
+
+	public AudioClip CollectCoinClip;
+	public AudioClip EatMushroomClip;
+	public AudioClip HitByEnemyClip;
+	public AudioClip KillEnemyClip;
+	public AudioClip MarioDiesClip;
+
 
 	public float DelayAfterHit = 3.0f;
 
@@ -37,6 +45,7 @@ public class Mario : MonoBehaviour {
 
 		_marioCollider = GetComponent<BoxCollider2D>();
 		_currentY = transform.position.y;
+		_audio = gameObject.AddComponent<AudioSource>();
 	}
 
 	void LateUpdate(){
@@ -58,7 +67,7 @@ public class Mario : MonoBehaviour {
 		if(coll.gameObject.layer == bricksLayer && _alreadyHitBrick != true){
 
 			Brick brick = HitBrickWithHead();
-			Debug.Log("hit "+coll.gameObject.name+" "+(brick==null));
+			//Debug.Log("hit "+coll.gameObject.name+" "+(brick==null));
 			if(brick != null){
 				brick.OnHit(gameObject);
 				_alreadyHitBrick = true;
@@ -73,6 +82,7 @@ public class Mario : MonoBehaviour {
 				if(HasStomped(coll)){
 					_motion.Jump();
 					_score += enemy.Stomped(this);
+					_audio.PlayOneShot(KillEnemyClip);
 				}
 				//mario collided with the enemy 
 				else
@@ -135,7 +145,7 @@ public class Mario : MonoBehaviour {
 		//if(coll.contacts[0].otherCollider.tag == "MarioHead"){
 		Collider2D[] colliders = Physics2D.OverlapAreaAll(_topR,_botL,LayerMask.GetMask("Obstacles"));
 
-		Debug.Log("collisions "+colliders.Length+": "+_topR+" "+_botL);
+//		Debug.Log("collisions "+colliders.Length+": "+_topR+" "+_botL);
 
 		if(colliders.Length == 0)
 			return null;
@@ -168,6 +178,7 @@ public class Mario : MonoBehaviour {
 
 	public void Die(){
 		_lives--;
+		_audio.PlayOneShot(MarioDiesClip);
 		_motion.SetState(STATE.DIED);
 		rigidbody2D.isKinematic = true;
 		Destroy(_marioCollider);
@@ -185,6 +196,7 @@ public class Mario : MonoBehaviour {
 
 			if(big != null){
 				big.Remove();
+				_audio.PlayOneShot(HitByEnemyClip);
 				big = null;
 			}
 			else{
@@ -197,9 +209,12 @@ public class Mario : MonoBehaviour {
 
 	private void pickItem(Item item){
 
-		if(item.ItemType == ITEM.COIN)
+		if(item.ItemType == ITEM.COIN){
 			_coins++;
+			_audio.PlayOneShot(CollectCoinClip);
+		}
 		else{
+			_audio.PlayOneShot(EatMushroomClip);
 			switch(item.superpower){
 				case POWER.BIG:
 					if(big == null)

@@ -7,6 +7,7 @@ public class ItemCollector : MonoBehaviour {
 
 	[HideInInspector]
 	public ItemCollision OnItemCollision;
+
 	private LayerMask _itemLayer;
 
 	void Awake(){

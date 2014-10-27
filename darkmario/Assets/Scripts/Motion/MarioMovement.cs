@@ -14,6 +14,10 @@ public class MarioMovement : MonoBehaviour
 	float releaseDecelleration 	= 703.0F;
 	float skiddingDecelleration = 1828.0F;
 
+	public AudioClip JumpClip;
+	public AudioClip WalkClip;
+	public AudioClip LandClip;
+	private AudioSource _audio;
 
 	SMBPhysicsBody body;
 	ObstacleCollision obsColls;
@@ -30,7 +34,7 @@ public class MarioMovement : MonoBehaviour
 	{
 		state = STATE.STANDING;
 		anim = GetComponent<Animator> (); 
-		
+		_audio = gameObject.AddComponent<AudioSource>();
 	}
 	
 	void Awake()
@@ -71,6 +75,7 @@ public class MarioMovement : MonoBehaviour
 	public void Jump(){
 		body.velocity.y = jumpSpeed;
 		SetState(STATE.JUMPING);
+		_audio.PlayOneShot(JumpClip);
 	}
 	// Update is called once per frame
 	void Update () 
@@ -84,20 +89,31 @@ public class MarioMovement : MonoBehaviour
 
 		if ( IsGrounded() )
 		{
-			// If Mario is moving other way and player steeres other way, Mario skids and decellerates faster
-			if ( UserInput.Right() && body.velocity.x < 0.0f ||
-			     UserInput.Left()  && body.velocity.x > 0.0f    )
-			{
-				Decellerate( skiddingDecelleration * Time.deltaTime );
-				SetState(STATE.SKIDDING);
+			//mario was jumping but now is grounded. Play landed sound
+			if(state == STATE.JUMPING){
+				_audio.PlayOneShot(LandClip);
 			}
-			else if (Mathf.Abs (body.velocity.x) < minWalkSpeed)
-			{
-				SetState(STATE.STANDING);
-			}
-			else
-			{
-				SetState(STATE.RUNNING);
+
+			if(WalkClip){
+
+				// If Mario is moving other way and player steeres other way, Mario skids and decellerates faster
+				if ( UserInput.Right() && body.velocity.x < 0.0f ||
+				     UserInput.Left()  && body.velocity.x > 0.0f    )
+				{
+					Decellerate( skiddingDecelleration * Time.deltaTime );
+					SetState(STATE.SKIDDING);
+				}
+				else if (Mathf.Abs (body.velocity.x) < minWalkSpeed)
+				{
+					SetState(STATE.STANDING);
+				}
+				else
+				{
+					SetState(STATE.RUNNING);
+					_audio.clip = WalkClip;
+					if(!_audio.isPlaying)
+						_audio.Play();
+				}
 			}
 		}
 
