@@ -6,17 +6,26 @@ public class BigPower : SuperPower {
 
 
 	override protected void Activate(){
-		Vector3 scale = transform.localScale;
-		scale.y *= 2;
+//		Vector3 scale = transform.localScale;
+//		scale.y *= 2;
 		
-		transform.localScale = scale;
+	//	transform.localScale = scale;
+
+	 
+		GetComponent<Animator> ().SetTrigger ("TransformToBig");
+		BoxCollider2D bc = GetComponent<BoxCollider2D> ();
+		bc.center = new Vector2 (0.0f, 50.0f);
+		bc.size = new Vector2 (65.0f, 155.0f);
+
+
 	}
 
 	override public void Remove(){
-		Vector3 scale = transform.localScale;
-		scale.y /= 2;
-		
-		transform.localScale = scale;
+//		Vector3 scale = transform.localScale;
+//		scale.y /= 2;
+		GetComponent<Animator> ().SetTrigger ("TransformToSmall");
+
+//		transform.localScale = scale;
 		Destroy(this);
 	}
 }

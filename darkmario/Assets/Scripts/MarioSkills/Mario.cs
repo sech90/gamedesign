@@ -136,12 +136,23 @@ public class Mario : MonoBehaviour {
 		float shrinkAmount = _marioCollider.bounds.extents.x * 0.2f;
 		
 		//Calculate triggering area for the head
-		_botL.x = transform.position.x - _marioCollider.bounds.extents.x + shrinkAmount;
+		/*_botL.x = transform.position.x - _marioCollider.bounds.extents.x + shrinkAmount;
 		_botL.y = transform.position.y + _marioCollider.bounds.extents.y-1;
 		
 		_topR.x = transform.position.x + _marioCollider.bounds.extents.x - shrinkAmount;
 		_topR.y = _botL.y + 20;
+*/
+		_botL.x = _marioCollider.bounds.center.x - _marioCollider.bounds.extents.x + shrinkAmount;
+		_botL.y = _marioCollider.bounds.center.y + _marioCollider.bounds.extents.y-1;
 		
+		_topR.x = _marioCollider.bounds.center.x + _marioCollider.bounds.extents.x - shrinkAmount;
+		_topR.y = _botL.y + 20;
+
+
+		Debug.Log ("*****");
+		Debug.Log (_topR.y);
+
+
 		//if(coll.contacts[0].otherCollider.tag == "MarioHead"){
 		Collider2D[] colliders = Physics2D.OverlapAreaAll(_topR,_botL,LayerMask.GetMask("Obstacles"));
 

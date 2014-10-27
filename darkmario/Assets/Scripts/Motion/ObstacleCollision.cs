@@ -5,7 +5,7 @@ public class ObstacleCollision : MonoBehaviour
 {
 	
 	private enum COLLISIONPOINT { GROUNDED1, GROUNDED2, RIGHT,  LEFT, 
-		CORNER1, CORNER2, CORNER3, CORNER4};
+		CORNER1, CORNER2, CORNER3, CORNER4, BIG1, BIG2};
 
 	private enum DIRECTION {UP, DOWN, LEFT, RIGHT};
 	
@@ -24,7 +24,8 @@ public class ObstacleCollision : MonoBehaviour
 		return ( GetColliderAt(COLLISIONPOINT.GROUNDED1) != null || 
 		         GetColliderAt(COLLISIONPOINT.GROUNDED2) != null    );
 	}
-	
+
+
 
 	void Awake () 
 	{
@@ -33,7 +34,7 @@ public class ObstacleCollision : MonoBehaviour
 
 
 		// Initialize array of collision points
-		collisionPoints = new Transform[8];
+		collisionPoints = new Transform[10];
 
 		collisionPoints[(int)COLLISIONPOINT.GROUNDED1]   = transform.Find ("groundedCheck1").transform;
 		collisionPoints[(int)COLLISIONPOINT.GROUNDED2]   = transform.Find ("groundedCheck2").transform;
@@ -46,6 +47,8 @@ public class ObstacleCollision : MonoBehaviour
 		collisionPoints[(int)COLLISIONPOINT.CORNER3]  	 = transform.Find ("corner3").transform;
 		collisionPoints[(int)COLLISIONPOINT.CORNER4]  	 = transform.Find ("corner4").transform;
 
+		collisionPoints[(int)COLLISIONPOINT.BIG1]  	 = transform.Find ("big1").transform;
+		collisionPoints[(int)COLLISIONPOINT.BIG2]  	 = transform.Find ("big2").transform;
 
 
 		hits = new Collider2D[5];
@@ -69,6 +72,11 @@ public class ObstacleCollision : MonoBehaviour
 		ProcessCollisionAt (COLLISIONPOINT.LEFT);
 		ProcessCollisionAt (COLLISIONPOINT.RIGHT);
 
+		if (IsBig ()) 
+		{
+			ProcessCollisionAt (COLLISIONPOINT.BIG1);
+			ProcessCollisionAt (COLLISIONPOINT.BIG2);
+		}
 		
 		oldPosition = new Vector2 (transform.position.x, transform.position.y);
 
@@ -155,7 +163,10 @@ public class ObstacleCollision : MonoBehaviour
 
 	}
 
-
+	private bool IsBig()
+	{
+		return gameObject.GetComponent<BigPower> () != null;
+	}
 
 
 	Collider2D GetColliderAt(COLLISIONPOINT cp)
