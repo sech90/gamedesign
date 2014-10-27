@@ -25,8 +25,8 @@ public class BigPower : SuperPower {
 //		scale.y /= 2;
 		GetComponent<Animator> ().SetTrigger ("TransformToSmall");
 		BoxCollider2D bc = GetComponent<BoxCollider2D> ();
-		bc.center = new Vector2 (0.0f, 2.0f);
-		bc.size = new Vector2 (65.0f, 76.0f);
+		bc.center = new Vector2 (-0.1359863f, 2.427719f);
+		bc.size = new Vector2 (64.62241f, 80.62982f);
 		
 		//		transform.localScale = scale;
 		Destroy(this);

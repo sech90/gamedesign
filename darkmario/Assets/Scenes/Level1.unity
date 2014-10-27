@@ -7534,7 +7534,7 @@ Transform:
   m_GameObject: {fileID: 760103881}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 25.0999756, y: 0, z: 300}
-  m_LocalScale: {x: 3109, y: 1200, z: 1}
+  m_LocalScale: {x: 1800, y: 1200, z: 1}
   m_Children: []
   m_Father: {fileID: 343141614}
   m_RootOrder: 5
@@ -22408,7 +22408,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: e08615d41fce1443bbffab661cce7773, type: 2}
+  - {fileID: 2100000, guid: 1104a83f812224954a2440923b5768b3, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
