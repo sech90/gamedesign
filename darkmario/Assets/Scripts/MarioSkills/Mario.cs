@@ -149,8 +149,7 @@ public class Mario : MonoBehaviour {
 		_topR.y = _botL.y + 20;
 
 
-		Debug.Log ("*****");
-		Debug.Log (_topR.y);
+	;
 
 
 		//if(coll.contacts[0].otherCollider.tag == "MarioHead"){

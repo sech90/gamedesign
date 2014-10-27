@@ -24,8 +24,11 @@ public class BigPower : SuperPower {
 //		Vector3 scale = transform.localScale;
 //		scale.y /= 2;
 		GetComponent<Animator> ().SetTrigger ("TransformToSmall");
-
-//		transform.localScale = scale;
+		BoxCollider2D bc = GetComponent<BoxCollider2D> ();
+		bc.center = new Vector2 (0.0f, 2.0f);
+		bc.size = new Vector2 (65.0f, 76.0f);
+		
+		//		transform.localScale = scale;
 		Destroy(this);
 	}
 }

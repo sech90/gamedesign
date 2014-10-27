@@ -23,17 +23,39 @@ public class UserInput : MonoBehaviour
 
 	static public bool Jump()
 	{
-		if (Input.GetAxis("Vertical") > 0)
+		if (Input.GetButton("Fire2") )
+			return true;
+
+		if (Input.GetKey(KeyCode.LeftAlt))
 			return true;
 
 		return false;
 	}
 
-	static public bool JumpDown()
+	static public bool RunOrFire()
 	{
-		if (Input.GetButtonDown("Vertical"))
+		if (Input.GetButton("Fire1") )
+			return true;
+
+		if (Input.GetKey(KeyCode.LeftShift))
 			return true;
 		
+		return false;
+	}
+
+
+
+	static public bool JumpDown()
+	{
+//		if (Input.GetButtonDown("Vertical"))
+//			return true;
+
+		if (Input.GetButtonDown ("Fire2"))
+			return true;
+				
+		if (Input.GetKeyDown(KeyCode.LeftAlt))
+			return true;
+
 		return false;
 	}
 
