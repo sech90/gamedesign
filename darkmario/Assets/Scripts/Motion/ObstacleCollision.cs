@@ -4,8 +4,7 @@ using System.Collections;
 public class ObstacleCollision : MonoBehaviour 
 {
 	
-	private enum COLLISIONPOINT { GROUND1, GROUND2, GROUNDED1, GROUNDED2, 
-		RIGHT1, RIGHT2, LEFT1, LEFT2, HEAD1, HEAD2,
+	private enum COLLISIONPOINT { GROUNDED1, GROUNDED2, RIGHT,  LEFT, 
 		CORNER1, CORNER2, CORNER3, CORNER4};
 
 	private enum DIRECTION {UP, DOWN, LEFT, RIGHT};
@@ -34,17 +33,13 @@ public class ObstacleCollision : MonoBehaviour
 
 
 		// Initialize array of collision points
-		collisionPoints = new Transform[14];
-		collisionPoints[(int)COLLISIONPOINT.GROUND1]   	 = transform.Find ("groundCheck1").transform;
-		collisionPoints[(int)COLLISIONPOINT.GROUND2]   	 = transform.Find ("groundCheck2").transform;
+		collisionPoints = new Transform[8];
+
 		collisionPoints[(int)COLLISIONPOINT.GROUNDED1]   = transform.Find ("groundedCheck1").transform;
 		collisionPoints[(int)COLLISIONPOINT.GROUNDED2]   = transform.Find ("groundedCheck2").transform;
-		collisionPoints[(int)COLLISIONPOINT.LEFT1]   	 = transform.Find ("leftCheck1").transform;
-		collisionPoints[(int)COLLISIONPOINT.LEFT2]   	 = transform.Find ("leftCheck2").transform;
-		collisionPoints[(int)COLLISIONPOINT.RIGHT1]   	 = transform.Find ("rightCheck1").transform;
-		collisionPoints[(int)COLLISIONPOINT.RIGHT2]   	 = transform.Find ("rightCheck2").transform;
-		collisionPoints[(int)COLLISIONPOINT.HEAD1]    	 = transform.Find ("headCheck1").transform;
-		collisionPoints[(int)COLLISIONPOINT.HEAD2]  	 = transform.Find ("headCheck2").transform;
+		collisionPoints[(int)COLLISIONPOINT.LEFT]   	 = transform.Find ("left").transform;
+		collisionPoints[(int)COLLISIONPOINT.RIGHT]   	 = transform.Find ("right").transform;
+
 
 		collisionPoints[(int)COLLISIONPOINT.CORNER1]  	 = transform.Find ("corner1").transform;
 		collisionPoints[(int)COLLISIONPOINT.CORNER2]  	 = transform.Find ("corner2").transform;
@@ -71,7 +66,8 @@ public class ObstacleCollision : MonoBehaviour
 		ProcessCollisionAt (COLLISIONPOINT.CORNER2);
 		ProcessCollisionAt (COLLISIONPOINT.CORNER3);
 		ProcessCollisionAt (COLLISIONPOINT.CORNER4);
-			
+		ProcessCollisionAt (COLLISIONPOINT.LEFT);
+		ProcessCollisionAt (COLLISIONPOINT.RIGHT);
 
 		
 		oldPosition = new Vector2 (transform.position.x, transform.position.y);
