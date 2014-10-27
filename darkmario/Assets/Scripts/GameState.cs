@@ -6,8 +6,7 @@ using System.Timers;
 public delegate void Callback();
 
 public class GameState : MonoBehaviour {
-
-	private Timer _clockTimer;
+	
 	private int timeLeft = 400;
 	private float _reloadTimer = 0.002f;
 	private bool _marioDied = false;
@@ -28,7 +27,7 @@ public class GameState : MonoBehaviour {
 		Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("CameraWall"),LayerMask.NameToLayer("Items"));
 		Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("CameraWall"),LayerMask.NameToLayer("Enemies"));
 		Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("CameraWall"),LayerMask.NameToLayer("RunningEnemies"));
-		Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("CameraWall"),LayerMask.NameToLayer("Player"),false);
+
 	}
 
 	void Start () {
@@ -67,11 +66,5 @@ public class GameState : MonoBehaviour {
 		Time.timeScale = 0.001f;
 		_marioDied = true;
 		Destroy(Camera.main.GetComponent<CameraFollow>());
-	}
-
-	void ReloadLevel(object source, ElapsedEventArgs e){
-		_clockTimer.Stop();
-		Time.timeScale = 1;
-		//Application.LoadLevel(Application.loadedLevel);
 	}
 }

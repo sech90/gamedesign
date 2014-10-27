@@ -55,6 +55,7 @@
      <Compile Include="Assets\Scripts\GameElements\Destructible.cs" />
      <Compile Include="Assets\Scripts\GameElements\Item.cs" />
      <Compile Include="Assets\Scripts\GameElements\Spawner.cs" />
+     <Compile Include="Assets\Scripts\GameElements\SweetHome.cs" />
      <Compile Include="Assets\Scripts\GameState.cs" />
      <Compile Include="Assets\Scripts\MarioSkills\BigPower.cs" />
      <Compile Include="Assets\Scripts\MarioSkills\FirePower.cs" />
@@ -72,7 +73,6 @@
      <Compile Include="Assets\Scripts\Motion\UserInput.cs" />
      <Compile Include="Assets\Scripts\Scrolling.cs" />
      <Compile Include="Assets\Scripts\StartScreen.cs" />
-     <None Include="Assets\TestFolder\readme.txt" />
  <Reference Include="UnityEngine.UI">
  <HintPath>E:/Program Files (x86)/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/4.6.0/UnityEngine.UI.dll</HintPath>
  </Reference>

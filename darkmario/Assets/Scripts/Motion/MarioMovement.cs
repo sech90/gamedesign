@@ -203,7 +203,7 @@ public class MarioMovement : MonoBehaviour
 	}
 
 	// Mario is grounded if he's touching ground and not moving upwards
-	private bool IsGrounded()
+	public bool IsGrounded()
 	{
 		return (body.velocity.y < jumpSpeed / 2.0F && obsColls.IsGrounded ());
 	}
