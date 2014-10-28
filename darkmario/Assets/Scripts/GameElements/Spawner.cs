@@ -12,9 +12,7 @@ public class Spawner : Brick {
 	private Vector3 _spawnPosition;
 
 	void Start(){
-		float yExtent = renderer.bounds.extents.y;
-		_spawnPosition = transform.position;
-		_spawnPosition.y += yExtent;
+
 
 		if(item != null && numberOfCoins > 0){
 			Debug.LogWarning("Spawner only requires the Item or the coins. Assuming this is a coin spawner");
@@ -23,6 +21,10 @@ public class Spawner : Brick {
 	}
 
 	override public void SpecialEffect(GameObject hitter){
+		float yExtent = renderer.bounds.extents.y;
+		_spawnPosition = transform.position;
+		_spawnPosition.y += yExtent;
+
 		if(!_isSolid){
 			if(item != null){
 				Instantiate(item,_spawnPosition,transform.rotation);
@@ -30,6 +32,10 @@ public class Spawner : Brick {
 				TurnSolid();
 			}
 			else{
+				_spawnPosition.y = transform.position.y + collider2D.bounds.extents.y*2;
+				GameObject coin = Resources.Load("CoinSpawn", typeof(GameObject)) as GameObject;
+				Instantiate(coin,_spawnPosition,transform.rotation);
+
 				AudioSource.PlayClipAtPoint(CoinAudio,transform.position);
 				numberOfCoins--;
 				if(numberOfCoins <= 0)

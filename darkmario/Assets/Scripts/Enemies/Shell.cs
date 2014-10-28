@@ -8,8 +8,10 @@ public class Shell : Enemy {
 	private Mario _mario;
 	private float respawnTime = 5.00f;
 	private float startTime;
+	private Animator _animator;
 
 	void Start(){
+		_animator = GetComponent<Animator>();
 		_movement = GetComponent<AISimpleMovement>();
 		startTime = Time.time;
 	}
@@ -39,6 +41,7 @@ public class Shell : Enemy {
 				_direction = DIRECTION.LEFT;
 
 			_movement.enabled = true;
+			_animator.SetBool("Rolling",true);
 			if(_movement.direction != _direction)
 				_movement.Flip();
 		}
@@ -46,6 +49,7 @@ public class Shell : Enemy {
 
 	override public int Stomped(Mario mario){
 		_movement.enabled = false;
+		_animator.SetBool("Rolling",false);
 		gameObject.layer = LayerMask.NameToLayer("Enemies");
 		startTime = Time.time;
 		return 0;
@@ -55,6 +59,7 @@ public class Shell : Enemy {
 		GameObject turtle = Resources.Load("Turtle", typeof(GameObject)) as GameObject;
 		Vector3 pos = transform.position;
 		Quaternion rot = transform.rotation;
+		pos.y += gameObject.collider2D.bounds.extents.y;
 		Instantiate(turtle,pos,rot);
 		Destroy(this.gameObject);
 	}

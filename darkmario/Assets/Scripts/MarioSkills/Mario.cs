@@ -19,6 +19,7 @@ public class Mario : MonoBehaviour {
 	private Vector2 _topR, _botL;
 	private float _lastY, _currentY=0;
 	private AudioSource _audio;
+	private Animator _animator;
 
 	public int Score{get{return _score;}}
 	public int Coins{get{return _coins;}}
@@ -46,6 +47,7 @@ public class Mario : MonoBehaviour {
 		_marioCollider = GetComponent<BoxCollider2D>();
 		_currentY = transform.position.y;
 		_audio = gameObject.AddComponent<AudioSource>();
+		_animator = GetComponent<Animator>();
 	}
 
 	void LateUpdate(){
@@ -110,7 +112,7 @@ public class Mario : MonoBehaviour {
 		float enemyHead  = coll.gameObject.transform.position.y + coll.collider.bounds.extents.y; 
 
 		//Before, mario's feet were below enemy's head
-		if(feetBefore <= enemyHead){
+		if(feetBefore+20 <= enemyHead){
 			Debug.Log("feetBefore "+feetBefore+" enemy: "+enemyHead);
 			return false;
 		}
@@ -260,7 +262,9 @@ public class Mario : MonoBehaviour {
 	IEnumerator ApplyInvulnerability()
 	{
 		Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"),LayerMask.NameToLayer("Enemies"),true);
+		_animator.SetBool("Invulnerable",true);
 		yield return new WaitForSeconds(DelayAfterHit);
+		_animator.SetBool("Invulnerable",false);
 		Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"),LayerMask.NameToLayer("Enemies"),false);
 	}
 }
