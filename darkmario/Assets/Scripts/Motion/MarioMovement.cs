@@ -7,10 +7,12 @@ public class MarioMovement : MonoBehaviour
 	// pixels / s
 	float maxWalkSpeed 			= 468.75F;
 	float minWalkSpeed			= 50.0f;
+	float maxRunSpeed			= 768.75F;
 	float jumpSpeed 			= 1200.0f;
 
 	// pixels / s^2
 	float walkAccelleration 	= 668.0F;
+	float runAccelleration 	= 668.0F;
 	float releaseDecelleration 	= 703.0F;
 	float skiddingDecelleration = 1828.0F;
 
@@ -123,22 +125,43 @@ public class MarioMovement : MonoBehaviour
 
 		if ( UserInput.Right() && body.velocity.x >= 0.0f )
 		{
-			body.velocity.x += walkAccelleration * Time.deltaTime;
+			if (UserInput.RunOrFire())
+			{
+				body.velocity.x += runAccelleration * Time.deltaTime;
 			
-			if (body.velocity.x > maxWalkSpeed)
-				body.velocity.x = maxWalkSpeed;
-			
+				if (body.velocity.x > maxRunSpeed)
+					body.velocity.x = maxRunSpeed;
+			}
+			else
+			{
+				body.velocity.x += walkAccelleration * Time.deltaTime;
+				
+				if (body.velocity.x > maxWalkSpeed)
+					body.velocity.x = maxWalkSpeed;
+
+			}
 		}
 		
 		if ( UserInput.Left() && body.velocity.x <= 0.0f)
 		{
-			body.velocity.x -= walkAccelleration * Time.deltaTime;
+			if (UserInput.RunOrFire())
+			{
+
+				body.velocity.x -= runAccelleration * Time.deltaTime;
 			
-			if (body.velocity.x < -maxWalkSpeed)
-				body.velocity.x = -maxWalkSpeed;
+				if (body.velocity.x < -maxRunSpeed)
+					body.velocity.x = -maxRunSpeed;
+			}
+			else
+			{
+				body.velocity.x -= walkAccelleration * Time.deltaTime;
+				
+				if (body.velocity.x < -maxWalkSpeed)
+					body.velocity.x = -maxWalkSpeed;
+			}
+
 		}
-
-
+		
 		// If player let's go of controller, Mario decellerates slowly
 		if (!UserInput.Left () && !UserInput.Right ()) 
 		{
