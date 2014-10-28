@@ -33,7 +33,7 @@ public class MarioMovement : MonoBehaviour
 	
 	private STATE state;
 	private enum DIRECTION {RIGHT, LEFT};
-	private DIRECTION direction = DIRECTION.RIGHT;
+//	private DIRECTION direction = DIRECTION.RIGHT;
 
 	public GameObject shotPrefab;
 
@@ -181,7 +181,7 @@ public class MarioMovement : MonoBehaviour
 		// Mario is facing the direction it's moving
 		if (body.velocity.x > 1.0f)
 		{
-			direction = DIRECTION.RIGHT;
+	//		direction = DIRECTION.RIGHT;
 			// The sprite is flipped using x-scale of tranformation
 			Vector3 scale = transform.localScale;
 			scale.x = 1;
@@ -190,7 +190,7 @@ public class MarioMovement : MonoBehaviour
 
 		if (body.velocity.x < -1.0f)
 		{
-			direction = DIRECTION.LEFT;
+//			direction = DIRECTION.LEFT;
 			Vector3 scale = transform.localScale;
 			scale.x = -1;
 			transform.localScale = scale;

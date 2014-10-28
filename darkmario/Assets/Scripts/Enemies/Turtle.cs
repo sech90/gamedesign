@@ -17,8 +17,9 @@ public class Turtle : Enemy {
 	{
 		if(mario == null)
 			base.Kill();
-		else
+		else{
 			Destroy(gameObject);
+		}
 	}
 
 

@@ -9,6 +9,7 @@ public class Shell : Enemy {
 	private float respawnTime = 5.00f;
 	private float startTime;
 	private Animator _animator;
+	public AudioClip CollidedEnemyClip;
 
 	void Start(){
 		_animator = GetComponent<Animator>();
@@ -25,8 +26,10 @@ public class Shell : Enemy {
 	void OnCollisionEnter2D(Collision2D coll){
 		Debug.Log("Shell collided with "+coll.gameObject.name);
 		Enemy enemy = coll.gameObject.GetComponent<Enemy>();
-		if(_movement.enabled && enemy != null)
+		if(_movement.enabled && enemy != null){
 			enemy.Kill();
+			AudioSource.PlayClipAtPoint(CollidedEnemyClip,transform.position);
+		}
 	}
 
 	public override void OnMarioContact (Mario mario,  Collision2D coll = null)

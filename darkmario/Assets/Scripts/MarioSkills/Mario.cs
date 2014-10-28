@@ -87,6 +87,10 @@ public class Mario : MonoBehaviour {
 					_audio.PlayOneShot(KillEnemyClip);
 				}
 				//mario collided with the enemy 
+				else if(star != null){
+					_score += enemy.pointsWhenKilled;
+					enemy.Kill();
+				}
 				else
 					enemy.OnMarioContact(this,coll);
 			}
@@ -261,10 +265,10 @@ public class Mario : MonoBehaviour {
 	
 	IEnumerator ApplyInvulnerability()
 	{
-		Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"),LayerMask.NameToLayer("Enemies"),true);
+		//Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"),LayerMask.NameToLayer("Enemies"),true);
 		_animator.SetBool("Invulnerable",true);
 		yield return new WaitForSeconds(DelayAfterHit);
 		_animator.SetBool("Invulnerable",false);
-		Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"),LayerMask.NameToLayer("Enemies"),false);
+		//Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"),LayerMask.NameToLayer("Enemies"),false);
 	}
 }

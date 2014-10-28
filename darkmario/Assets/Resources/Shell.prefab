@@ -115,6 +115,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lives: 1
   pointsWhenKilled: 0
+  CollidedEnemyClip: {fileID: 8300000, guid: a27469c4e206369459193c5a01f1b1bb, type: 3}
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -23,8 +23,8 @@ public class ShotController : MonoBehaviour {
 
 		// If shot hits an enemy, it dies
 		if (coll.gameObject.GetComponent<Enemy> () != null)
-						coll.gameObject.GetComponent<Enemy> ().Kill ();
-
+			coll.gameObject.GetComponent<Enemy> ().Kill ();
+		
 		// Shot is destroyed on all collisions
 		Destroy (gameObject);
 	}
