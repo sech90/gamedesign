@@ -17,7 +17,7 @@ public class ObstacleCollision : MonoBehaviour
 
 	private  Vector3 oldPosition;
 
-
+	private bool collisionOccurred;
 
 	public bool IsGrounded()
 	{
@@ -64,6 +64,7 @@ public class ObstacleCollision : MonoBehaviour
 	
 	void Update () 
 	{
+		collisionOccurred = false;
 
 		ProcessCollisionAt (COLLISIONPOINT.CORNER1);
 		ProcessCollisionAt (COLLISIONPOINT.CORNER2);
@@ -77,8 +78,9 @@ public class ObstacleCollision : MonoBehaviour
 			ProcessCollisionAt (COLLISIONPOINT.BIG1);
 			ProcessCollisionAt (COLLISIONPOINT.BIG2);
 		}
-		
-		oldPosition = new Vector2 (transform.position.x, transform.position.y);
+
+		if (collisionOccurred == false)
+   		    oldPosition = new Vector2 (transform.position.x, transform.position.y);
 
 
 	
@@ -92,6 +94,9 @@ public class ObstacleCollision : MonoBehaviour
 		
 				if (coll == null) 
 						return;
+
+				collisionOccurred = true;
+
 		
 
 			
