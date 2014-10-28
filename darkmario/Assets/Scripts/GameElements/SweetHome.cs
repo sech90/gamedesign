@@ -28,7 +28,7 @@ public class SweetHome : MonoBehaviour {
 		float extentY = collider2D.bounds.extents.y;
 		float extentX = collider2D.bounds.extents.x;
 
-		Vector3 randPos = new Vector3(0,0,100);
+		Vector3 randPos = new Vector3(0,0,800);
 		Vector2 center = collider2D.bounds.center;
 		center.y += extentY;
 
