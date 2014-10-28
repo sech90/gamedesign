@@ -23,6 +23,7 @@ public class MarioMovement : MonoBehaviour
 	public AudioClip JumpClip;
 	public AudioClip WalkClip;
 	public AudioClip LandClip;
+	public AudioClip FireClip;
 	private AudioSource _audio;
 	
 
@@ -196,12 +197,23 @@ public class MarioMovement : MonoBehaviour
 			transform.localScale = scale;
 		}
 
-		if (UserInput.RunOrFire() && Time.time > nextFire) 
+		if (UserInput.RunOrFire() && Time.time > nextFire && gameObject.GetComponent<BigPower>()!=null ) 
 		{
 			GameObject shot = Instantiate (shotPrefab) as GameObject;
-			shot.transform.position = transform.position + new Vector3(60.0f, 50.0f, 0.0f);
+			Rigidbody2D shotRB = shot.GetComponent<Rigidbody2D>();
+			if (direction == DIRECTION.RIGHT)
+			{
+				shotRB.velocity = new Vector2( 800.0f, 0.0f );
+				shot.transform.position = transform.position + new Vector3(60.0f, 50.0f, 0.0f);
+			}
+			else
+			{
+				shotRB.velocity = new Vector2( -800.0f, 0.0f );
+				shot.transform.position = transform.position + new Vector3(-60.0f, 50.0f, 0.0f);
+			}
 
-	
+			_audio.PlayOneShot(FireClip);
+			SetState(STATE.JUMPING);	
 			nextFire = Time.time + fireRate;
 			
 		}
