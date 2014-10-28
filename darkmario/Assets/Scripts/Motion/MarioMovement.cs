@@ -12,14 +12,19 @@ public class MarioMovement : MonoBehaviour
 
 	// pixels / s^2
 	float walkAccelleration 	= 668.0F;
-	float runAccelleration 	= 668.0F;
+	float runAccelleration 		= 668.0F;
 	float releaseDecelleration 	= 703.0F;
 	float skiddingDecelleration = 1828.0F;
+
+	private float nextFire = 0.0f;
+
+	public float fireRate = 0.5f; 
 
 	public AudioClip JumpClip;
 	public AudioClip WalkClip;
 	public AudioClip LandClip;
 	private AudioSource _audio;
+	
 
 	SMBPhysicsBody body;
 	ObstacleCollision obsColls;
@@ -27,16 +32,20 @@ public class MarioMovement : MonoBehaviour
 	Animator anim;
 	
 	private STATE state;
-
 	private enum DIRECTION {RIGHT, LEFT};
 	private DIRECTION direction = DIRECTION.RIGHT;
+
+	public GameObject shotPrefab;
+
 	public bool Grounded{get{return IsGrounded();}}
+
 
 	void Start () 
 	{
 		state = STATE.STANDING;
 		anim = GetComponent<Animator> (); 
 		_audio = gameObject.AddComponent<AudioSource>();
+
 	}
 	
 	void Awake()
@@ -185,6 +194,16 @@ public class MarioMovement : MonoBehaviour
 			Vector3 scale = transform.localScale;
 			scale.x = -1;
 			transform.localScale = scale;
+		}
+
+		if (UserInput.RunOrFire() && Time.time > nextFire) 
+		{
+			GameObject shot = Instantiate (shotPrefab) as GameObject;
+			shot.transform.position = transform.position + new Vector3(60.0f, 50.0f, 0.0f);
+
+	
+			nextFire = Time.time + fireRate;
+			
 		}
 
 

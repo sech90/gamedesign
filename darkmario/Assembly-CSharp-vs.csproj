@@ -70,6 +70,7 @@
      <Compile Include="Assets\Scripts\Motion\MarioMovement.cs" />
      <Compile Include="Assets\Scripts\Motion\ObstacleCollision.cs" />
      <Compile Include="Assets\Scripts\Motion\SMBPhysicsBody.cs" />
+     <Compile Include="Assets\Scripts\Motion\ShotController.cs" />
      <Compile Include="Assets\Scripts\Motion\UserInput.cs" />
      <Compile Include="Assets\Scripts\Scrolling.cs" />
      <Compile Include="Assets\Scripts\StartScreen.cs" />

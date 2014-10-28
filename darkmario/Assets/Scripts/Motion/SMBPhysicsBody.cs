@@ -35,8 +35,10 @@ public class SMBPhysicsBody : MonoBehaviour
 		// Gravity pulls object down
 		if(velocity.y > -2000 && !movement.IsGrounded())
 			velocity.y -= marioGravity * Time.deltaTime;
-		
-		
+
+		// Prevents physics engine moving Mario
+		rigidbody2D.velocity = new Vector2 (0.0f, 0.0f);
+
 	}
 	
 	
