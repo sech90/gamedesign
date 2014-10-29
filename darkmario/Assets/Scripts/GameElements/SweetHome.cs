@@ -4,7 +4,6 @@ using System.Collections;
 public class SweetHome : MonoBehaviour {
 
 	public GameObject FireWorks;
-	public AudioClip FireWorksClip;
 	public AudioClip HowlClip;
 	public int HowManyFires = 10;
 	public float Interval = 0.5f;
@@ -17,14 +16,10 @@ public class SweetHome : MonoBehaviour {
 			audio.PlayOneShot(HowlClip);
 
 			Invoke("PreKaboom", 1.5f);
-			Invoke("QuitToMenu", 4.5f);
-
 
 			// Put Mario behind the cabin and disable movement. Causes a glitch in camera position.
 			coll.gameObject.transform.position = transform.position + new Vector3(0.0f,0.0f,1000.0f);
 			coll.GetComponent<SMBPhysicsBody>().enabled = false;
-
-
 		}
 	}
 
@@ -33,12 +28,16 @@ public class SweetHome : MonoBehaviour {
 	}
 
 	private IEnumerator KABOOM(){
-		float extentY = collider2D.bounds.extents.y;
-		float extentX = collider2D.bounds.extents.x;
+		GameState.gameEnded = true;
+		Bounds homebounds = GetComponent<SpriteRenderer> ().sprite.bounds;
+
+		float extentY = homebounds.extents.y;
+		float extentX = homebounds.extents.x;
 
 		Vector3 randPos = new Vector3(0,0,800);
-		Vector2 center = collider2D.bounds.center;
+		Vector2 center = transform.position;
 		center.y += extentY;
+
 
 		for(int i=0;i<HowManyFires;i++){
 			Vector2 rand = Random.insideUnitCircle;
@@ -48,8 +47,4 @@ public class SweetHome : MonoBehaviour {
 			yield return new WaitForSeconds(Interval);
 		}
 	}
-
-	private void QuitToMenu() {
-			Application.LoadLevel("StartScreen");
-		}
 }

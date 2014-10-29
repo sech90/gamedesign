@@ -13,9 +13,13 @@ public class GameState : MonoBehaviour {
 	private float _timeAfterDeath;
 	private float endTime;
 	private Mario _mario;
+	private bool _isUiShown = false;
+
 	public Text score;
 	public Text coins;
 	public Text timer;
+	public Text FinalScoreText;
+	public static bool gameEnded = false;
 
 	void Awake(){
 		Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"),LayerMask.NameToLayer("Player"),true);
@@ -27,7 +31,6 @@ public class GameState : MonoBehaviour {
 		Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("CameraWall"),LayerMask.NameToLayer("Items"));
 		Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("CameraWall"),LayerMask.NameToLayer("Enemies"));
 		Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("CameraWall"),LayerMask.NameToLayer("RunningEnemies"));
-
 	}
 
 	void Start () {
@@ -36,9 +39,42 @@ public class GameState : MonoBehaviour {
 		endTime = Time.time + 400;
 		_timeAfterDeath = -1;
 	}
+
+	private void ShowFinalText(){
+		if(_isUiShown)
+			return;
+		_isUiShown = true;
+		GameObject FinalLayerText = GameObject.Find ("EndLevelText");
+		if (FinalLayerText != null) {
+			for(int i=0;i<FinalLayerText.transform.childCount;i++){
+				FinalLayerText.transform.GetChild(i).gameObject.SetActive(true);
+			}
+			FinalScoreText.text = "Your Score: "+(_mario.Score + timeLeft*10);
+		}
+	}
+
+	private void HideFinalText(){
+		if(!_isUiShown)
+			return;
+		_isUiShown = false;
+		GameObject FinalLayerText = GameObject.Find ("EndLevelText");
+		if (FinalLayerText != null) 
+			for(int i=0;i<FinalLayerText.transform.childCount;i++)
+				FinalLayerText.transform.GetChild(i).gameObject.SetActive(false);
+	}
 	
-	// Update is called once per frame
 	void Update () {
+
+		if (gameEnded) {
+			ShowFinalText();
+			if(UserInput.JumpDown()){
+				HideFinalText();
+				gameEnded = false;
+				Application.LoadLevel("StartScreen");
+			}
+				
+			return;
+		}
 		if(timeLeft > 0){
 			timeLeft = (int)(endTime - Time.time);
 			score.text = _mario.Score.ToString();
@@ -56,9 +92,7 @@ public class GameState : MonoBehaviour {
 			if(Time.time - _timeAfterDeath >= _reloadTimer){
 				Time.timeScale = 1;
 				Application.LoadLevel(Application.loadedLevel);
-
 			}
-
 		}
 	}
 

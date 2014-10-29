@@ -26,6 +26,7 @@ public class Mario : MonoBehaviour {
 	public int Coins{get{return _coins;}}
 	public int Lives{get{return _lives;}}
 
+
 	public AudioClip CollectCoinClip;
 	public AudioClip EatMushroomClip;
 	public AudioClip HitByEnemyClip;
