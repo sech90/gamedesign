@@ -379,9 +379,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06d6d37f035814b83952e8b346a0a6bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fireRate: .5
   JumpClip: {fileID: 8300000, guid: 93b03681b0596b64dae45d78cadfc28d, type: 3}
   WalkClip: {fileID: 8300000, guid: 03356448894aafd4ca638e64bd561d6f, type: 3}
   LandClip: {fileID: 8300000, guid: 74963313d29faa4479b4f041d02ceb0a, type: 3}
+  FireClip: {fileID: 8300000, guid: 5b72aea882b2f094b8730cbdc3d01406, type: 3}
+  shotPrefab: {fileID: 100000, guid: d545303f8cf4048ee814cc6355425b6e, type: 2}
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1

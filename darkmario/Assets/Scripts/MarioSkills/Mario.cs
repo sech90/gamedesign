@@ -20,6 +20,7 @@ public class Mario : MonoBehaviour {
 	private float _lastY, _currentY=0;
 	private AudioSource _audio;
 	private Animator _animator;
+	private bool _HitByEnemyCooldown = false;
 
 	public int Score{get{return _score;}}
 	public int Coins{get{return _coins;}}
@@ -116,7 +117,7 @@ public class Mario : MonoBehaviour {
 		float enemyHead  = coll.gameObject.transform.position.y + coll.collider.bounds.extents.y; 
 
 		//Before, mario's feet were below enemy's head
-		if(feetBefore+20 <= enemyHead){
+		if(feetBefore+40 <= enemyHead){
 			Debug.Log("feetBefore "+feetBefore+" enemy: "+enemyHead);
 			return false;
 		}
@@ -204,7 +205,7 @@ public class Mario : MonoBehaviour {
 	}
 
 	public void HitByEnemy(){
-		if(star == null){
+		if(star == null && !_HitByEnemyCooldown){
 			if(fire != null){
 				fire.Remove();
 				fire = null;
@@ -267,7 +268,9 @@ public class Mario : MonoBehaviour {
 	{
 		//Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"),LayerMask.NameToLayer("Enemies"),true);
 		_animator.SetBool("Invulnerable",true);
+		_HitByEnemyCooldown = true;
 		yield return new WaitForSeconds(DelayAfterHit);
+		_HitByEnemyCooldown = false;
 		_animator.SetBool("Invulnerable",false);
 		//Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"),LayerMask.NameToLayer("Enemies"),false);
 	}

@@ -3,13 +3,17 @@ using System.Collections;
 
 public class FirePower : SuperPower {
 		
+	void Start(){
+		Activate();
+	}
+
 	override protected void Activate(){
-		Debug.Log("Mario is on fire");
+		GetComponent<SpriteRenderer>().color = Color.red;
 	}
 	
 	override public void Remove(){
+		GetComponent<SpriteRenderer>().color = Color.white;
 		Destroy(this);
-		Debug.Log("Mario not on fire anymore");
 	}
 
 }

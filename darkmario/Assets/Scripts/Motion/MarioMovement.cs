@@ -23,6 +23,7 @@ public class MarioMovement : MonoBehaviour
 	public AudioClip JumpClip;
 	public AudioClip WalkClip;
 	public AudioClip LandClip;
+	public AudioClip FireClip;
 	private AudioSource _audio;
 	
 
@@ -33,7 +34,7 @@ public class MarioMovement : MonoBehaviour
 	
 	private STATE state;
 	private enum DIRECTION {RIGHT, LEFT};
-//	private DIRECTION direction = DIRECTION.RIGHT;
+	private DIRECTION direction = DIRECTION.RIGHT;
 
 	public GameObject shotPrefab;
 
@@ -181,7 +182,7 @@ public class MarioMovement : MonoBehaviour
 		// Mario is facing the direction it's moving
 		if (body.velocity.x > 1.0f)
 		{
-	//		direction = DIRECTION.RIGHT;
+			direction = DIRECTION.RIGHT;
 			// The sprite is flipped using x-scale of tranformation
 			Vector3 scale = transform.localScale;
 			scale.x = 1;
@@ -190,18 +191,30 @@ public class MarioMovement : MonoBehaviour
 
 		if (body.velocity.x < -1.0f)
 		{
-//			direction = DIRECTION.LEFT;
+			direction = DIRECTION.LEFT;
 			Vector3 scale = transform.localScale;
 			scale.x = -1;
 			transform.localScale = scale;
 		}
 
-		if (UserInput.RunOrFire() && Time.time > nextFire) 
+		if (UserInput.RunOrFire() && Time.time > nextFire && gameObject.GetComponent<FirePower>()!=null ) 
 		{
-			GameObject shot = Instantiate (shotPrefab) as GameObject;
-			shot.transform.position = transform.position + new Vector3(60.0f, 50.0f, 0.0f);
+			GameObject shot = Instantiate (shotPrefab, transform.position,transform.rotation) as GameObject;
+			_audio.PlayOneShot(FireClip);
+			Rigidbody2D shotRB = shot.GetComponent<Rigidbody2D>();
+			if (direction == DIRECTION.RIGHT)
+			{
+				shotRB.velocity = new Vector2( 800.0f, 0.0f );
+				shot.transform.position = transform.position + new Vector3(60.0f, 50.0f, 0.0f);
+			}
+			else
+			{
+				shotRB.velocity = new Vector2( -800.0f, 0.0f );
+				shot.transform.position = transform.position + new Vector3(-60.0f, 50.0f, 0.0f);
+			}
 
-	
+			_audio.PlayOneShot(FireClip);
+			SetState(STATE.JUMPING);	
 			nextFire = Time.time + fireRate;
 			
 		}
