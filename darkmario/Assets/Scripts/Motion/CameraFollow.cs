@@ -13,7 +13,7 @@ public class CameraFollow : MonoBehaviour
 		if(target == null)
 			target = GameObject.FindObjectOfType<Mario>().transform;
 	}
-	void Update () 
+	void LateUpdate () 
 	{
 		if (target == null) 
 		{
