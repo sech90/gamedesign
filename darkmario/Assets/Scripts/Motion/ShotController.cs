@@ -1,10 +1,8 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 
 public class ShotController : MonoBehaviour {
 
-	private Rigidbody2D rb = null;
 	private int layermask;
 
 
@@ -12,7 +10,7 @@ public class ShotController : MonoBehaviour {
 	void Start () 
 	{
 		layermask = LayerMask.GetMask("Obstacles","Ground","CameraWall");
-		rb = gameObject.GetComponent<Rigidbody2D>();
+//		rb = gameObject.GetComponent<Rigidbody2D>();
 	//	rb.velocity = new Vector2( 800.0f, 0.0f);
 	}
 	

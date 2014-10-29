@@ -12,9 +12,10 @@ public class MarioMovement : MonoBehaviour
 
 	// pixels / s^2
 	float walkAccelleration 	= 668.0F;
-	float runAccelleration 		= 668.0F;
+	float runAccelleration 		= 1002.0F;
 	float releaseDecelleration 	= 703.0F;
 	float skiddingDecelleration = 1828.0F;
+	float jumpXDecelleration 	= 1002.0F;
 
 	private float nextFire = 0.0f;
 
@@ -46,7 +47,6 @@ public class MarioMovement : MonoBehaviour
 		state = STATE.STANDING;
 		anim = GetComponent<Animator> (); 
 		_audio = gameObject.AddComponent<AudioSource>();
-
 	}
 	
 	void Awake()
@@ -99,18 +99,15 @@ public class MarioMovement : MonoBehaviour
 			Jump();
 		}
 
+		if ( IsGrounded() && state == STATE.JUMPING)
+			_audio.PlayOneShot(LandClip);
+
 		if ( IsGrounded() )
 		{
-			//mario was jumping but now is grounded. Play landed sound
-			if(state == STATE.JUMPING){
-				_audio.PlayOneShot(LandClip);
-			}
-
-			if(WalkClip){
+			//if(WalkClip){
 
 				// If Mario is moving other way and player steeres other way, Mario skids and decellerates faster
-				if ( UserInput.Right() && body.velocity.x < 0.0f ||
-				     UserInput.Left()  && body.velocity.x > 0.0f    )
+				if ( IsBraking () )
 				{
 					Decellerate( skiddingDecelleration * Time.deltaTime );
 					SetState(STATE.SKIDDING);
@@ -126,8 +123,14 @@ public class MarioMovement : MonoBehaviour
 					if(!_audio.isPlaying)
 						_audio.Play();
 				}
-			}
+			//}
 		}
+
+		if (!IsGrounded() && IsBraking () ) 
+		{
+			Decellerate( jumpXDecelleration * Time.deltaTime );
+		}
+
 
 
 		
@@ -148,7 +151,6 @@ public class MarioMovement : MonoBehaviour
 				
 				if (body.velocity.x > maxWalkSpeed)
 					body.velocity.x = maxWalkSpeed;
-
 			}
 		}
 		
@@ -156,7 +158,6 @@ public class MarioMovement : MonoBehaviour
 		{
 			if (UserInput.RunOrFire())
 			{
-
 				body.velocity.x -= runAccelleration * Time.deltaTime;
 			
 				if (body.velocity.x < -maxRunSpeed)
@@ -172,8 +173,8 @@ public class MarioMovement : MonoBehaviour
 
 		}
 		
-		// If player let's go of controller, Mario decellerates slowly
-		if (!UserInput.Left () && !UserInput.Right ()) 
+		// If player let's go of controller, Mario decellerates slowly if grounded
+		if (!UserInput.Left () && !UserInput.Right () && IsGrounded() ) 
 		{
 			Decellerate( releaseDecelleration * Time.deltaTime );
 		}
@@ -196,6 +197,8 @@ public class MarioMovement : MonoBehaviour
 			scale.x = -1;
 			transform.localScale = scale;
 		}
+
+		// FIRING
 
 		if (UserInput.RunOrFire() && Time.time > nextFire && gameObject.GetComponent<FirePower>()!=null ) 
 		{
@@ -263,7 +266,19 @@ public class MarioMovement : MonoBehaviour
 		return (body.velocity.y < jumpSpeed / 2.0F && obsColls.IsGrounded ());
 	}
 
+	private bool IsBraking()
+	{
+		return (UserInput.Right () && body.velocity.x < 0.0f ||
+						UserInput.Left () && body.velocity.x > 0.0f);
+	}
 	
-	
+	private bool IsAccelerating()
+	{
+		return (UserInput.Right () && body.velocity.x >= 0.0f ||
+		        UserInput.Left () && body.velocity.x <= 0.0f);
+	}
+
+
+
 	
 }

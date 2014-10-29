@@ -52,8 +52,9 @@ public class Mario : MonoBehaviour {
 		_animator = GetComponent<Animator>();
 	}
 
+
 	void LateUpdate(){
-		if(_currentY != 0)
+		if(_currentY != 0)    
 			_lastY = _currentY;
 		_currentY = transform.position.y;
 //		Debug.Log(_lastY+" - "+ _currentY);
@@ -102,10 +103,11 @@ public class Mario : MonoBehaviour {
 	private bool HasStomped(Collision2D coll){
 
 		//if moving straight or jumping up
+		/*
 		if(_lastY <= _currentY){
 			Debug.Log("Not jumping down.. prev: "+_lastY+" curr: "+_currentY);
 			return false;
-		}
+		}*/
 
 		//HACK: correct previous Y if OnCollision was called before Update
 		/*if(_currentY != transform.position.y){
