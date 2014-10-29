@@ -66,7 +66,6 @@
      <Compile Include="Assets\Scripts\Motion\AISimpleJump.cs" />
      <Compile Include="Assets\Scripts\Motion\AISimpleMovement.cs" />
      <Compile Include="Assets\Scripts\Motion\CameraFollow.cs" />
-     <Compile Include="Assets\Scripts\Motion\MarioCollisions.cs" />
      <Compile Include="Assets\Scripts\Motion\MarioMovement.cs" />
      <Compile Include="Assets\Scripts\Motion\ObstacleCollision.cs" />
      <Compile Include="Assets\Scripts\Motion\SMBPhysicsBody.cs" />
