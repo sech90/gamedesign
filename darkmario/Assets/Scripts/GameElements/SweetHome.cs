@@ -16,7 +16,15 @@ public class SweetHome : MonoBehaviour {
 			isExploded = true;
 			audio.PlayOneShot(HowlClip);
 
-			Invoke("PreKaboom",1.5f);
+			Invoke("PreKaboom", 1.5f);
+			Invoke("QuitToMenu", 4.5f);
+
+
+			// Put Mario behind the cabin and disable movement. Causes a glitch in camera position.
+			coll.gameObject.transform.position = transform.position + new Vector3(0.0f,0.0f,1000.0f);
+			coll.GetComponent<SMBPhysicsBody>().enabled = false;
+
+
 		}
 	}
 
@@ -40,4 +48,8 @@ public class SweetHome : MonoBehaviour {
 			yield return new WaitForSeconds(Interval);
 		}
 	}
+
+	private void QuitToMenu() {
+			Application.LoadLevel("StartScreen");
+		}
 }
