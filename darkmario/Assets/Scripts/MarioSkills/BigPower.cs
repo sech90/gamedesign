@@ -14,7 +14,7 @@ public class BigPower : SuperPower {
 	 
 		GetComponent<Animator> ().SetTrigger ("TransformToBig");
 		BoxCollider2D bc = GetComponent<BoxCollider2D> ();
-		bc.center = new Vector2 (0.0f, 50.0f);
+		bc.center = new Vector2 (0.0f, 39.0f);
 		bc.size = new Vector2 (65.0f, 155.0f);
 
 
