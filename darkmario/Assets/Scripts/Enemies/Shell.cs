@@ -27,8 +27,8 @@ public class Shell : Enemy {
 		Debug.Log("Shell collided with "+coll.gameObject.name);
 		Enemy enemy = coll.gameObject.GetComponent<Enemy>();
 		if(_movement.enabled && enemy != null){
-			enemy.Kill();
 			AudioSource.PlayClipAtPoint(CollidedEnemyClip,transform.position);
+			enemy.Kill();
 		}
 	}
 
