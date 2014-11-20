@@ -12,10 +12,12 @@ public class EditableMesh {
 	Vector3[] verticesCopy;
 	MeshFilter meshFilter;
 	MeshRenderer renderer;
+
+	GameObject plane;
 	
 	public void Create() 
 	{
-		GameObject plane = new GameObject("Plane");
+		plane = new GameObject("Plane");
 		meshFilter = (MeshFilter)plane.AddComponent(typeof(MeshFilter));
 		meshFilter.mesh = CreateMeshPlane(15.0f, 3.0f, 80, 1);
 		verticesCopy = meshFilter.mesh.vertices;
@@ -28,7 +30,7 @@ public class EditableMesh {
 
 	public void SetPosition(Vector3 position)
 	{
-
+		plane.transform.position = position;
 	}
 	
 	public void SetColor(Color color)
