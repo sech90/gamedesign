@@ -13,6 +13,9 @@ Assets/TestFolder/*
 /*.userprefs
 /*.pidb
 /*.booproj
+/*.DS_Store
+/*.exe
+/*_Data*
 
 #Unity3D Generated File On Crash Reports
 sysinfo.txt
