@@ -1,25 +1,38 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class SeaHandler : MonoBehaviour {
-	
-	EditableMesh mesh;
-	
+public class SeaBottom : MonoBehaviour {
+
+	EditableMesh mesh1;
+	EditableMesh mesh2;
+	EditableMesh mesh3;
+
 	void Start () 
 	{
-		mesh = new EditableMesh();
-		
-		mesh.Create();
-		mesh.SetColor(Color.blue);
+		mesh1 = new EditableMesh();
+		mesh1.Create();
+		mesh1.SetColor(new Color(0.9f, 0.5f, 0.0F, 1.0F) );
+
+		mesh2 = new EditableMesh();
+		mesh2.Create();
+		mesh2.SetColor(new Color(0.9f, 0.5f, 0.0F, 0.3F) );
+
 	}
 	
 	void Update () 
 	{
-		
+		float time = Time.time;
+
+		UpdateMesh( mesh1, time );		
+		UpdateMesh( mesh2, time + 2.0f );		
+
+	}
+
+	void UpdateMesh( EditableMesh mesh, float time)
+	{
 		int i = 0;
 		
-		float time = Time.time;
-		
+
 		while (i < 81) 
 		{
 			Vector3 position = mesh.GetVertex(i,1); 
@@ -32,7 +45,7 @@ public class SeaHandler : MonoBehaviour {
 		}
 		
 		mesh.UpdateVertices();
-		
+
 	}
 	
 	
@@ -40,10 +53,10 @@ public class SeaHandler : MonoBehaviour {
 	{
 		//		return 4.0f + 0.8f * Mathf.Sin(time*0.4f + x*0.7f) 
 		//			- 0.1f * Mathf.Cos(time*2 + x*2.0f);
-		return 4.0f + 0.3f * Mathf.Sin(time*0.4f + x*0.7f) 
-			- 0.1f * Mathf.Cos(time*2 + x*2.0f);
+		return 2.0f + 0.3f * Mathf.Sin(time*0.4f + x*0.7f) ;
+
 		/*return 4.0f + 0.3f * Mathf.Sin(time*0.4f + x*0.7f) 
 			- 0.1f * Mathf.Cos(time*0.13f + x*2.0f); */
 	}
-	
+
 }
