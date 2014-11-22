@@ -1,32 +1,8 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/MarioSkills/StarPower.cs">
+  <MonoDevelop.Ide.Workspace />
+  <MonoDevelop.Ide.Workbench ActiveDocument="..\shipshooter\Assets\Scripts\GameHandler.cs">
     <Files>
-      <File FileName="Assets/Scripts/GameElements/Spawner.cs" Line="56" Column="1" />
-      <File FileName="../../StarBlocks/Assets/BackgroundScript.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Scrolling.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Motion/CameraFollow.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/GameState.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/MarioSkills/Mario.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Motion/UserInput.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Motion/MarioMovement.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/StartScreen.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Motion/SMBPhysicsBody.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Motion/ObstacleCollision.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/MarioSkills/BigPower.cs" Line="17" Column="36" />
-      <File FileName="Assets/Scripts/MarioSkills/SuperPower.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/MarioSkills/ItemCollector.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/MarioSkills/FirePower.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/GameElements/Item.cs" Line="1" Column="1" />
-      <File FileName="../../StarBlocks/Assets/Fyssaliikuttelu.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/GameElements/Destructible.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/GameElements/Brick.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/GameElements/Block.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Enemies/Goomba.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Enemies/Enemy.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Motion/ShotController.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/GameElements/SweetHome.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/MarioSkills/StarPower.cs" Line="1" Column="1" />
+      <File FileName="..\shipshooter\Assets\Scripts\GameHandler.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
