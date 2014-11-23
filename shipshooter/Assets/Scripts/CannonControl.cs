@@ -31,13 +31,13 @@ public class CannonControl : MonoBehaviour {
 			_curAngle -= RotateSpeed * Time.deltaTime;
 			_curAngle = Mathf.Clamp(_curAngle, -_angleLimit, +_angleLimit); // update the object rotation: 
 			_hinge.localRotation = Quaternion.Euler(0,0,_curAngle); 
-			Debug.Log(_hinge.rotation.z);
+			//Debug.Log(_hinge.rotation.z);
 		}
 		else if(Input.GetKey("down")){
 			_curAngle += RotateSpeed * Time.deltaTime;
 			_curAngle = Mathf.Clamp(_curAngle, -_angleLimit, +_angleLimit); // update the object rotation: 
 			_hinge.localRotation = Quaternion.Euler(0,0,_curAngle); 
-			Debug.Log(_hinge.rotation.z);
+			//Debug.Log(_hinge.rotation.z);
 		}
 	}
 
