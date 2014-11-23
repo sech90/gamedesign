@@ -6,7 +6,16 @@ public class ShipHandler : MonoBehaviour {
 	public GameObject sea;
 
 	public float hullWidth = 3.0f;
-	public float rollFactor = 1.0f;
+	public float rollFactor = 0.5f;
+	public float maxSpeed = 0.5f;
+	public float wheelTurnSpeed = 0.25f;
+	public float maxRotationFromTurning = 15.0f; 
+
+	// How much the wheel has been turned
+	private float wheel = 0.0f; // -1 = max to left, 1 = max to right
+
+
+
 
 	// Use this for initialization
 	void Start () 
@@ -17,29 +26,35 @@ public class ShipHandler : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{
-		/*
-		SeaHandler sh = sea.GetComponent<SeaHandler>();
+		if ( Input.GetKey (KeyCode.E) )
+		{
+			TurnWheel( wheelTurnSpeed * Time.deltaTime );
+		}
 
+		if ( Input.GetKey (KeyCode.Q) )
+		{
+			TurnWheel( -wheelTurnSpeed * Time.deltaTime );
+		}
 
-		// Height of the sea 
-		float seaLeft   = sh.GetSurfaceY(7.5f - hullWidth/2.0f, Time.time);
-		float seaMiddle = sh.GetSurfaceY(7.5f,                  Time.time);
-		float seaRight  = sh.GetSurfaceY(7.5f + hullWidth/2.0f, Time.time);
-
-		// Ship floats at the avg of sea's surface at the three points
-		float shipHeight = ( seaLeft + seaMiddle + seaRight ) / 3.0f;
-
-
-
-		transform.position = new Vector3(transform.position.x, 
-		                                 shipHeight, 
-		                                 transform.position.z );
-
-
-		transform.rotation =  Quaternion.AngleAxis(Mathf.Sin(Time.time) * 5.0f, Vector3.forward);
-
-	*/
+		TurnShip();
 		UpdateTransformation();
+	}
+
+	void TurnWheel( float amount )
+	{
+		wheel += amount;
+
+		if (wheel < -1.0f)
+			wheel = -1.0f;
+
+		if (wheel > 1.0f)
+			wheel = 1.0f;
+	}
+
+	void TurnShip()
+	{
+		Vector3 change = new Vector3(maxSpeed * wheel * Time.deltaTime, 0.0f, 0.0f);
+		transform.position = transform.position + change;
 	}
 
 
@@ -68,7 +83,7 @@ public class ShipHandler : MonoBehaviour {
 		float roll = Mathf.Atan( (seaRight-seaLeft)/hullWidth ) * Mathf.Rad2Deg;
 		roll = roll * rollFactor; // dampen the roll to make it more tolerable
 			
-		transform.rotation =  Quaternion.AngleAxis(roll, Vector3.forward);
+		transform.rotation =  Quaternion.AngleAxis(roll - wheel* maxRotationFromTurning, Vector3.forward);
 	}
 
 }

@@ -1130,6 +1130,9 @@ MonoBehaviour:
   sea: {fileID: 100000, guid: f358c3eab5128473f9bbb8638217d100, type: 2}
   hullWidth: 3
   rollFactor: 1
+  maxSpeed: .5
+  wheelTurnSpeed: .25
+  maxRotationFromTurning: 15
 --- !u!135 &13500000
 SphereCollider:
   m_ObjectHideFlags: 1
