@@ -8,8 +8,13 @@ public class GameHandler : MonoBehaviour {
 	{
 
 		GameObject shipPrefab = Resources.Load<GameObject>("Ship");
+		GameObject sailorPrefab = Resources.Load<GameObject>("Sailor");
 
 		GameObject ship = Instantiate (shipPrefab) as GameObject;
+		GameObject sailor = Instantiate (sailorPrefab) as GameObject;
+		sailor.transform.parent = ship.transform;
+		sailor.transform.localPosition = new Vector3(0.0f, 0.0f, -1.0f);
+
 	
 	}
 	

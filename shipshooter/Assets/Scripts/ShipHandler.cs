@@ -9,7 +9,8 @@ public class ShipHandler : MonoBehaviour {
 	public float rollFactor = 1.0f;
 
 	// Use this for initialization
-	void Start () {
+	void Start () 
+	{
 	
 	}
 	
