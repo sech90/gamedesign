@@ -100,7 +100,7 @@ public class SeaBottom : MonoBehaviour {
 			i++;
 		}
 		
-		mesh.UpdateVertices();
+		mesh.UpdateMesh();
 
 	}
 	

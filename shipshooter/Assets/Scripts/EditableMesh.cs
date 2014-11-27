@@ -10,6 +10,9 @@ public class EditableMesh {
 	
 	
 	Vector3[] verticesCopy;
+	Vector2[] uvCopy;
+
+
 	MeshFilter meshFilter;
 	MeshRenderer renderer;
 
@@ -21,6 +24,7 @@ public class EditableMesh {
 		meshFilter = (MeshFilter)plane.AddComponent(typeof(MeshFilter));
 		meshFilter.mesh = CreateMeshPlane(15.0f, 3.0f, 80, 1);
 		verticesCopy = meshFilter.mesh.vertices;
+		uvCopy = meshFilter.mesh.uv;
 		
 		renderer = plane.AddComponent(typeof(MeshRenderer)) as MeshRenderer;
 		
@@ -41,6 +45,14 @@ public class EditableMesh {
 		tex.Apply();
 		renderer.material.mainTexture = tex;
 		renderer.material.color = color;
+		
+	}
+
+	public void SetTexture(Texture2D tex)
+	{
+		renderer.material.shader = Shader.Find ("Unlit/Transparent");
+		renderer.material.mainTexture = tex;
+//		renderer.material.color = color;
 		
 	}
 	
@@ -146,10 +158,18 @@ public class EditableMesh {
 		int index = i + j * widthVertices;
 		verticesCopy[ index ] = position;
 	}
+
+	public void SetUv(int i, int j, Vector2 uv)
+	{
+		int index = i + j * widthVertices;
+		uvCopy[ index ] = uv;
+	}
+
 	
-	public void UpdateVertices()
+	public void UpdateMesh()
 	{
 		meshFilter.mesh.vertices = verticesCopy; 
+		meshFilter.mesh.uv = uvCopy;
 		meshFilter.mesh.RecalculateBounds();
 		
 		verticesCopy = meshFilter.mesh.vertices;

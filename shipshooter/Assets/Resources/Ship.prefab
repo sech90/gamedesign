@@ -1129,7 +1129,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sea: {fileID: 100000, guid: f358c3eab5128473f9bbb8638217d100, type: 2}
   hullWidth: 3
-  rollFactor: 1
+  rollFactor: .5
   maxSpeed: .5
   wheelTurnSpeed: .25
   maxRotationFromTurning: 15
