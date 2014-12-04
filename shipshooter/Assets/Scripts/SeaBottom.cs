@@ -18,42 +18,42 @@ public class SeaBottom : MonoBehaviour {
 	void Start () 
 	{
 		mesh1 = new EditableMesh();
-		mesh1.Create();
+		mesh1.Create(15.0f, 3.0f, 80, 1);
 		mesh1.SetColor( GetBottomColor(1.0f) );
 		mesh1.SetPosition( new Vector3(0.0f, 0.0f, -1.0f));
 
 		mesh2 = new EditableMesh();
-		mesh2.Create();
+		mesh2.Create(15.0f, 3.0f, 80, 1);
 		mesh2.SetColor(GetBottomColor(0.7f) );
 		mesh2.SetPosition( new Vector3(0.0f, 0.0f, -0.9f));
 
 		mesh3 = new EditableMesh();
-		mesh3.Create();
+		mesh3.Create(15.0f, 3.0f, 80, 1);
 		mesh3.SetColor(GetBottomColor(0.6f) );
 		mesh3.SetPosition( new Vector3(0.0f, 0.0f, -0.8f));
 
 		mesh4 = new EditableMesh();
-		mesh4.Create();
+		mesh4.Create(15.0f, 3.0f, 80, 1);
 		mesh4.SetColor(GetBottomColor(0.5f) );
 		mesh4.SetPosition( new Vector3(0.0f, 0.0f, -0.7f));
 
 		mesh5 = new EditableMesh();
-		mesh5.Create();
+		mesh5.Create(15.0f, 3.0f, 80, 1);
 		mesh5.SetColor( GetBottomColor(0.4f) );
 		mesh5.SetPosition( new Vector3(0.0f, 0.0f, -0.6f));
 		
 		mesh6 = new EditableMesh();
-		mesh6.Create();
+		mesh6.Create(15.0f, 3.0f, 80, 1);
 		mesh6.SetColor(GetBottomColor(0.3f) );
 		mesh6.SetPosition( new Vector3(0.0f, 0.0f, -0.5f));
 		
 		mesh7 = new EditableMesh();
-		mesh7.Create();
+		mesh7.Create(15.0f, 3.0f, 80, 1);
 		mesh7.SetColor(GetBottomColor(0.2f) );
 		mesh7.SetPosition( new Vector3(0.0f, 0.0f, -0.4f));
 		
 		mesh8 = new EditableMesh();
-		mesh8.Create();
+		mesh8.Create(15.0f, 3.0f, 80, 1);
 		mesh8.SetColor(GetBottomColor(0.1f) );
 		mesh8.SetPosition( new Vector3(0.0f, 0.0f, -0.3f));
 

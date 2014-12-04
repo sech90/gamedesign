@@ -18,17 +18,22 @@ public class EditableMesh {
 
 	GameObject plane;
 	
-	public void Create() 
+	public void Create(float totalWidth, float totalHeight, int numWidthSegments, int numHeightSegments)
 	{
 		plane = new GameObject("Plane");
 		meshFilter = (MeshFilter)plane.AddComponent(typeof(MeshFilter));
-		meshFilter.mesh = CreateMeshPlane(15.0f, 3.0f, 80, 1);
+		meshFilter.mesh = CreateMeshPlane(totalWidth, totalHeight, numWidthSegments, numHeightSegments);
 		verticesCopy = meshFilter.mesh.vertices;
 		uvCopy = meshFilter.mesh.uv;
 		
 		renderer = plane.AddComponent(typeof(MeshRenderer)) as MeshRenderer;
-		
+
 		SetColor (Color.red);
+	}
+
+	public void SetParent(GameObject parent)
+	{
+		plane.transform.SetParent(parent.transform);
 	}
 
 
@@ -36,7 +41,17 @@ public class EditableMesh {
 	{
 		plane.transform.position = position;
 	}
-	
+
+	public void SetLocalPosition(Vector3 position)
+	{
+		plane.transform.localPosition = position;
+	}
+
+	public void SetSortingOrder(int so)
+	{
+		renderer.sortingOrder = so;
+	}
+
 	public void SetColor(Color color)
 	{
 		renderer.material.shader = Shader.Find ("Unlit/Transparent");
@@ -159,6 +174,12 @@ public class EditableMesh {
 		verticesCopy[ index ] = position;
 	}
 
+	public void SetVertex(int i, int j, Vector2 position)
+	{
+		SetVertex( i, j, new Vector3(position.x, position.y, 0.0f) );
+	}
+
+	
 	public void SetUv(int i, int j, Vector2 uv)
 	{
 		int index = i + j * widthVertices;
