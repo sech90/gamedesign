@@ -6,7 +6,7 @@ public class SeaHandler : MonoBehaviour {
 	EditableMesh mesh;
 
 	GameObject[] wave;
-	int numberOfWaves = 20;
+	int numberOfWaves = 30;
 	int numberOfSegments = 80;
 	float width = 15.0f;
 	float avgDepth = 4.0f;
@@ -15,12 +15,12 @@ public class SeaHandler : MonoBehaviour {
 	{
 		mesh = new EditableMesh();
 		
-		mesh.Create(15.0f, avgDepth, numberOfSegments, 1);
+		mesh.Create(20.0f, avgDepth, numberOfSegments, 1);
 		
 	//	Texture2D seaTex = Resources.Load<Texture2D>("seaTest");
 		//mesh.SetTexture(seaTex);
 
-		Color seaColor = CreateColor(182, 172,147);
+		Color seaColor = Util.CreateColor(182, 172,147);
 
 
 		mesh.SetColor(seaColor);
@@ -33,7 +33,7 @@ public class SeaHandler : MonoBehaviour {
 		{
 		   wave[i] = Instantiate (wavePrefab) as GameObject;
 			SpriteRenderer sprite = wave[i].GetComponent<SpriteRenderer>();
-			if (IsOdd(i))
+			if (Util.IsOdd(i))
 				sprite.sortingOrder = 4;
 			else
 				sprite.sortingOrder = 8;
@@ -72,8 +72,10 @@ public class SeaHandler : MonoBehaviour {
 
 		for (i=0; i<numberOfWaves; i++)
 		{
-			float x = i* 17.0f/numberOfWaves;
+			float x = i* 19.0f/numberOfWaves;
 			float y = GetSurfaceY( x, time );
+			if (Util.IsOdd(i))
+				y=y+0.15f;
 			float z = 0.0f;
  
 		    wave[i].transform.position = new Vector3(x,y,z);
@@ -98,15 +100,4 @@ public class SeaHandler : MonoBehaviour {
 			- 0.1f * Mathf.Cos(time*0.13f + x*2.0f); */
 	}
 
-	private Color CreateColor(int red, int green, int blue)
-	{
-		Color color = new Color (red/256.0f, green/256.0f, blue/256.0f);
-		return color;
-	}
-
-	private static bool IsOdd(int value)
-	{
-		return value % 2 != 0;
-	}
-	
 }

@@ -66,9 +66,9 @@ public class ShipHandler : MonoBehaviour {
 			
 			
 		// Height of the sea at hull's middle and it's edges
-		float seaLeft   = sh.GetSurfaceY(7.5f - hullWidth/2.0f, Time.time);
-		float seaMiddle = sh.GetSurfaceY(7.5f,                  Time.time);
-		float seaRight  = sh.GetSurfaceY(7.5f + hullWidth/2.0f, Time.time);
+		float seaLeft   = sh.GetSurfaceY(transform.position.x - hullWidth/2.0f, Time.time);
+		float seaMiddle = sh.GetSurfaceY(transform.position.x,                  Time.time);
+		float seaRight  = sh.GetSurfaceY(transform.position.x + hullWidth/2.0f, Time.time);
 			
 		// Ship floats at the avg of the three points
 		float shipHeight = ( seaLeft + seaMiddle + seaRight ) / 3.0f;

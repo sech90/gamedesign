@@ -35,7 +35,7 @@ public class Bilgewater : MonoBehaviour {
 
 		mesh.SetSortingOrder(30);
 
-		Color waterColor = new Color(0.0f, 0.0f, 1.0f, 0.5f);
+		Color waterColor = Util.CreateColor(182, 172, 147, 120);
 		mesh.SetColor(waterColor);
 
 
