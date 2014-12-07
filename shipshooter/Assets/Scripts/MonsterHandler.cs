@@ -22,7 +22,7 @@ public class MonsterHandler : MonoBehaviour {
 	{
 		
 		SeaHandler sh = sea.GetComponent<SeaHandler>();
-		
+
 
 		float time = Time.time;
 		
