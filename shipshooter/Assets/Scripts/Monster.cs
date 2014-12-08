@@ -1,16 +1,18 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class MonsterHandler : MonoBehaviour {
+public class Monster : MonoBehaviour {
 
 	public GameObject sea;
 
-	// Use this for initialization
-	void Start () 
+	protected static GameObject ship = null;
+	
+	// Sets the ship as target for all monsters
+	public static void SetTargetShip( GameObject shipIn )
 	{
-	
+		ship = shipIn;
 	}
-	
+	/*
 	// Update is called once per frame
 	void Update () 
 	{
@@ -27,8 +29,8 @@ public class MonsterHandler : MonoBehaviour {
 		float time = Time.time;
 		
 		transform.position = new Vector3(transform.position.x, 
-		                                 sh.GetSurfaceY(transform.position.x, time) + 0.2f, 
+		                                 sh.GetSurfaceY(transform.position.x, time) + 0.3f, 
 		                                 transform.position.z );
 		
-	}
+	}*/
 }

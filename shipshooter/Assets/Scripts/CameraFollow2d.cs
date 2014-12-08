@@ -2,7 +2,9 @@
 using System.Collections;
 
 
-// If attached to camera, this script makes it follow the given target game
+// If attached to camera, this script makes it follow the given target GameObject.
+// It only starts to move when target is further away from camera center than the
+// given clearance.
 
 public class CameraFollow2d : MonoBehaviour 
 {
