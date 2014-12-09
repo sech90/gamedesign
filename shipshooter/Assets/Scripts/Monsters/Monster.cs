@@ -3,34 +3,50 @@ using System.Collections;
 
 public class Monster : MonoBehaviour {
 
-	public GameObject sea;
-
-	protected static GameObject ship = null;
+	protected enum Facing{
+		Left,
+		Right
+	};
 	
-	// Sets the ship as target for all monsters
-	public static void SetTargetShip( GameObject shipIn )
-	{
-		ship = shipIn;
+	protected enum Mode{
+		Approach,
+		Wait,
+		Attack,
+		Retreat,
+		Dying
+	};
+
+	float droppingDeadSpeed = 15.0f;
+	float waitingUntil;
+
+	protected Mode _mode;
+
+
+	protected void MonsterUpdate (){
+		if (_mode == Mode.Dying)
+			Die();
+		else if (_mode == Mode.Wait)
+			Wait();
 	}
-	/*
-	// Update is called once per frame
-	void Update () 
-	{
-		UpdateTransformation();
-	
+
+	void Wait(){
+
+		if (Time.time >= waitingUntil){
+			_mode = Mode.Attack;
+		}
 	}
 
-	void UpdateTransformation()
-	{
-		
-		SeaHandler sh = sea.GetComponent<SeaHandler>();
+	void Die(){
+		float step = droppingDeadSpeed * Time.deltaTime;
+		transform.position = transform.position - new Vector3(0.0f, step, 0.0f);
 
+		if (transform.position.y < -5.0f)
+			Destroy(this.gameObject);
+	}
 
-		float time = Time.time;
-		
-		transform.position = new Vector3(transform.position.x, 
-		                                 sh.GetSurfaceY(transform.position.x, time) + 0.3f, 
-		                                 transform.position.z );
-		
-	}*/
+	protected void WaitUntil( float time ){
+		waitingUntil = time;
+		_mode = Mode.Wait;
+	}
+
 }

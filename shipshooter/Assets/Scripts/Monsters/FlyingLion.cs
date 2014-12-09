@@ -3,43 +3,24 @@ using System.Collections;
 
 public class FlyingLion : Monster 
 {
-	enum Side
-	{
-		Left,
-		Right
-	};
-	
-	enum Mode
-	{
-		Approach,
-		Wait,
-		Attack,
-		Retreat
-	};
+	float _attackSpeed = 5.0f;
+	float _approachSpeed = 2.0f;
+	float _retreatSpeed = 2.0f;
+	float _waitTime = 3.0f;
 
+	GameObject _shipAttackSpot; //GameObject towards which the monster is attacking
+	Vector3 _target;			// Position towards which the monster is moving
+	Facing _facing;				// Is monster facing left or right
 
-	float attackSpeed = 5.0f;
-	float approachSpeed = 2.0f;
-	float retreatSpeed = 2.0f;
-	float waitTime = 3.0f;
-
-	GameObject shipAttackSpot; 
-	Vector3 target;
-	Side side;
-	Mode mode;
-	float waitingUntil;
 
 	// Use this for initialization
-	void Start () 
-	{
+	void Start () {
 		// Select at random whether monster comes from left or right
-		if (Random.value > 0.5f)
-		{
-			side = Side.Right;
+		if (Random.value > 0.5f){
+			_facing = Facing.Right;
 		}
-		else
-		{
-			side = Side.Left;
+		else{
+			_facing = Facing.Left;
 			// Mirror the sprite
 			Vector3 scale = transform.localScale;
 			scale.x *= -1;
@@ -47,83 +28,67 @@ public class FlyingLion : Monster
 		}
 
 		transform.position = RandomStartPosition();
-		mode = Mode.Approach;
-		target = RandomWaitPosition();
+		_mode = Mode.Approach;
+		_target = RandomWaitPosition();
 
-		if (side == Side.Right)
-			shipAttackSpot = GameObject.Find("FlyingLionAttackSpotRight");
+		if (_facing == Facing.Right)
+			_shipAttackSpot = GameObject.Find("FlyingLionAttackSpotRight");
 		else
-			shipAttackSpot = GameObject.Find("FlyingLionAttackSpotLeft");
+			_shipAttackSpot = GameObject.Find("FlyingLionAttackSpotLeft");
 
-		if (shipAttackSpot == null)
+		if (_shipAttackSpot == null)
 			Debug.LogError( "ERROR: Attack spot for Flying Lion not found");
 	}
 
-	// Update is called once per frame
-	void Update () 
-	{
-		if (mode == Mode.Approach)
+	void Update () {
+
+		if (_mode == Mode.Approach)
 			Approach();
-		else if (mode == Mode.Attack)
+		else if (_mode == Mode.Attack)
 			Attack();
-		else if (mode == Mode.Retreat)
+		else if (_mode == Mode.Retreat)
 			Retreat();
-		else if (mode == Mode.Wait)
-			Wait();
+	
+		MonsterUpdate();
+	
 	}
 
-	void Approach()
-	{
-		MoveStraightTowards(target, approachSpeed);
-		if (transform.position == target)
-		{
-			mode = Mode.Wait;
-			waitingUntil = Time.time + waitTime;
+	void Approach(){
+		MoveStraightTowards(_target, _approachSpeed);
+		if (transform.position == _target){
+			WaitUntil( Time.time + _waitTime );
 		}
 	}
 
-	void Retreat()
-	{
-		MoveStraightTowards(target, retreatSpeed);
-		if (transform.position == target)
-		{
-			mode = Mode.Wait;
-			waitingUntil = Time.time + waitTime;
+	void Retreat(){
+		MoveStraightTowards(_target, _retreatSpeed);
+		if (transform.position == _target){
+			WaitUntil( Time.time + _waitTime );
 		}
 	}
 
 	void Attack()
 	{
-		target = shipAttackSpot.transform.position;
+		_target = _shipAttackSpot.transform.position;
 
-		MoveStraightTowards(target, attackSpeed);
+		MoveStraightTowards(_target, _attackSpeed);
 		
-		if (transform.position == target)
-		{
-			mode = Mode.Retreat;
-			target = RandomWaitPosition();
+		if (transform.position == _target){
+			_mode = Mode.Retreat;
+			_target = RandomWaitPosition();
 		}
 	}
+	
 
-	void Wait()
-	{
-		if (Time.time >= waitingUntil)
-		{
-			mode = Mode.Attack;
-		}
-	}
-
-	void MoveStraightTowards(Vector3 position, float speed)
-	{
+	void MoveStraightTowards(Vector3 position, float speed){
 		float step = speed * Time.deltaTime;
 		transform.position = Vector3.MoveTowards(transform.position, position, step);
 	}
 
 
-	Vector3 RandomStartPosition()
-	{
-		float x = ship.transform.position.x;
-		if (side == Side.Right)
+	Vector3 RandomStartPosition(){
+		float x = ShipHandler.instance.transform.position.x;
+		if (_facing == Facing.Right)
 			x += 15.0f;
 		else
 			x -= 15.0f;
@@ -132,10 +97,9 @@ public class FlyingLion : Monster
 		return new Vector3(x, y, 0.0f);
 	}
 
-	Vector3 RandomWaitPosition()
-	{
-		float x = ship.transform.position.x;
-		if (side == Side.Right)
+	Vector3 RandomWaitPosition(){
+		float x = ShipHandler.instance.transform.position.x;
+		if (_facing == Facing.Right)
 		     x += Random.Range (3.0f, 6.0f);
 		else
 			x  -= Random.Range (3.0f, 6.0f);

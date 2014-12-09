@@ -14,15 +14,13 @@ public class ShipHandler : MonoBehaviour {
 	// How much the wheel has been turned
 	private float wheel = 0.0f; // -1 = max to left, 1 = max to right
 
+	public static ShipHandler instance { get; private set; }
 
-
-
-	// Use this for initialization
-	void Start () 
+	void Awake() 
 	{
-	
+		instance = this;
 	}
-	
+
 	// Update is called once per frame
 	void Update () 
 	{

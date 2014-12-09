@@ -13,8 +13,6 @@ public class GameHandler : MonoBehaviour {
 		GameObject flyingLionPrefab = Resources.Load<GameObject>("FlyingLion");
 
 		GameObject ship = Instantiate (shipPrefab) as GameObject;
-		Monster.SetTargetShip(ship);
-
 
 		GameObject sailor = Instantiate (sailorPrefab) as GameObject;
 		GameObject camera = Instantiate (cameraPrefab) as GameObject;
