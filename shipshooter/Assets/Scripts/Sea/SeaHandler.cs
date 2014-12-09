@@ -46,12 +46,10 @@ public class SeaHandler : MonoBehaviour {
 		
 		int i = 0;
 		
-		float time = Time.time;
-		
 		while (i < numberOfSegments+1) 
 		{
 			Vector3 position = mesh.GetVertex(i,1); 
-			float surfaceY = GetSurfaceY( position.x, time );
+			float surfaceY = GetSurfaceY( position.x );
 
 			Vector3 newPosition = new Vector3( position.x, surfaceY, position.z );
 			
@@ -73,7 +71,7 @@ public class SeaHandler : MonoBehaviour {
 		for (i=0; i<numberOfWaves; i++)
 		{
 			float x = i* 19.0f/numberOfWaves;
-			float y = GetSurfaceY( x, time );
+			float y = GetSurfaceY( x );
 			if (Util.IsOdd(i))
 				y=y+0.15f;
 			float z = 0.0f;
@@ -86,8 +84,9 @@ public class SeaHandler : MonoBehaviour {
 	}
 	
 	
-	public float GetSurfaceY( float x, float time)
+	public float GetSurfaceY( float x)
 	{
+		float time = Time.time;
 		return avgDepth + 0.38f * Mathf.Sin(time*0.1f + x*0.7f) 
 			- 0.45f * Mathf.Cos(time*0.8f + x*0.4f);
 

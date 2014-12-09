@@ -17,6 +17,10 @@ public class Bilgewater : MonoBehaviour {
 	Vector2 hullRightMiddle;
 	Vector2 hullRightTop;
 
+	//should be from 0 (no water) to 1 (max height)
+	public void SetWaterLevel(float level){
+		
+	}
 
 	void Start () 
 	{
