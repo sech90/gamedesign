@@ -70,8 +70,10 @@ public class Cannon : InteractiveObject {
 		if(_remainCooldown == 0){
 			GameObject bullet = Instantiate(_cannonBall,_spawner.position,_hinge.localRotation) as GameObject;
 			Vector3 distance = _spawner.position - _hinge.position;
-			Vector3 forceDirection = distance / distance.magnitude;
-			bullet.rigidbody.AddForce(CannonPower * forceDirection, ForceMode.Impulse);
+			//Vector3 forceDirection = distance / distance.magnitude;
+			Vector2 forceDirection = distance / distance.magnitude;
+			//bullet.rigidbody.AddForce(CannonPower * forceDirection, ForceMode.Impulse);
+			bullet.rigidbody2D.AddForce(CannonPower * forceDirection, ForceMode2D.Impulse);
 			Destroy(bullet,1.0f);
 			_remainCooldown = Cooldown;
 		}

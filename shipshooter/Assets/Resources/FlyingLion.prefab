@@ -139,6 +139,7 @@ GameObject:
   - 212: {fileID: 21200016}
   - 95: {fileID: 9500000}
   - 114: {fileID: 11400000}
+  - 60: {fileID: 6000000}
   m_Layer: 0
   m_Name: FlyingLion
   m_TagString: Untagged
@@ -256,12 +257,43 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100016}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.38783431, y: 1.93527532, z: 0}
+  m_LocalPosition: {x: -10.2777777, y: 6.51339054, z: 0}
   m_LocalScale: {x: .200000003, y: .200000003, z: 1}
   m_Children:
   - {fileID: 400014}
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!60 &6000000
+PolygonCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100016}
+  m_Enabled: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Poly:
+    m_Paths:
+    - - {x: 4.82663155, y: 3.98642063}
+      - {x: .49487114, y: 3.36579561}
+      - {x: 2.51451969, y: 6.3261199}
+      - {x: -.492839813, y: 4.48382616}
+      - {x: -2.38114834, y: 2.72176266}
+      - {x: -.808911324, y: 1.23780251}
+      - {x: -2.4768734, y: .847418308}
+      - {x: -2.84791946, y: 1.27025843}
+      - {x: -4.46647167, y: 1.33933306}
+      - {x: -4.9523592, y: -.378611088}
+      - {x: -3.43195438, y: .0122570992}
+      - {x: -.41595459, y: -1.42012358}
+      - {x: -1.31158352, y: -2.36959219}
+      - {x: 1.20570183, y: -2.03469992}
+      - {x: 1.35077, y: -1.21933222}
+      - {x: 6.14765167, y: -.711977482}
+      - {x: 6.2142849, y: 3.26535463}
+      - {x: 5.14336586, y: 2.27622747}
+      - {x: 4.86962318, y: .207061768}
+      - {x: 1.76203728, y: 1.25146389}
 --- !u!95 &9500000
 Animator:
   serializedVersion: 3
@@ -288,7 +320,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17ab480337cf24397af7b1b7e5adc841, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sea: {fileID: 0}
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1

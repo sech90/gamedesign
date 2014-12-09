@@ -49,4 +49,14 @@ public class Monster : MonoBehaviour {
 		_mode = Mode.Wait;
 	}
 
+	void OnCollisionEnter2D(Collision2D coll) {
+		//	if (coll.gameObject.tag == "Enemy")
+		//		coll.gameObject.SendMessage("ApplyDamage", 10);
+		_mode = Mode.Dying;
+		Destroy( coll.gameObject );
+		
+	}
+
+
+
 }
