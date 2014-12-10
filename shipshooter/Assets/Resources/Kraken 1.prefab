@@ -202,7 +202,7 @@ GameObject:
   - 4: {fileID: 400024}
   - 212: {fileID: 21200024}
   - 95: {fileID: 9500000}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Kraken 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}

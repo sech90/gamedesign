@@ -12,11 +12,11 @@ TagManager:
   Builtin Layer 5: UI
   Builtin Layer 6: 
   Builtin Layer 7: 
-  User Layer 8: 
-  User Layer 9: 
-  User Layer 10: 
-  User Layer 11: 
-  User Layer 12: 
+  User Layer 8: WaterInteract
+  User Layer 9: Ship
+  User Layer 10: Monsters
+  User Layer 11: InteractiveObj
+  User Layer 12: Sailorman
   User Layer 13: 
   User Layer 14: 
   User Layer 15: 
@@ -40,4 +40,8 @@ TagManager:
   - name: Default
     userID: 0
     uniqueID: 0
+    locked: 0
+  - name: Particles
+    userID: 1
+    uniqueID: 3991360135
     locked: 0

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
-using System.Collections;
+using System;
+using System.Collections.Generic;
 
 public class Bilgewater : MonoBehaviour {
 
@@ -17,20 +18,57 @@ public class Bilgewater : MonoBehaviour {
 	Vector2 hullRightMiddle;
 	Vector2 hullRightTop;
 
-	//should be from 0 (no water) to 1 (max height)
-	public void SetWaterLevel(float level){
-		
+	//should be from 0 (no water) to 1 (completely full)
+	public void SetWaterLevel(float level){}
+
+	//should return values from 0..1
+	public float GetWaterHeight()
+	{
+		return -0.7f;
 	}
 
 	void Start () 
 	{
+		/** /
+		PolygonCollider2D coll = ship.collider2D as PolygonCollider2D;
+		Vector2[] sortedX = coll.points;
+		Vector2[] sortedY = coll.points;
+
+		Array.Sort(sortedX,delegate(Vector2 a, Vector2 b) {
+			return a.x.CompareTo(b.x);
+		});
+
+		Array.Sort(sortedY,delegate(Vector2 a, Vector2 b) {
+			return a.y.CompareTo(b.y);
+		});
+
+		for(int i=0;i<coll.GetTotalPointCount(); i++){
+			Debug.Log("X "+i+": "+sortedX[i]);
+		}
+
+		for(int i=0;i<coll.GetTotalPointCount(); i++){
+			Debug.Log("Y "+i+": "+sortedY[i]);
+		}
+
+		hullBottom = 		sortedY[0];
+		hullLeftTop =  		sortedX[0];
+		hullRightTop = 		sortedX[6];
+		hullLeftMiddle = 	sortedX[1].x < sortedX[2].x ? sortedX[1] : sortedX[2];
+		hullRightMiddle = 	sortedX[4].x < sortedX[5].x ? sortedX[4] : sortedX[5];
+
+		Debug.Log(hullBottom);
+		Debug.Log(hullLeftTop);
+		Debug.Log(hullRightTop);
+		Debug.Log(hullLeftMiddle);
+		Debug.Log(hullRightMiddle);
+		/**/
 
 		hullBottom = 		new Vector2( 0.0f,  -1.25f);
-		hullLeftMiddle = 	new Vector2(-1.07f,  -0.85f);
-		hullRightMiddle = 	new Vector2( 1.07f,  -0.85f);
 		hullLeftTop =  		new Vector2(-1.45f, 0.18f);
 		hullRightTop = 		new Vector2( 1.45f, 0.18f);
-
+		hullLeftMiddle = 	new Vector2(-1.07f,  -0.85f);
+		hullRightMiddle = 	new Vector2( 1.07f,  -0.85f);
+		/**/
 		mesh = new EditableMesh();
 		mesh.Create(10.0f, 10.0f, 1, 2);
 
@@ -41,8 +79,6 @@ public class Bilgewater : MonoBehaviour {
 
 		Color waterColor = Util.CreateColor(182, 172, 147, 120);
 		mesh.SetColor(waterColor);
-
-
 
 		mesh.SetVertex(0,0, hullBottom);
 		mesh.SetVertex(1,0, hullBottom);
@@ -145,13 +181,5 @@ public class Bilgewater : MonoBehaviour {
 		LineSegment2d surface = new LineSegment2d( a, b );
 		return surface;
 	}
-
-	float GetWaterHeight()
-	{
-		return -0.7f;
-	}
-
-
-
 
 }

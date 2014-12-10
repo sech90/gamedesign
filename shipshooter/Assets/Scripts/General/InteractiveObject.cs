@@ -11,13 +11,11 @@ public abstract class InteractiveObject : MonoBehaviour {
 	protected KeyCode[] _keyList; 
 
 	void OnTriggerEnter2D(Collider2D coll){
-		Debug.Log("Trigger enter with "+coll.name);
 		if(coll.GetComponent<Sailorman>() != null)
 			_isOnTriggerArea = true;
 	}
 
 	void OnTriggerExit2D(Collider2D coll){
-		Debug.Log("Trigger exit with "+coll.name);
 		if(coll.GetComponent<Sailorman>() != null)
 			_isOnTriggerArea = false;
 	}
@@ -27,18 +25,15 @@ public abstract class InteractiveObject : MonoBehaviour {
 
 			for(int i=0;i<_keyList.Length; i++){
 
-				if(Input.GetKeyDown(_keyList[i])){
+				if(Input.GetKeyDown(_keyList[i]))
 					OnButtonPressed(_keyList[i]);
-					return;
-				}
-				else if(Input.GetKeyUp(_keyList[i])){
+
+				else if(Input.GetKeyUp(_keyList[i]))
 					OnButtonRelease(_keyList[i]);
-					return;
-				}
-				else if(Input.GetKey(_keyList[i])){
+
+				else if(Input.GetKey(_keyList[i]))
 					OnButtonHold(_keyList[i]);
-					return;
-				}
+
 
 			}
 		}

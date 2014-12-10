@@ -1,38 +1,44 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+public enum MonsterFacing{
+	Left,
+	Right
+};
+
+public enum MonsterMode{
+	Approach,
+	Wait,
+	Attack,
+	Retreat,
+	Dying
+};
+
 public class Monster : MonoBehaviour {
-
-	protected enum Facing{
-		Left,
-		Right
-	};
 	
-	protected enum Mode{
-		Approach,
-		Wait,
-		Attack,
-		Retreat,
-		Dying
-	};
+	public int AttackPower;
+	public int PointsWhenKilled;
+	public int MaxHp;
+	
+	protected int _currentHp;
+	protected MonsterMode _mode;
 
-	float droppingDeadSpeed = 15.0f;
-	float waitingUntil;
+	private float droppingDeadSpeed = 15.0f;
+	private float waitingUntil;
 
-	protected Mode _mode;
-
+	public MonsterMode Mode{get{return _mode;}}
 
 	protected void MonsterUpdate (){
-		if (_mode == Mode.Dying)
+		if (_mode == MonsterMode.Dying)
 			Die();
-		else if (_mode == Mode.Wait)
+		else if (_mode == MonsterMode.Wait)
 			Wait();
 	}
 
 	void Wait(){
 
 		if (Time.time >= waitingUntil){
-			_mode = Mode.Attack;
+			_mode = MonsterMode.Attack;
 		}
 	}
 
@@ -46,13 +52,13 @@ public class Monster : MonoBehaviour {
 
 	protected void WaitUntil( float time ){
 		waitingUntil = time;
-		_mode = Mode.Wait;
+		_mode = MonsterMode.Wait;
 	}
 
 	void OnCollisionEnter2D(Collision2D coll) {
 		//	if (coll.gameObject.tag == "Enemy")
 		//		coll.gameObject.SendMessage("ApplyDamage", 10);
-		_mode = Mode.Dying;
+		_mode = MonsterMode.Dying;
 		Destroy( coll.gameObject );
 		
 	}

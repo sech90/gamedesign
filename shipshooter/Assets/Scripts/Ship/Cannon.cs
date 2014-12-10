@@ -33,7 +33,6 @@ public class Cannon : InteractiveObject {
 	}
 	
 	override protected void OnButtonPressed(KeyCode key){
-		Debug.Log("cannon press "+key);
 		switch(key){
 			case KeyCode.A:
 				if(!_isRightSide)
@@ -49,30 +48,25 @@ public class Cannon : InteractiveObject {
 	}
 
 	override protected void OnButtonHold(KeyCode key){
-		Debug.Log("cannon hold "+key);
 		switch(key){
 		case KeyCode.W:
 			_curAngle -= RotateSpeed * Time.deltaTime;
-			_curAngle = Mathf.Clamp(_curAngle, -_angleLimit, +_angleLimit); // update the object rotation: 
-			_hinge.localRotation = Quaternion.Euler(0,0,_curAngle); 
 			break;
 		case KeyCode.S:
 			_curAngle += RotateSpeed * Time.deltaTime;
-			_curAngle = Mathf.Clamp(_curAngle, -_angleLimit, +_angleLimit); // update the object rotation: 
-			_hinge.localRotation = Quaternion.Euler(0,0,_curAngle); 
 			break;
 		default:
-			break;
+			return;
 		}
+		_curAngle = Mathf.Clamp(_curAngle, -_angleLimit, +_angleLimit); // update the object rotation: 
+		_hinge.localRotation = Quaternion.Euler(0,0,_curAngle); 
 	}
 
 	private void Shoot(){
 		if(_remainCooldown == 0){
 			GameObject bullet = Instantiate(_cannonBall,_spawner.position,_hinge.localRotation) as GameObject;
-			Vector3 distance = _spawner.position - _hinge.position;
-			//Vector3 forceDirection = distance / distance.magnitude;
+			Vector2 distance = _spawner.position - _hinge.position;
 			Vector2 forceDirection = distance / distance.magnitude;
-			//bullet.rigidbody.AddForce(CannonPower * forceDirection, ForceMode.Impulse);
 			bullet.rigidbody2D.AddForce(CannonPower * forceDirection, ForceMode2D.Impulse);
 			Destroy(bullet,1.0f);
 			_remainCooldown = Cooldown;

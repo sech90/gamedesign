@@ -8,39 +8,50 @@ public class Ship : FloatingObject {
 
 	//components of the ship
 	private Sailorman 	_player;
-	private List<Hole> 	_holes;
+	private Hole[]		_holes;
 	private Pump[] 		_pumps;
 	private Wheel 		_wheel;
 	private Bilgewater 	_water;
+	private int 		_attackBuffer = 0;
 
 	//data of the ship
 	private float _currentHp;
 	public  float CurrentHp {
 		get{return _currentHp;} 
-		set{
-			if(value < 0) _currentHp = 0;
-			else if (value > MaxHp) _currentHp = MaxHp;
-			else _currentHp = value;
-		}
+		set{_currentHp = Mathf.Clamp(value,0,MaxHp);}
 	}
 
 	void Start () {
-		_currentHp = MaxHp;
+		_currentHp = MaxHp; 
 		_player = transform.GetComponentInChildren<Sailorman>();
-		_pumps  = transform.GetComponentsInChildren<Pump>();
-		_wheel  = transform.GetComponentInChildren<Wheel>();
-		_holes  = new List<Hole>();
 		_water  = transform.GetComponentInChildren<Bilgewater>();
+		_pumps  = transform.FindChild("Interactive").GetComponentsInChildren<Pump>();
+		_wheel  = transform.FindChild("Interactive").GetComponentInChildren<Wheel>();
+		_holes  = transform.FindChild("Interactive/Holes").GetComponentsInChildren<Hole>();
+
+
+
+		for(int i=0;i<_pumps.Length;i++)
+			_pumps[i].OnPump = Pumped;
+
 	}
 
 	void Update () {
 		doSteering();
+
+		for(int i=0;i<_holes.Length; i++){
+			CurrentHp = _currentHp - _holes[i].GetWaterPerSec() * Time.deltaTime;
+		}
+
 		_water.SetWaterLevel(1-_currentHp/MaxHp);
 	}
 
 	//create holes depending by the force
-	void OnCollisionEnter2D(Collision2D coll){
-		Debug.Log("Hit by enemy!");
+	void OnTriggerEnter2D(Collider2D coll){
+		Monster monster = coll.GetComponent<Monster>();
+		if(monster != null){
+			_attackBuffer += monster.AttackPower;
+		}
 	}
 
 	private void doSteering(){
@@ -50,4 +61,25 @@ public class Ship : FloatingObject {
 			transform.position = pos;
 		}
 	}
+
+	private void Pumped(Pump pump){
+		if(pump.LevelOfActivation < _water.GetWaterHeight())
+			_currentHp = _currentHp + pump.PumpPower;
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

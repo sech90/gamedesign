@@ -21,7 +21,6 @@ public class Wheel : InteractiveObject {
 
 
 	override protected void OnButtonHold(KeyCode key){
-		Debug.Log("Onbuttonhold "+key);
 		switch(key){
 			case KeyCode.A:
 				_steeringAmount -= turnSpeed*Time.deltaTime;

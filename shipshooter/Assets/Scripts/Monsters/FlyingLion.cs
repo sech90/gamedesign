@@ -10,17 +10,17 @@ public class FlyingLion : Monster
 
 	GameObject _shipAttackSpot; //GameObject towards which the monster is attacking
 	Vector3 _target;			// Position towards which the monster is moving
-	Facing _facing;				// Is monster facing left or right
+	MonsterFacing _facing;				// Is monster facing left or right
 
 
 	// Use this for initialization
 	void Start () {
 		// Select at random whether monster comes from left or right
 		if (Random.value > 0.5f){
-			_facing = Facing.Right;
+			_facing = MonsterFacing.Right;
 		}
 		else{
-			_facing = Facing.Left;
+			_facing = MonsterFacing.Left;
 			// Mirror the sprite
 			Vector3 scale = transform.localScale;
 			scale.x *= -1;
@@ -28,10 +28,10 @@ public class FlyingLion : Monster
 		}
 
 		transform.position = RandomStartPosition();
-		_mode = Mode.Approach;
+		_mode = MonsterMode.Approach;
 		_target = RandomWaitPosition();
 
-		if (_facing == Facing.Right)
+		if (_facing == MonsterFacing.Right)
 			_shipAttackSpot = GameObject.Find("FlyingLionAttackSpotRight");
 		else
 			_shipAttackSpot = GameObject.Find("FlyingLionAttackSpotLeft");
@@ -42,11 +42,11 @@ public class FlyingLion : Monster
 
 	void Update () {
 
-		if (_mode == Mode.Approach)
+		if (_mode == MonsterMode.Approach)
 			Approach();
-		else if (_mode == Mode.Attack)
+		else if (_mode == MonsterMode.Attack)
 			Attack();
-		else if (_mode == Mode.Retreat)
+		else if (_mode == MonsterMode.Retreat)
 			Retreat();
 	
 		MonsterUpdate();
@@ -74,7 +74,7 @@ public class FlyingLion : Monster
 		MoveStraightTowards(_target, _attackSpeed);
 		
 		if (transform.position == _target){
-			_mode = Mode.Retreat;
+			_mode = MonsterMode.Retreat;
 			_target = RandomWaitPosition();
 		}
 	}
@@ -88,7 +88,7 @@ public class FlyingLion : Monster
 
 	Vector3 RandomStartPosition(){
 		float x = ShipHandler.instance.transform.position.x;
-		if (_facing == Facing.Right)
+		if (_facing == MonsterFacing.Right)
 			x += 15.0f;
 		else
 			x -= 15.0f;
@@ -99,7 +99,7 @@ public class FlyingLion : Monster
 
 	Vector3 RandomWaitPosition(){
 		float x = ShipHandler.instance.transform.position.x;
-		if (_facing == Facing.Right)
+		if (_facing == MonsterFacing.Right)
 		     x += Random.Range (3.0f, 6.0f);
 		else
 			x  -= Random.Range (3.0f, 6.0f);
