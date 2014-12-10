@@ -74,7 +74,7 @@ public class ShipHandler : MonoBehaviour {
 			
 			
 		transform.position = new Vector3(transform.position.x, 
-			                             shipHeight, 
+			                             shipHeight - 0.6f, 
 			                             transform.position.z );
 
 		// Calculate ships roll (rotation caused by waves)
