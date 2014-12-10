@@ -12,7 +12,6 @@ public class Ship : FloatingObject {
 	private Pump[] 		_pumps;
 	private Wheel 		_wheel;
 	private Bilgewater 	_water;
-	private int 		_attackBuffer = 0;
 
 	//data of the ship
 	private float _currentHp;
@@ -27,9 +26,12 @@ public class Ship : FloatingObject {
 		_water  = transform.GetComponentInChildren<Bilgewater>();
 		_pumps  = transform.FindChild("Interactive").GetComponentsInChildren<Pump>();
 		_wheel  = transform.FindChild("Interactive").GetComponentInChildren<Wheel>();
-		_holes  = transform.FindChild("Interactive/Holes").GetComponentsInChildren<Hole>();
+		_holes  = new Hole[4];//transform.FindChild("Interactive/Holes").GetComponentsInChildren<Hole>();
 
-
+		_holes[0] = transform.FindChild("Interactive/Holes/MidLeft").GetComponent<Hole>();
+		_holes[1] = transform.FindChild("Interactive/Holes/MidRight").GetComponent<Hole>();
+		_holes[2] = transform.FindChild("Interactive/Holes/BotLeft").GetComponent<Hole>();
+		_holes[3] = transform.FindChild("Interactive/Holes/BotRight").GetComponent<Hole>();
 
 		for(int i=0;i<_pumps.Length;i++)
 			_pumps[i].OnPump = Pumped;
@@ -44,13 +46,17 @@ public class Ship : FloatingObject {
 		}
 
 		_water.SetWaterLevel(1-_currentHp/MaxHp);
-	}
+	} 
 
-	//create holes depending by the force
+	//create holes depending by the strength of the monster
 	void OnTriggerEnter2D(Collider2D coll){
 		Monster monster = coll.GetComponent<Monster>();
-		if(monster != null){
-			_attackBuffer += monster.AttackPower;
+		if(monster != null && monster.Mode == MonsterMode.Attack){
+
+			if(monster.Direction == MonsterFacing.Left)
+				_holes[0].TakeDamage(monster.AttackPower);
+			else
+				_holes[1].TakeDamage(monster.AttackPower);
 		}
 	}
 
@@ -63,7 +69,7 @@ public class Ship : FloatingObject {
 	}
 
 	private void Pumped(Pump pump){
-		if(pump.LevelOfActivation < _water.GetWaterHeight())
+		if(pump.LevelOfActivation < _water.GetWaterLevel())
 			_currentHp = _currentHp + pump.PumpPower;
 	}
 }

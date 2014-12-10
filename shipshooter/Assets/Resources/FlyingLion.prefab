@@ -336,9 +336,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17ab480337cf24397af7b1b7e5adc841, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AttackPower: 0
-  PointsWhenKilled: 0
-  MaxHp: 0
+  AttackPower: 5
+  PointsWhenKilled: 200
+  MaxHp: 1
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1

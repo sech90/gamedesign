@@ -22,11 +22,13 @@ public class Monster : MonoBehaviour {
 	
 	protected int _currentHp;
 	protected MonsterMode _mode;
+	protected MonsterFacing _facing;				// Is monster facing left or right
 
 	private float droppingDeadSpeed = 15.0f;
 	private float waitingUntil;
 
 	public MonsterMode Mode{get{return _mode;}}
+	public MonsterFacing Direction{get{return _facing;}}
 
 	protected void MonsterUpdate (){
 		if (_mode == MonsterMode.Dying)

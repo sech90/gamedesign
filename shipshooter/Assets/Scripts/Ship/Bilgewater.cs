@@ -22,7 +22,7 @@ public class Bilgewater : MonoBehaviour {
 	public void SetWaterLevel(float level){}
 
 	//should return values from 0..1
-	public float GetWaterHeight()
+	public float GetWaterLevel()
 	{
 		return -0.7f;
 	}
@@ -173,8 +173,8 @@ public class Bilgewater : MonoBehaviour {
 
 		//Vector2 a =  new Vector2(10.0f, GetWaterHeight() );
 		//Vector2 eb =     new Vector2( 4.0f, GetWaterHeight() );
-		Vector2 a =  new Vector2(x, y + GetWaterHeight() );
-		Vector2 b =  new Vector2( -x, -y + GetWaterHeight() );
+		Vector2 a =  new Vector2(x, y + GetWaterLevel() );
+		Vector2 b =  new Vector2( -x, -y + GetWaterLevel() );
 
 	
 

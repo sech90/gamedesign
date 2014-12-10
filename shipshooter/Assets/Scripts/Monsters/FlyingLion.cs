@@ -10,7 +10,6 @@ public class FlyingLion : Monster
 
 	GameObject _shipAttackSpot; //GameObject towards which the monster is attacking
 	Vector3 _target;			// Position towards which the monster is moving
-	MonsterFacing _facing;				// Is monster facing left or right
 
 
 	// Use this for initialization

@@ -5,9 +5,11 @@ public class Hole : InteractiveObject {
 
 	public float MinWaterSec = 1.0f;
 	public float MaxWaterSec = 10.0f;
-	public int MaxHP = 10;
+	public int MaxHP = 20;
+	public int DamageBuffer = 15;
 
 	private int _currentHp;
+	private int _buffer = 0;
 	public int HP{get{return _currentHp;}}
 
 	//settings for particle system
@@ -22,7 +24,7 @@ public class Hole : InteractiveObject {
 
 	void Start(){
 		_currentHp = MaxHP;
-		_keyList = new KeyCode[]{ KeyCode.A, KeyCode.D, KeyCode.Q };
+		_keyList = new KeyCode[]{ KeyCode.A, KeyCode.D};
 		_jet = transform.FindChild("WaterJet").GetComponent<ParticleSystem>();
 		_halo = transform.FindChild("HoleHalo").GetComponent<ParticleSystem>();
 		_spray = transform.FindChild("WaterSpry").GetComponent<ParticleSystem>();
@@ -39,7 +41,13 @@ public class Hole : InteractiveObject {
 	}
 
 	public void TakeDamage(int amount){
+
+		if(_buffer < DamageBuffer){
+			_buffer += amount;
+			amount = _buffer > DamageBuffer ? DamageBuffer - _buffer : 0;
+		}
 		_currentHp = Mathf.Clamp(_currentHp-amount, 0, _currentHp);
+		Debug.Log(name+" take damage "+amount+" buffer: "+_buffer);
 		UpdateParticle();
 	}
 
@@ -49,6 +57,8 @@ public class Hole : InteractiveObject {
 			if(transform.localRotation.eulerAngles.z <= 90 || transform.localRotation.eulerAngles.z >= 270){
 				if(_currentHp < MaxHP){
 					_currentHp++;
+					if(_currentHp == MaxHP)
+						_buffer = 0;
 					UpdateParticle();
 				}
 			}
@@ -57,16 +67,17 @@ public class Hole : InteractiveObject {
 			if(transform.localRotation.eulerAngles.z > 90 && transform.localRotation.eulerAngles.z < 270){
 				if(_currentHp < MaxHP){
 					_currentHp++;
+					if(_currentHp == MaxHP)
+						_buffer = 0;
 					UpdateParticle();
 				}
 			}
 			break;
-		case KeyCode.Q:
-			TakeDamage(1);
-			break;
 		default:
 			break;
 		}
+
+
 	}
 
 	private void UpdateParticle(){
