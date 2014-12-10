@@ -48,6 +48,7 @@ public class Cannon : InteractiveObject {
 	}
 
 	override protected void OnButtonHold(KeyCode key){
+		Debug.Log("Cannon hold "+key);
 		switch(key){
 		case KeyCode.W:
 			_curAngle -= RotateSpeed * Time.deltaTime;
