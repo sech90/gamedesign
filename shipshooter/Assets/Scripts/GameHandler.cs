@@ -1,7 +1,18 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
+using System;
 using System.Collections;
 
 public class GameHandler : MonoBehaviour {
+
+	private static float _score = 0;
+
+	public int ScorePerSecond = 50;
+	public Text ScoreText;
+	public AudioClip MainSoundtrack;
+	public AudioClip StartScreenAudio;
+
+	public float Score{get{return _score;}}
 
 	// Use this for initialization
 	void Awake () 
@@ -15,9 +26,9 @@ public class GameHandler : MonoBehaviour {
 
 
 		GameObject flyingLionPrefab = Resources.Load<GameObject>("FlyingLion");
-		GameObject flyingLion1 = Instantiate (flyingLionPrefab) as GameObject;
-		GameObject flyingLion2 = Instantiate (flyingLionPrefab) as GameObject;
-		GameObject flyingLion3 = Instantiate (flyingLionPrefab) as GameObject;
+		Instantiate (flyingLionPrefab);
+		Instantiate (flyingLionPrefab);
+		Instantiate (flyingLionPrefab);
 		//flyingLion.transform.position = new Vector3(9.0f, 2.0f, 0.0f);
 
 		/** /
@@ -34,10 +45,16 @@ public class GameHandler : MonoBehaviour {
 		sailor.transform.parent = ship.transform;
 		sailor.transform.localPosition = new Vector3(0.0f, 0.0f, -1.0f);
 		/**/
+		AudioSource.PlayClipAtPoint(MainSoundtrack,transform.position);
+	}
 
+	void Update(){
+		_score += ScorePerSecond * Time.deltaTime;
+		ScoreText.text = ((int)_score).ToString();
+	}
 
-
-	
+	public static void AddScore(int amount){
+		_score += amount;
 	}
 	
 }

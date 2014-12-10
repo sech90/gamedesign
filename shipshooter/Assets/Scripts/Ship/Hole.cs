@@ -47,7 +47,6 @@ public class Hole : InteractiveObject {
 			amount = _buffer > DamageBuffer ? DamageBuffer - _buffer : 0;
 		}
 		_currentHp = Mathf.Clamp(_currentHp-amount, 0, _currentHp);
-		Debug.Log(name+" take damage "+amount+" buffer: "+_buffer);
 		UpdateParticle();
 	}
 

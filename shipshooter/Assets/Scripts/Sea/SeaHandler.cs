@@ -8,7 +8,7 @@ public class SeaHandler : MonoBehaviour {
 	GameObject[] wave;
 	int numberOfWaves = 30;
 	int numberOfSegments = 80;
-	float width = 15.0f;
+//	float width = 15.0f;
 	float avgDepth = 4.0f;
 
 	void Start () 
@@ -66,7 +66,7 @@ public class SeaHandler : MonoBehaviour {
 		mesh.UpdateMesh();
 
 
-		bool even=true;
+//		bool even=true;
 
 		for (i=0; i<numberOfWaves; i++)
 		{

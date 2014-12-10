@@ -7,7 +7,7 @@ public class Ship : FloatingObject {
 	public float SteerMaxSpeed = 10.0f;
 
 	//components of the ship
-	private Sailorman 	_player;
+//	private Sailorman 	_player;
 	private Hole[]		_holes;
 	private Pump[] 		_pumps;
 	private Wheel 		_wheel;
@@ -22,7 +22,7 @@ public class Ship : FloatingObject {
 
 	void Start () {
 		_currentHp = MaxHp; 
-		_player = transform.GetComponentInChildren<Sailorman>();
+//		_player = transform.GetComponentInChildren<Sailorman>();
 		_water  = transform.GetComponentInChildren<Bilgewater>();
 		_pumps  = transform.FindChild("Interactive").GetComponentsInChildren<Pump>();
 		_wheel  = transform.FindChild("Interactive").GetComponentInChildren<Wheel>();
