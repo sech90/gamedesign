@@ -6,16 +6,16 @@ public class SeaHandler : MonoBehaviour {
 	EditableMesh mesh;
 
 	GameObject[] wave;
-	int numberOfWaves = 30;
+	int numberOfWaves = 70;
 	int numberOfSegments = 80;
-	float width = 15.0f;
+	float width = 40.0f;
 	float avgDepth = 4.0f;
 
 	void Start () 
 	{
 		mesh = new EditableMesh();
 		
-		mesh.Create(20.0f, avgDepth, numberOfSegments, 1);
+		mesh.Create(width, avgDepth, numberOfSegments, 1);
 		
 	//	Texture2D seaTex = Resources.Load<Texture2D>("seaTest");
 		//mesh.SetTexture(seaTex);
@@ -70,7 +70,7 @@ public class SeaHandler : MonoBehaviour {
 
 		for (i=0; i<numberOfWaves; i++)
 		{
-			float x = i* 19.0f/numberOfWaves;
+			float x = i* width/numberOfWaves;
 			float y = GetSurfaceY( x );
 			if (Util.IsOdd(i))
 				y=y+0.15f;
