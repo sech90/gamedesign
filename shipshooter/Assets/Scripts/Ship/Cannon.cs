@@ -29,7 +29,6 @@ public class Cannon : InteractiveObject {
 	void FixedUpdate(){
 		if(_remainCooldown != 0)
 			_remainCooldown = Mathf.Clamp(_remainCooldown - Time.deltaTime, 0, _remainCooldown);
-
 	}
 	
 	override protected void OnButtonPressed(KeyCode key){

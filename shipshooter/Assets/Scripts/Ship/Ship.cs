@@ -35,7 +35,6 @@ public class Ship : FloatingObject {
 
 		for(int i=0;i<_pumps.Length;i++)
 			_pumps[i].OnPump = Pumped;
-
 	}
 
 	void Update () {
@@ -50,6 +49,7 @@ public class Ship : FloatingObject {
 
 	//create holes depending by the strength of the monster
 	void OnTriggerEnter2D(Collider2D coll){
+		Debug.Log("Monster collision "+coll.name);
 		Monster monster = coll.GetComponent<Monster>();
 		if(monster != null && monster.Mode == MonsterMode.Attack){
 
