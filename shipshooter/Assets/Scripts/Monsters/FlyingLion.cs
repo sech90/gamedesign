@@ -8,8 +8,11 @@ public class FlyingLion : Monster
 	float _retreatSpeed = 2.0f;
 	float _waitTime = 3.0f;
 
+
+
 	GameObject _shipAttackSpot; //GameObject towards which the monster is attacking
 	Vector3 _target;			// Position towards which the monster is moving
+
 
 
 	// Use this for initialization
@@ -37,6 +40,8 @@ public class FlyingLion : Monster
 
 		if (_shipAttackSpot == null)
 			Debug.LogError( "ERROR: Attack spot for Flying Lion not found");
+
+		Monster._headCount++;
 	}
 
 	void Update () {
@@ -106,6 +111,7 @@ public class FlyingLion : Monster
 		float y = Random.Range (6.0f, 10.0f);
 		return new Vector3(x, y, 0.0f);
 	}
+
 
 
 

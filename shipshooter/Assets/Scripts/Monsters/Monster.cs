@@ -30,6 +30,13 @@ public class Monster : MonoBehaviour {
 	public MonsterMode Mode{get{return _mode;}}
 	public MonsterFacing Direction{get{return _facing;}}
 
+	static protected int _headCount = 0;
+
+	static public int GetNumberOf()
+	{
+		return _headCount;
+	}
+
 	protected void MonsterUpdate (){
 		if (_mode == MonsterMode.Dying)
 			Die();
@@ -44,12 +51,15 @@ public class Monster : MonoBehaviour {
 		}
 	}
 
-	void Die(){
+	virtual protected void Die(){
 		float step = droppingDeadSpeed * Time.deltaTime;
 		transform.position = transform.position - new Vector3(0.0f, step, 0.0f);
 
 		if (transform.position.y < -5.0f)
+		{
 			Destroy(this.gameObject);
+			_headCount--;
+		}
 	}
 
 	protected void WaitUntil( float time ){

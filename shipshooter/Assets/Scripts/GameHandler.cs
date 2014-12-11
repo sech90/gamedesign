@@ -3,6 +3,11 @@ using System.Collections;
 
 public class GameHandler : MonoBehaviour {
 
+	float lastSpawn = 0.0f;
+	float spawnRate = 3.0f;
+	GameObject flyingLionPrefab;
+	int maxFlyingMonsters = 4;
+
 	// Use this for initialization
 	void Awake () 
 	{
@@ -14,10 +19,10 @@ public class GameHandler : MonoBehaviour {
 
 
 
-		GameObject flyingLionPrefab = Resources.Load<GameObject>("FlyingLion");
-		GameObject flyingLion1 = Instantiate (flyingLionPrefab) as GameObject;
-		GameObject flyingLion2 = Instantiate (flyingLionPrefab) as GameObject;
-		GameObject flyingLion3 = Instantiate (flyingLionPrefab) as GameObject;
+		flyingLionPrefab = Resources.Load<GameObject>("FlyingLion");
+//		GameObject flyingLion1 = Instantiate (flyingLionPrefab) as GameObject;
+//		GameObject flyingLion2 = Instantiate (flyingLionPrefab) as GameObject;
+//		GameObject flyingLion3 = Instantiate (flyingLionPrefab) as GameObject;
 		//flyingLion.transform.position = new Vector3(9.0f, 2.0f, 0.0f);
 
 		/** /
@@ -38,6 +43,17 @@ public class GameHandler : MonoBehaviour {
 
 
 	
+	}
+
+	void Update()
+	{
+		if (Time.time > lastSpawn + spawnRate && Monster.GetNumberOf() < maxFlyingMonsters)
+		{
+			GameObject flyingLion = Instantiate (flyingLionPrefab) as GameObject;
+			lastSpawn = Time.time;
+		}
+	
+
 	}
 	
 }
