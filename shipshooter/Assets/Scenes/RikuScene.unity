@@ -1712,6 +1712,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57d3fab7d716443f18814f43e8f9975d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ScorePerSecond: 50
+  ScoreText: {fileID: 613181369}
+  MainSoundtrack: {fileID: 8300000, guid: bc2707dfe902edf4da17e16e7bc7a3e7, type: 3}
+  StartScreenAudio: {fileID: 8300000, guid: 46a0caafa66631442a0f6523aca0e1bb, type: 3}
 --- !u!4 &151558298
 Transform:
   m_ObjectHideFlags: 0

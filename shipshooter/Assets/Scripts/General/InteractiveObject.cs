@@ -11,6 +11,7 @@ public abstract class InteractiveObject : MonoBehaviour {
 	protected KeyCode[] _keyList; 
 
 	void OnTriggerEnter2D(Collider2D coll){
+		Debug.Log(name+ " triggered "+coll.name);
 		if(coll.GetComponent<Sailorman>() != null)
 			_isOnTriggerArea = true;
 	}

@@ -1,4 +1,6 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
+using System;
 using System.Collections;
 
 public class GameHandler : MonoBehaviour {
@@ -8,6 +10,15 @@ public class GameHandler : MonoBehaviour {
 	GameObject flyingLionPrefab;
 	int maxFlyingMonsters = 4;
 
+	private static float _score = 0;
+
+	public int ScorePerSecond = 50;
+	public Text ScoreText;
+	public AudioClip MainSoundtrack;
+	public AudioClip StartScreenAudio;
+
+	public float Score{get{return _score;}}
+
 	// Use this for initialization
 	void Awake () 
 	{
@@ -16,10 +27,9 @@ public class GameHandler : MonoBehaviour {
 		Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Ship"), LayerMask.NameToLayer("WaterInteract"), true); 
 		Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Monsters"), LayerMask.NameToLayer("Monsters"), true); 
 		Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Monsters"), LayerMask.NameToLayer("InteractiveObj"), true); 
+		Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Markers"), LayerMask.NameToLayer("InteractiveObj"), true); 
 
 
-
-		flyingLionPrefab = Resources.Load<GameObject>("FlyingLion");
 //		GameObject flyingLion1 = Instantiate (flyingLionPrefab) as GameObject;
 //		GameObject flyingLion2 = Instantiate (flyingLionPrefab) as GameObject;
 //		GameObject flyingLion3 = Instantiate (flyingLionPrefab) as GameObject;
@@ -39,10 +49,16 @@ public class GameHandler : MonoBehaviour {
 		sailor.transform.parent = ship.transform;
 		sailor.transform.localPosition = new Vector3(0.0f, 0.0f, -1.0f);
 		/**/
+		AudioSource.PlayClipAtPoint(MainSoundtrack,transform.position);
+	}
 
+	void Update(){
+		_score += ScorePerSecond * Time.deltaTime;
+		ScoreText.text = ((int)_score).ToString();
+	}
 
-
-	
+	public static void AddScore(int amount){
+		_score += amount;
 	}
 
 	void Update()
