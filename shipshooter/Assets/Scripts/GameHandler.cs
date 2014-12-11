@@ -29,7 +29,7 @@ public class GameHandler : MonoBehaviour {
 		Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Monsters"), LayerMask.NameToLayer("InteractiveObj"), true); 
 		Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Markers"), LayerMask.NameToLayer("InteractiveObj"), true); 
 
-
+		flyingLionPrefab = Resources.Load<GameObject>("FlyingLion");
 //		GameObject flyingLion1 = Instantiate (flyingLionPrefab) as GameObject;
 //		GameObject flyingLion2 = Instantiate (flyingLionPrefab) as GameObject;
 //		GameObject flyingLion3 = Instantiate (flyingLionPrefab) as GameObject;
@@ -49,12 +49,7 @@ public class GameHandler : MonoBehaviour {
 		sailor.transform.parent = ship.transform;
 		sailor.transform.localPosition = new Vector3(0.0f, 0.0f, -1.0f);
 		/**/
-		AudioSource.PlayClipAtPoint(MainSoundtrack,transform.position);
-	}
-
-	void Update(){
-		_score += ScorePerSecond * Time.deltaTime;
-		ScoreText.text = ((int)_score).ToString();
+		//AudioSource.PlayClipAtPoint(MainSoundtrack,transform.position);
 	}
 
 	public static void AddScore(int amount){
@@ -63,6 +58,9 @@ public class GameHandler : MonoBehaviour {
 
 	void Update()
 	{
+		_score += ScorePerSecond * Time.deltaTime;
+		ScoreText.text = ((int)_score).ToString();
+
 		if (Time.time > lastSpawn + spawnRate && Monster.GetNumberOf() < maxFlyingMonsters)
 		{
 			GameObject flyingLion = Instantiate (flyingLionPrefab) as GameObject;

@@ -12,6 +12,10 @@ public class SeaHandler : MonoBehaviour {
 	float width = 40.0f;
 	float avgDepth = 4.0f;
 
+	public float waveHeightFactor = 1.0f;
+	public float waveWidthFactor = 1.0f;
+	public float waveSpeedFactor = 1.0f;
+
 	void Start () 
 	{
 		mesh = new EditableMesh();
@@ -87,9 +91,10 @@ public class SeaHandler : MonoBehaviour {
 	
 	public float GetSurfaceY( float x)
 	{
-		float time = Time.time;
-		return avgDepth + 0.38f * Mathf.Sin(time*0.1f + x*0.7f) 
-			- 0.45f * Mathf.Cos(time*0.8f + x*0.4f);
+		float time = Time.time * waveSpeedFactor;
+		x *= waveWidthFactor;
+
+		return avgDepth + (0.38f * waveHeightFactor)* Mathf.Sin(time*0.1f + x*0.7f) - (0.45f  * waveHeightFactor) * Mathf.Cos(time*0.8f + x*0.4f);
 
 //		return avgDepth + 3.0f * Mathf.PerlinNoise(0.2f*x, 0.25f*time);
 
