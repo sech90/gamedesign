@@ -21,6 +21,7 @@ public class SeaHandler : MonoBehaviour {
 		mesh = new EditableMesh();
 		
 		mesh.Create(width, avgDepth, numberOfSegments, 1);
+		mesh.SetSortingOrder(7);
 		
 	//	Texture2D seaTex = Resources.Load<Texture2D>("seaTest");
 		//mesh.SetTexture(seaTex);

@@ -19,13 +19,24 @@ public class Bilgewater : MonoBehaviour {
 	Vector2 hullRightMiddle;
 	Vector2 hullRightTop;
 
+	float _waterLevel = 0.0f;
+
+	float _waterMaxHeight = 0.3f;
+	float _waterMinHeight = -1.1f;
+
+
 	//should be from 0 (no water) to 1 (completely full)
-	public void SetWaterLevel(float level){}
+	public void SetWaterLevel(float level)
+	{
+		level = Mathf.Clamp(level, 0.0f, 1.0f);
+
+		_waterLevel = level;
+	}
 
 	//should return values from 0..1
 	public float GetWaterLevel()
 	{
-		return -0.8f;
+		return _waterLevel;
 	}
 
 	void Start () 
@@ -175,8 +186,10 @@ public class Bilgewater : MonoBehaviour {
 
 		//Vector2 a =  new Vector2(10.0f, GetWaterHeight() );
 		//Vector2 eb =     new Vector2( 4.0f, GetWaterHeight() );
-		Vector2 a =  new Vector2(x, y + GetWaterLevel() );
-		Vector2 b =  new Vector2( -x, -y + GetWaterLevel() );
+
+		float waterHeight = _waterMinHeight + (_waterMaxHeight-_waterMinHeight)*GetWaterLevel();
+		Vector2 a =  new Vector2(x, y +  waterHeight );
+		Vector2 b =  new Vector2( -x, -y + waterHeight );
 
 	
 

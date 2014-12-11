@@ -4,9 +4,9 @@ using System.Collections;
 public class FlyingLion : Monster 
 {
 	float _attackSpeed = 5.0f;
-	float _approachSpeed = 2.0f;
+	float _approachSpeed = 1.0f;
 	float _retreatSpeed = 2.0f;
-	float _waitTime = 3.0f;
+	float _waitTime = 6.0f;
 
 
 

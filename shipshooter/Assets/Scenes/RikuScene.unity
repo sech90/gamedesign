@@ -1714,8 +1714,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ScorePerSecond: 50
   ScoreText: {fileID: 613181369}
-  MainSoundtrack: {fileID: 8300000, guid: bc2707dfe902edf4da17e16e7bc7a3e7, type: 3}
-  StartScreenAudio: {fileID: 8300000, guid: 46a0caafa66631442a0f6523aca0e1bb, type: 3}
+  MainSoundtrack: {fileID: 0}
+  StartScreenAudio: {fileID: 0}
 --- !u!4 &151558298
 Transform:
   m_ObjectHideFlags: 0
@@ -22423,6 +22423,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0682889ffa9fc4505ae1edfd2e66f3f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  waveHeightFactor: 1
+  waveWidthFactor: 1
+  waveSpeedFactor: 1
 --- !u!1 &1952599885
 GameObject:
   m_ObjectHideFlags: 0
