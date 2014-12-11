@@ -12,7 +12,8 @@ public class Bilgewater : MonoBehaviour {
 	
 
 
-	Vector2 hullBottom;
+	Vector2 hullLeftBottom;
+	Vector2 hullRightBottom;
 	Vector2 hullLeftMiddle;
 	Vector2 hullLeftTop;
 	Vector2 hullRightMiddle;
@@ -24,7 +25,7 @@ public class Bilgewater : MonoBehaviour {
 	//should return values from 0..1
 	public float GetWaterLevel()
 	{
-		return -0.7f;
+		return -0.8f;
 	}
 
 	void Start () 
@@ -63,11 +64,12 @@ public class Bilgewater : MonoBehaviour {
 		Debug.Log(hullRightMiddle);
 		/**/
 
-		hullBottom = 		new Vector2( 0.0f,  -1.25f);
-		hullLeftTop =  		new Vector2(-1.45f, 0.18f);
-		hullRightTop = 		new Vector2( 1.45f, 0.18f);
-		hullLeftMiddle = 	new Vector2(-1.07f,  -0.85f);
-		hullRightMiddle = 	new Vector2( 1.07f,  -0.85f);
+		hullLeftBottom = 		new Vector2( -0.55f,  -1.25f);
+		hullRightBottom = 		new Vector2( 0.55f,  -1.25f);
+		hullLeftTop =  		new Vector2(-1.7f, 1.18f);
+		hullRightTop = 		new Vector2( 1.85f, 1.18f);
+		hullLeftMiddle = 	new Vector2(-1.2f,  -0.85f);
+		hullRightMiddle = 	new Vector2( 1.2f,  -0.85f);
 		/**/
 		mesh = new EditableMesh();
 		mesh.Create(10.0f, 10.0f, 1, 2);
@@ -75,13 +77,13 @@ public class Bilgewater : MonoBehaviour {
 		mesh.SetParent(this.gameObject);
 		mesh.SetLocalPosition( new Vector3(0.0f, 0.0f, 0.0f) );
 
-		mesh.SetSortingOrder(30);
+		mesh.SetSortingOrder(23);
 
 		Color waterColor = Util.CreateColor(118, 112, 95, 170);
 		mesh.SetColor(waterColor);
 
-		mesh.SetVertex(0,0, hullBottom);
-		mesh.SetVertex(1,0, hullBottom);
+		mesh.SetVertex(0,0, hullLeftBottom);
+		mesh.SetVertex(1,0, hullRightBottom);
 		mesh.SetVertex(0,1, hullLeftMiddle);
 		mesh.SetVertex(1,1, hullRightMiddle);
 		mesh.SetVertex(0,2, hullLeftTop);
@@ -96,8 +98,8 @@ public class Bilgewater : MonoBehaviour {
 
 		LineSegment2d upperLeftSide  = new LineSegment2d( hullLeftTop,  hullLeftMiddle );
 		LineSegment2d upperRightSide = new LineSegment2d( hullRightTop, hullRightMiddle );
-		LineSegment2d lowerLeftSide  = new LineSegment2d( hullBottom,   hullLeftMiddle );
-		LineSegment2d lowerRightSide = new LineSegment2d( hullBottom,   hullRightMiddle );
+		LineSegment2d lowerLeftSide  = new LineSegment2d( hullLeftBottom,   hullLeftMiddle );
+		LineSegment2d lowerRightSide = new LineSegment2d( hullRightBottom,   hullRightMiddle );
 
 
 		Vector2 isect = new Vector2(0.0f,0.0f);
@@ -115,8 +117,8 @@ public class Bilgewater : MonoBehaviour {
 		}
 		else
 		{
-			mesh.SetVertex(0,1, hullBottom);
-			mesh.SetVertex(0,2, hullBottom);
+			mesh.SetVertex(0,1, hullLeftBottom);
+			mesh.SetVertex(0,2, hullLeftBottom);
 		}
 
 		if( surface.Intersection(lowerRightSide, ref isect))
@@ -131,8 +133,8 @@ public class Bilgewater : MonoBehaviour {
 		}
 		else
 		{
-			mesh.SetVertex(1,1, hullBottom);
-			mesh.SetVertex(1,2, hullBottom);
+			mesh.SetVertex(1,1, hullRightBottom);
+			mesh.SetVertex(1,2, hullRightBottom);
 		}
 
 
