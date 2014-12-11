@@ -7,11 +7,14 @@ public class Cannon : InteractiveObject {
 	public float RotateSpeed = 5.0f;
 	public float Cooldown = 1.5f;
 	public int ShootAngle = 90;
+	public GameObject Explosion;
+	public AudioClip ExplosionSound;
 
 
 	private Transform 	_hinge;
 	private Transform 	_spawner;
 	private GameObject 	_cannonBall;
+
 	private float 		_angleLimit;
 	private float 		_curAngle = 0;
 	private bool		_isRightSide;
@@ -47,7 +50,6 @@ public class Cannon : InteractiveObject {
 	}
 
 	override protected void OnButtonHold(KeyCode key){
-		Debug.Log("Cannon hold "+key);
 		switch(key){
 		case KeyCode.W:
 			_curAngle -= RotateSpeed * Time.deltaTime;
@@ -68,6 +70,8 @@ public class Cannon : InteractiveObject {
 			Vector2 distance = _spawner.position - _hinge.position;
 			Vector2 forceDirection = distance / distance.magnitude;
 			bullet.rigidbody2D.AddForce(CannonPower * forceDirection, ForceMode2D.Impulse);
+			Instantiate(Explosion,_spawner.position,_hinge.localRotation);
+			AudioSource.PlayClipAtPoint(ExplosionSound,_spawner.position);
 			Destroy(bullet,1.0f);
 			_remainCooldown = Cooldown;
 		}
