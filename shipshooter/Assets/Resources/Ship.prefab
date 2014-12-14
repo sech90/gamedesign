@@ -3254,8 +3254,8 @@ MonoBehaviour:
   rollFactor: .75
   rollAdjustment: 0
   isSinking: 0
-  sinkingAcceleration: .150000006
-  sinkingRollAcceleration: 1
+  sinkingAcceleration: .0299999993
+  sinkingRollAcceleration: .200000003
 --- !u!198 &19800000
 ParticleSystem:
   m_ObjectHideFlags: 1

@@ -71,8 +71,11 @@ public class Ship : MonoBehaviour {
 		float floatingHeight = Mathf.Lerp( _floatingHeightEmpty, _floatingHeightFull, _water.GetWaterLevel() );
 		_floatingObject.yAdjustment = floatingHeight;
 
-		if (_water.GetWaterLevel() >= 1.0f){
-			_floatingObject.StartSinking();
+		// If water level reaches max, the ship sink
+		if ( _water.GetWaterLevel() >= 1.0f ){
+			_floatingObject.isSinking = true;
+			_floatingObject.isFloating = false;
+			_floatingObject.isRolling = false;
 			AudioSource.PlayClipAtPoint(sinkingSound, transform.position);
 		}
 

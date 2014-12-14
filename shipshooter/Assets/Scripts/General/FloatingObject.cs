@@ -21,16 +21,8 @@ public class FloatingObject : MonoBehaviour {
 	private float sinkingRollSpeed = 0.0f;
 
 	private SeaHandler _sea;  
-
-	public void StartSinking(){
-		isFloating = false;
-		isRolling = false;
-		isSinking = true;
-		sinkingSpeed = 0.0f;
-		sinkingRollSpeed = 0.0f;
-	}
-
 	
+
 	void Start(){
 		_sea = GameObject.FindObjectOfType<SeaHandler>();
 	}
