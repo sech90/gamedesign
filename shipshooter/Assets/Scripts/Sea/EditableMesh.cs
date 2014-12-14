@@ -15,6 +15,7 @@ public class EditableMesh {
 
 	MeshFilter meshFilter;
 	MeshRenderer renderer;
+	
 
 	GameObject plane;
 	
@@ -69,6 +70,11 @@ public class EditableMesh {
 		renderer.material.mainTexture = tex;
 //		renderer.material.color = color;
 		
+	}
+
+	public void SetMaterial(Material material)
+	{
+		renderer.material = material;
 	}
 	
 	private Mesh CreateMeshPlane(float totalWidth, float totalHeight, int numWidthSegments, int numHeightSegments)

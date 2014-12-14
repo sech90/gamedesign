@@ -49,7 +49,7 @@ public class GameHandler : MonoBehaviour {
 		sailor.transform.parent = ship.transform;
 		sailor.transform.localPosition = new Vector3(0.0f, 0.0f, -1.0f);
 		/**/
-		AudioSource.PlayClipAtPoint(MainSoundtrack,transform.position);
+		//AudioSource.PlayClipAtPoint(MainSoundtrack,transform.position);
 	}
 
 	public static void AddScore(int amount){
@@ -66,6 +66,10 @@ public class GameHandler : MonoBehaviour {
 			GameObject flyingLion = Instantiate (flyingLionPrefab) as GameObject;
 			lastSpawn = Time.time;
 		}
+
+		if (UserInput.Exit())
+			Application.Quit();
+
 	
 
 	}
