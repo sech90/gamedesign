@@ -27,7 +27,7 @@ public class Cannon : InteractiveObject {
 		_spawner 	 = _hinge.Find("CannonChamber/BulletSpawner");
 		_cannonBall  = Resources.Load<GameObject>("CannonBall");
 		_angleLimit  = ShootAngle/2;
-		_keyList 	 = new KeyCode[]{ KeyCode.W, KeyCode.S, KeyCode.A, KeyCode.D };
+		//_keyList 	 = new string[]{ "up", "down", "left", "right" };
 		_isRightSide = _spawner.position.x > _hinge.position.x ? true : false; 
 	}
 
@@ -36,13 +36,13 @@ public class Cannon : InteractiveObject {
 			_remainCooldown = Mathf.Clamp(_remainCooldown - Time.deltaTime, 0, _remainCooldown);
 	}
 	
-	override protected void OnButtonPressed(KeyCode key){
+	override protected void OnButtonPressed(ButtonDir key){
 		switch(key){
-			case KeyCode.A:
+		case ButtonDir.LEFT:
 				if(!_isRightSide)
 					Shoot();
 				break;
-			case KeyCode.D:
+		case ButtonDir.RIGHT:
 				if(_isRightSide)
 					Shoot();
 				break;
@@ -51,12 +51,12 @@ public class Cannon : InteractiveObject {
 		}
 	}
 
-	override protected void OnButtonHold(KeyCode key){
+	override protected void OnButtonHold(ButtonDir key){
 		switch(key){
-		case KeyCode.W:
+		case ButtonDir.UP:
 			_curAngle -= RotateSpeed * Time.deltaTime;
 			break;
-		case KeyCode.S:
+		case ButtonDir.DOWN:
 			_curAngle += RotateSpeed * Time.deltaTime;
 			break;
 		default:
@@ -83,6 +83,6 @@ public class Cannon : InteractiveObject {
 		}
 	}
 
-	override protected void OnButtonRelease(KeyCode key){}
+	override protected void OnButtonRelease(ButtonDir key){}
 
 }

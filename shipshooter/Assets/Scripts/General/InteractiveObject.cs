@@ -1,26 +1,34 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+
 public abstract class InteractiveObject : MonoBehaviour {
 
-	abstract protected void OnButtonPressed(KeyCode key);
-	abstract protected void OnButtonHold(KeyCode key);
-	abstract protected void OnButtonRelease(KeyCode key);
+	abstract protected void OnButtonPressed(ButtonDir key);
+	abstract protected void OnButtonHold(ButtonDir key);
+	abstract protected void OnButtonRelease(ButtonDir key);
 
-	private bool _isOnTriggerArea = false;
-	protected KeyCode[] _keyList; 
+	//private bool _isOnTriggerArea = false;
+	//protected ButtonDir[] _keyList; 
 
 	void OnTriggerEnter2D(Collider2D coll){
-		Debug.Log(name+ " triggered "+coll.name);
-		if(coll.GetComponent<Sailorman>() != null)
-			_isOnTriggerArea = true;
+		Sailorman sailor = coll.GetComponent<Sailorman>();
+		if(sailor != null){
+			sailor.OnButtonPressed += OnButtonPressed;
+			sailor.OnButtonHold += OnButtonHold;
+			sailor.OnButtonRelease += OnButtonRelease;
+		}
 	}
 
 	void OnTriggerExit2D(Collider2D coll){
-		if(coll.GetComponent<Sailorman>() != null)
-			_isOnTriggerArea = false;
+		Sailorman sailor = coll.GetComponent<Sailorman>();
+		if(sailor != null){
+			sailor.OnButtonPressed -= OnButtonPressed;
+			sailor.OnButtonHold -= OnButtonHold;
+			sailor.OnButtonRelease -= OnButtonRelease;
+		}
 	}
-
+	/*
 	void Update(){
 		if(_isOnTriggerArea && Input.anyKey){
 
@@ -38,6 +46,6 @@ public abstract class InteractiveObject : MonoBehaviour {
 
 			}
 		}
-	}
+	}*/
 
 }

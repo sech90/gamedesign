@@ -13,24 +13,20 @@ public class Wheel : InteractiveObject {
 	public float SteeringAmount{ get{return _steeringAmount;} }
 
 
-	Wheel(){
-		_keyList = new KeyCode[]{ KeyCode.A, KeyCode.D };
-	}
-
 	void FixedUpdate(){
 		if(_steeringAmount != 0)
 			_steeringAmount = Mathf.Lerp(_steeringAmount,0,counterSteering*Time.deltaTime);
 	}
 
 
-	override protected void OnButtonHold(KeyCode key){
+	override protected void OnButtonHold(ButtonDir key){
 		switch(key){
-			case KeyCode.A:
+		case ButtonDir.LEFT:
 				_steeringAmount -= turnSpeed*Time.deltaTime;
 				if(_steeringAmount < -1.0f)
 					_steeringAmount = -1.0f;
 				break;
-			case KeyCode.D:
+		case ButtonDir.RIGHT:
 				_steeringAmount += turnSpeed*Time.deltaTime;
 				if(_steeringAmount > 1.0f)
 					_steeringAmount = 1.0f;
@@ -40,12 +36,12 @@ public class Wheel : InteractiveObject {
 		}
 	}
 
-	override protected void OnButtonPressed(KeyCode key){
+	override protected void OnButtonPressed(ButtonDir key){
 		switch(key){
-		case KeyCode.A:
+		case ButtonDir.LEFT:
 			AudioSource.PlayClipAtPoint(steerLeftSound, transform.position);
 			break;
-		case KeyCode.D:
+		case ButtonDir.RIGHT:
 			AudioSource.PlayClipAtPoint(steerRightSound, transform.position);
 			break;
 		default:
@@ -55,6 +51,5 @@ public class Wheel : InteractiveObject {
 
 	
 	//empty bodies
-//	override protected void OnButtonPressed(KeyCode key){}
-	override protected void OnButtonRelease(KeyCode key){}
+	override protected void OnButtonRelease(ButtonDir key){}
 }

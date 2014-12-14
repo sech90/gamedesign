@@ -7,6 +7,7 @@ public class Hole : InteractiveObject {
 	public float MaxWaterSec = 10.0f;
 	public int MaxHP = 20;
 	public int DamageBuffer = 15;
+	public AudioClip RepairSound;
 
 	private int _currentHp;
 	private int _buffer = 0;
@@ -24,7 +25,7 @@ public class Hole : InteractiveObject {
 
 	void Start(){
 		_currentHp = MaxHP;
-		_keyList = new KeyCode[]{ KeyCode.A, KeyCode.D};
+		//_keyList = new string[]{ "right", "left"};
 		_jet = transform.FindChild("WaterJet").GetComponent<ParticleSystem>();
 		_halo = transform.FindChild("HoleHalo").GetComponent<ParticleSystem>();
 		_spray = transform.FindChild("WaterSpry").GetComponent<ParticleSystem>();
@@ -50,25 +51,27 @@ public class Hole : InteractiveObject {
 		UpdateParticle();
 	}
 
-	override protected void OnButtonPressed(KeyCode key){
+	override protected void OnButtonPressed(ButtonDir key){
 		switch(key){
-		case KeyCode.A:
+		case ButtonDir.LEFT:
 			if(transform.localRotation.eulerAngles.z <= 90 || transform.localRotation.eulerAngles.z >= 270){
 				if(_currentHp < MaxHP){
 					_currentHp++;
 					if(_currentHp == MaxHP)
 						_buffer = 0;
 					UpdateParticle();
+					AudioSource.PlayClipAtPoint(RepairSound,transform.position);
 				}
 			}
 			break;
-		case KeyCode.D:
+		case ButtonDir.RIGHT:
 			if(transform.localRotation.eulerAngles.z > 90 && transform.localRotation.eulerAngles.z < 270){
 				if(_currentHp < MaxHP){
 					_currentHp++;
 					if(_currentHp == MaxHP)
 						_buffer = 0;
 					UpdateParticle();
+					AudioSource.PlayClipAtPoint(RepairSound,transform.position);
 				}
 			}
 			break;
@@ -97,8 +100,8 @@ public class Hole : InteractiveObject {
 	}
 	
 	//empty bodies
-	override protected void OnButtonHold(KeyCode key){}
-	override protected void OnButtonRelease(KeyCode key){}
+	override protected void OnButtonHold(ButtonDir key){}
+	override protected void OnButtonRelease(ButtonDir key){}
 
 
 }

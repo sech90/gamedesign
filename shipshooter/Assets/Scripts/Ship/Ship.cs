@@ -111,9 +111,12 @@ public class Ship : MonoBehaviour {
 	}
 
 	private void Pumped(Pump pump){
-		Debug.Log("pumped");
-		if(pump.LevelOfActivation < _water.GetWaterLevel())
+
+		if(pump.LevelOfActivation < _water.GetWaterLevel()){
 			_currentHp = _currentHp + pump.PumpPower;
+			Debug.Log("pumped "+_currentHp);
+		}
+
 	}
 }
 
