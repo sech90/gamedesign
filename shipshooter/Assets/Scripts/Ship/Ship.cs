@@ -1,10 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
-public class Ship : FloatingObject {
+public class Ship : MonoBehaviour {
 
 	public int MaxHp = 100;
-	public float SteerMaxSpeed = 10.0f;
+	public float SteerMaxSpeed = 0.5f;
+	public float maxSteeringRoll = 0.0f;
+	public AudioClip beingHitSound = null;
+	public AudioClip sinkingSound = null;
+
+
 
 	//components of the ship
 //	private Sailorman 	_player;
@@ -13,11 +18,22 @@ public class Ship : FloatingObject {
 	private Wheel 		_wheel;
 	private Bilgewater 	_water;
 
+	private FloatingObject _floatingObject;
+
 	//data of the ship
 	private float _currentHp;
 	public  float CurrentHp {
 		get{return _currentHp;} 
 		set{_currentHp = Mathf.Clamp(value,0,MaxHp);}
+	}
+
+	private float _floatingHeightEmpty = -0.5f;
+	private float _floatingHeightFull  = -1.2f;
+
+	public static Ship instance { get; private set; }
+	
+	void Awake() {
+		instance = this;
 	}
 
 	void Start () {
@@ -35,9 +51,15 @@ public class Ship : FloatingObject {
 
 		for(int i=0;i<_pumps.Length;i++)
 			_pumps[i].OnPump = Pumped;
+
+		_floatingObject = gameObject.GetComponent<FloatingObject>();
+
+
 	}
 
 	void Update () {
+
+
 		doSteering();
 
 		for(int i=0;i<_holes.Length; i++){
@@ -45,7 +67,25 @@ public class Ship : FloatingObject {
 		}
 
 		_water.SetWaterLevel(1-_currentHp/MaxHp);
+
+		float floatingHeight = Mathf.Lerp( _floatingHeightEmpty, _floatingHeightFull, _water.GetWaterLevel() );
+		_floatingObject.yAdjustment = floatingHeight;
+
+		// If water level reaches max, the ship sink
+		if ( _water.GetWaterLevel() >= 1.0f ){
+			_floatingObject.isSinking = true;
+			_floatingObject.isFloating = false;
+			_floatingObject.isRolling = false;
+			AudioSource.PlayClipAtPoint(sinkingSound, transform.position);
+		}
+
+		if (transform.position.y < -5.0f) {
+			// The ship has sunk. Game over!
+		}
 	} 
+
+
+
 
 	//create holes depending by the strength of the monster
 	void OnTriggerEnter2D(Collider2D coll){
@@ -56,6 +96,8 @@ public class Ship : FloatingObject {
 				_holes[0].TakeDamage(monster.AttackPower);
 			else
 				_holes[1].TakeDamage(monster.AttackPower);
+
+			AudioSource.PlayClipAtPoint(beingHitSound, monster.transform.position);
 		}
 	}
 
@@ -65,6 +107,7 @@ public class Ship : FloatingObject {
 			pos.x += _wheel.SteeringAmount * SteerMaxSpeed * Time.deltaTime;
 			transform.position = pos;
 		}
+		_floatingObject.rollAdjustment = _wheel.SteeringAmount * -maxSteeringRoll;
 	}
 
 	private void Pumped(Pump pump){

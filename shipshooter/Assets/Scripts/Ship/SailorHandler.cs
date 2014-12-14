@@ -11,6 +11,8 @@ public class SailorHandler : MonoBehaviour {
 	private float handsHeight = 0.02f; // y-position of hands
 	private float sailorWidth = 0.09f;  
 
+	bool lastMoveOnLadder = false;
+
 	// Use this for initialization
 	void Start () 
 	{
@@ -20,29 +22,34 @@ public class SailorHandler : MonoBehaviour {
 	void Update () 
 	{
 
-		if ( UserInput.Player1Left() && !LeftObstructed() )
+		if ( UserInput.Player1Left() && !LeftObstructed() && !FeetInsideFloorOnStairs() )
 		{
 			Move( new Vector3(-sidewaysSpeed * Time.deltaTime, 0.0f) );
+			lastMoveOnLadder = false;
 		}
 
-		if ( UserInput.Player1Right() && !RightObstructed() )
+		if ( UserInput.Player1Right() && !RightObstructed() && !FeetInsideFloorOnStairs())
 		{
 			Move( new Vector3(sidewaysSpeed * Time.deltaTime, 0.0f) );
+			lastMoveOnLadder = false;
 		}
 
 		if ( UserInput.Player1Up() && ( HandsOnLadder() || FeetOnLadder()) )
 		{
 			Move( new Vector3(0.0f, climbSpeed * Time.deltaTime ) );
+			lastMoveOnLadder = true;
 		}
 
 		if ( UserInput.Player1Down() && FeetOnLadder() )
 		{
 			Move( new Vector3(0.0f, -climbSpeed * Time.deltaTime ) );
+			lastMoveOnLadder = true;
 		}
 
 		if (!StandingOnFloor () && !FeetOnLadder () && !HandsOnLadder ()) 
 		{
 			Fall();
+			lastMoveOnLadder = false;
 		}
 	}
 
@@ -69,6 +76,12 @@ public class SailorHandler : MonoBehaviour {
 	{
 		return (IsColliderAtLocal(transform.localPosition, "Floor"));
 	}
+
+	bool FeetInsideFloorOnStairs()
+	{
+		return FeetOnLadder() && StandingOnFloor() && lastMoveOnLadder;
+	}
+
 
 	bool FeetOnLadder()
 	{

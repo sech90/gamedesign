@@ -66,6 +66,10 @@ public class GameHandler : MonoBehaviour {
 			GameObject flyingLion = Instantiate (flyingLionPrefab) as GameObject;
 			lastSpawn = Time.time;
 		}
+
+		if (UserInput.Exit())
+			Application.Quit();
+
 	
 
 	}

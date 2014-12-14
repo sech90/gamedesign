@@ -3,6 +3,8 @@ using System.Collections;
 
 public class FlyingLion : Monster 
 {
+	public AudioClip AttackSound = null;
+
 	float _attackSpeed = 5.0f;
 	float _approachSpeed = 1.0f;
 	float _retreatSpeed = 2.0f;
@@ -91,7 +93,7 @@ public class FlyingLion : Monster
 
 
 	Vector3 RandomStartPosition(){
-		float x = ShipHandler.instance.transform.position.x;
+		float x = Ship.instance.transform.position.x;
 		if (_facing == MonsterFacing.Right)
 			x += 15.0f;
 		else
@@ -102,7 +104,7 @@ public class FlyingLion : Monster
 	}
 
 	Vector3 RandomWaitPosition(){
-		float x = ShipHandler.instance.transform.position.x;
+		float x = Ship.instance.transform.position.x;
 		if (_facing == MonsterFacing.Right)
 		     x += Random.Range (3.0f, 6.0f);
 		else
