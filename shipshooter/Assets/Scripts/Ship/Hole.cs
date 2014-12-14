@@ -42,7 +42,7 @@ public class Hole : InteractiveObject {
 	}
 
 	public void TakeDamage(int amount){
-		Debug.Log(name + "take damage "+amount);
+		//Debug.Log(name + "take damage "+amount);
 		if(_buffer < DamageBuffer){
 			_buffer += amount;
 			amount = _buffer > DamageBuffer ? DamageBuffer - _buffer : 0;
