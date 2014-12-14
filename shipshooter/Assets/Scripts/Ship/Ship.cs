@@ -72,7 +72,7 @@ public class Ship : MonoBehaviour {
 		_floatingObject.yAdjustment = floatingHeight;
 
 		// If water level reaches max, the ship sink
-		if ( _water.GetWaterLevel() >= 1.0f ){
+		if ( _water.GetWaterLevel() >= 1.0f  && !_floatingObject.isSinking ){
 			_floatingObject.isSinking = true;
 			_floatingObject.isFloating = false;
 			_floatingObject.isRolling = false;

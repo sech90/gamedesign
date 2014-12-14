@@ -19,11 +19,12 @@ public class Bilgewater : MonoBehaviour {
 	Vector2 hullRightMiddle;
 	Vector2 hullRightTop;
 
-	float _waterLevel = 0.0f;
+	float _waterLevel = 0.5f;
 
 	float _waterMaxHeight = 0.3f;
 	float _waterMinHeight = -1.1f;
 
+	private GameObject bilgeWaterLine;
 
 	//should be from 0 (no water) to 1 (completely full)
 	public void SetWaterLevel(float level)
@@ -41,6 +42,10 @@ public class Bilgewater : MonoBehaviour {
 
 	void Start () 
 	{
+
+
+		bilgeWaterLine = transform.FindChild("BilgeWaterLine").gameObject;
+
 		/** /
 		PolygonCollider2D coll = ship.collider2D as PolygonCollider2D;
 		Vector2[] sortedX = coll.points;
@@ -151,6 +156,15 @@ public class Bilgewater : MonoBehaviour {
 
 		mesh.UpdateMesh();
 
+
+		bilgeWaterLine.transform.localPosition = mesh.GetVertex(0,2) * 0.33333333f;
+		bilgeWaterLine.transform.localEulerAngles = new Vector3( 0.0f, 0.0f, -transform.rotation.eulerAngles.z);
+		Vector3 vec = mesh.GetVertex(0,2) - mesh.GetVertex(1,2);
+		float xScale = vec.magnitude;
+		bilgeWaterLine.transform.localScale = new Vector3( xScale, 1.5f, 1.0f);
+
+	//	bilgeWaterLine.transform.localScale = new Vector3(0.3333333f, 0.33333333f, 1.0f);
+//			new Vector3(0.0f,0.0f,0.0f); //mesh.GetVertex(0,1);
 		//int i = 0;
 		
 /*

@@ -15,6 +15,9 @@ public class FlyingLion : Monster
 	GameObject _shipAttackSpot; //GameObject towards which the monster is attacking
 	Vector3 _target;			// Position towards which the monster is moving
 
+	public float droppingDeadAccelleration = 0.5f;
+	private float droppingDeadSpeed = 0.0f;
+	private float waitingUntil;
 
 
 	// Use this for initialization
@@ -54,10 +57,50 @@ public class FlyingLion : Monster
 			Attack();
 		else if (_mode == MonsterMode.Retreat)
 			Retreat();
-	
-		MonsterUpdate();
-	
+		else if (_mode == MonsterMode.Dying)
+			Die();
+		else if (_mode == MonsterMode.Wait)
+			Wait();
 	}
+	
+	void Wait(){
+		
+		if (Time.time >= waitingUntil){
+			_mode = MonsterMode.Attack;
+			AudioSource.PlayClipAtPoint(AttackSound,transform.position);
+
+		}
+	}
+	
+	virtual protected void Die(){
+	
+		droppingDeadSpeed += droppingDeadAccelleration * Time.deltaTime;
+		transform.position += new Vector3(0.0f, -droppingDeadSpeed, 0.0f );
+		//sinkingRollSpeed += sinkingRollAcceleration * Time.deltaTime;
+		
+
+		float angle = Mathf.MoveTowardsAngle(transform.eulerAngles.z, 180.0f, 5.0f);
+		transform.eulerAngles = new Vector3(0, 0, angle);
+	
+		
+		if (transform.position.y < -5.0f)
+		{
+			Destroy(this.gameObject);
+			_headCount--;
+		}
+	}
+	
+	protected void WaitUntil( float time ){
+		waitingUntil = time;
+		_mode = MonsterMode.Wait;
+	}
+	
+	void OnCollisionEnter2D(Collision2D coll) {
+		_mode = MonsterMode.Dying;
+		Destroy( coll.gameObject );
+		GameHandler.AddScore(PointsWhenKilled);
+	}
+
 
 	void Approach(){
 		MoveStraightTowards(_target, _approachSpeed);
