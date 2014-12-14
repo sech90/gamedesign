@@ -3,6 +3,8 @@ using System.Collections;
 
 public class FlyingLion : Monster 
 {
+	public AudioClip AttackSound = null;
+
 	float _attackSpeed = 5.0f;
 	float _approachSpeed = 1.0f;
 	float _retreatSpeed = 2.0f;

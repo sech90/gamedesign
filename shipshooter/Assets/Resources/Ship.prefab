@@ -1059,7 +1059,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 400126}
   - 212: {fileID: 21200016}
-  - 114: {fileID: 11400032}
   - 114: {fileID: 11400030}
   - 60: {fileID: 6000000}
   - 50: {fileID: 5000002}
@@ -1488,7 +1487,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100026}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .0489999987, y: .805999994, z: 0}
+  m_LocalPosition: {x: .0489999987, y: .791999996, z: 0}
   m_LocalScale: {x: .300000012, y: .300000012, z: 1}
   m_Children: []
   m_Father: {fileID: 400126}
@@ -2580,8 +2579,8 @@ PolygonCollider2D:
   m_Poly:
     m_Paths:
     - - {x: -.532097518, y: .420405149}
-      - {x: -.416184604, y: .762851238}
-      - {x: .398881286, y: .76340121}
+      - {x: -.315856934, y: 1.02754533}
+      - {x: .298553467, y: 1.03022993}
       - {x: .528004646, y: .46926865}
       - {x: .514290214, y: .0671129227}
       - {x: .370158523, y: -.241417646}
@@ -2795,8 +2794,8 @@ BoxCollider2D:
   m_Enabled: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Size: {x: .0648506433, y: .159795135}
-  m_Center: {x: .102365673, y: -.00438040495}
+  m_Size: {x: .0310871154, y: .159795135}
+  m_Center: {x: .0854838192, y: -.00438040495}
 --- !u!61 &6100038
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -2828,8 +2827,8 @@ BoxCollider2D:
   m_Enabled: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Size: {x: .0648506433, y: .159795135}
-  m_Center: {x: .102365673, y: -.00438040495}
+  m_Size: {x: .0288338028, y: .159795135}
+  m_Center: {x: .0843599737, y: -.00438040495}
 --- !u!61 &6100044
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -3136,7 +3135,8 @@ MonoBehaviour:
   Cooldown: 1.5
   ShootAngle: 90
   Explosion: {fileID: 100000, guid: aedd180f817255546b113bb139eb9f24, type: 2}
-  ExplosionSound: {fileID: 8300000, guid: 506f152b8f07b4c84840d3c39c410330, type: 3}
+  ExplosionSound1: {fileID: 8300000, guid: f049cb32e79ff4ba8aab2f54c1d8b093, type: 3}
+  ExplosionSound2: {fileID: 8300000, guid: 449efba5ba5d14cadaaa1a80e53a9261, type: 3}
 --- !u!114 &11400024
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3168,7 +3168,8 @@ MonoBehaviour:
   Cooldown: 1.5
   ShootAngle: 90
   Explosion: {fileID: 100000, guid: aedd180f817255546b113bb139eb9f24, type: 2}
-  ExplosionSound: {fileID: 8300000, guid: 506f152b8f07b4c84840d3c39c410330, type: 3}
+  ExplosionSound1: {fileID: 8300000, guid: f049cb32e79ff4ba8aab2f54c1d8b093, type: 3}
+  ExplosionSound2: {fileID: 8300000, guid: 449efba5ba5d14cadaaa1a80e53a9261, type: 3}
 --- !u!114 &11400028
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3193,30 +3194,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d583989a7505bf847a6c892259d7d35e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isFloating: 1
-  yAdjustment: 0
-  objectWidth: .100000001
-  isRolling: 0
-  rollFactor: 1
   MaxHp: 100
-  SteerMaxSpeed: 10
---- !u!114 &11400032
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100126}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 34e376ac822c140f7b73f095254ca95c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sea: {fileID: 100000, guid: f358c3eab5128473f9bbb8638217d100, type: 2}
-  hullWidth: 3
-  rollFactor: .5
-  maxSpeed: .5
-  wheelTurnSpeed: .25
-  maxRotationFromTurning: 15
+  SteerMaxSpeed: 2
+  maxSteeringRoll: 15
+  beingHitSound: {fileID: 8300000, guid: 0ff57ecf2c1614a2a9f37c84dee3bd71, type: 3}
 --- !u!114 &11400034
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3266,6 +3247,7 @@ MonoBehaviour:
   objectWidth: 3
   isRolling: 1
   rollFactor: .75
+  rollAdjustment: 0
 --- !u!198 &19800000
 ParticleSystem:
   m_ObjectHideFlags: 1

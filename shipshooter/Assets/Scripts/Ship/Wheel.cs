@@ -5,6 +5,9 @@ public class Wheel : InteractiveObject {
 
 	public float turnSpeed = 0.25f;
 	public float counterSteering = 0.1f;
+	public AudioClip steerRightSound = null;
+	public AudioClip steerLeftSound = null;
+
 
 	private float _steeringAmount = 0;
 	public float SteeringAmount{ get{return _steeringAmount;} }
@@ -37,7 +40,21 @@ public class Wheel : InteractiveObject {
 		}
 	}
 
+	override protected void OnButtonPressed(KeyCode key){
+		switch(key){
+		case KeyCode.A:
+			AudioSource.PlayClipAtPoint(steerLeftSound, transform.position);
+			break;
+		case KeyCode.D:
+			AudioSource.PlayClipAtPoint(steerRightSound, transform.position);
+			break;
+		default:
+			break;
+		}
+	}
+
+	
 	//empty bodies
-	override protected void OnButtonPressed(KeyCode key){}
+//	override protected void OnButtonPressed(KeyCode key){}
 	override protected void OnButtonRelease(KeyCode key){}
 }

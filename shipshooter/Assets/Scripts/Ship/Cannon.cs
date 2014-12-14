@@ -8,7 +8,8 @@ public class Cannon : InteractiveObject {
 	public float Cooldown = 1.5f;
 	public int ShootAngle = 90;
 	public GameObject Explosion;
-	public AudioClip ExplosionSound;
+	public AudioClip ExplosionSound1;
+	public AudioClip ExplosionSound2;
 
 
 	private Transform 	_hinge;
@@ -19,6 +20,7 @@ public class Cannon : InteractiveObject {
 	private float 		_curAngle = 0;
 	private bool		_isRightSide;
 	private float		_remainCooldown = 0;
+	private bool 		_explosionSoundToggle = true;
 
 	void Start () {
 		_hinge 		 = transform.Find("CannonHinge");
@@ -71,7 +73,11 @@ public class Cannon : InteractiveObject {
 			Vector2 forceDirection = distance / distance.magnitude;
 			bullet.rigidbody2D.AddForce(CannonPower * forceDirection, ForceMode2D.Impulse);
 			Instantiate(Explosion,_spawner.position,_hinge.localRotation);
-			AudioSource.PlayClipAtPoint(ExplosionSound,_spawner.position);
+			if (_explosionSoundToggle)
+	 			AudioSource.PlayClipAtPoint(ExplosionSound1,_spawner.position);
+			else
+				AudioSource.PlayClipAtPoint(ExplosionSound2,_spawner.position);
+			_explosionSoundToggle = ! _explosionSoundToggle;
 			Destroy(bullet,1.0f);
 			_remainCooldown = Cooldown;
 		}

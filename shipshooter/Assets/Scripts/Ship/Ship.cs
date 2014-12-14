@@ -6,6 +6,7 @@ public class Ship : MonoBehaviour {
 	public int MaxHp = 100;
 	public float SteerMaxSpeed = 0.5f;
 	public float maxSteeringRoll = 0.0f;
+	public AudioClip beingHitSound = null;
 
 	//components of the ship
 //	private Sailorman 	_player;
@@ -76,6 +77,8 @@ public class Ship : MonoBehaviour {
 				_holes[0].TakeDamage(monster.AttackPower);
 			else
 				_holes[1].TakeDamage(monster.AttackPower);
+
+			AudioSource.PlayClipAtPoint(beingHitSound, monster.transform.position);
 		}
 	}
 
