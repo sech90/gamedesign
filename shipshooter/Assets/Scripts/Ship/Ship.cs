@@ -1,10 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
-public class Ship : FloatingObject {
+public class Ship : MonoBehaviour {
 
 	public int MaxHp = 100;
-	public float SteerMaxSpeed = 10.0f;
+	public float SteerMaxSpeed = 0.5f;
+	public float maxSteeringRoll = 0.0f;
 
 	//components of the ship
 //	private Sailorman 	_player;
@@ -13,11 +14,20 @@ public class Ship : FloatingObject {
 	private Wheel 		_wheel;
 	private Bilgewater 	_water;
 
+	private FloatingObject _floatingObject;
+
 	//data of the ship
 	private float _currentHp;
 	public  float CurrentHp {
 		get{return _currentHp;} 
 		set{_currentHp = Mathf.Clamp(value,0,MaxHp);}
+	}
+
+
+	public static Ship instance { get; private set; }
+	
+	void Awake() {
+		instance = this;
 	}
 
 	void Start () {
@@ -35,9 +45,15 @@ public class Ship : FloatingObject {
 
 		for(int i=0;i<_pumps.Length;i++)
 			_pumps[i].OnPump = Pumped;
+
+		_floatingObject = gameObject.GetComponent<FloatingObject>();
+
+
 	}
 
 	void Update () {
+
+
 		doSteering();
 
 		for(int i=0;i<_holes.Length; i++){
@@ -46,6 +62,9 @@ public class Ship : FloatingObject {
 
 		_water.SetWaterLevel(1-_currentHp/MaxHp);
 	} 
+
+
+
 
 	//create holes depending by the strength of the monster
 	void OnTriggerEnter2D(Collider2D coll){
@@ -66,6 +85,7 @@ public class Ship : FloatingObject {
 			pos.x += _wheel.SteeringAmount * SteerMaxSpeed * Time.deltaTime;
 			transform.position = pos;
 		}
+		_floatingObject.rollAdjustment = _wheel.SteeringAmount * -maxSteeringRoll;
 	}
 
 	private void Pumped(Pump pump){

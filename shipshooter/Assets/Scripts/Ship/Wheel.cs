@@ -24,13 +24,13 @@ public class Wheel : InteractiveObject {
 		switch(key){
 			case KeyCode.A:
 				_steeringAmount -= turnSpeed*Time.deltaTime;
-				if(_steeringAmount < -1)
-					_steeringAmount = -1;
+				if(_steeringAmount < -1.0f)
+					_steeringAmount = -1.0f;
 				break;
 			case KeyCode.D:
 				_steeringAmount += turnSpeed*Time.deltaTime;
-				if(_steeringAmount > 1)
-					_steeringAmount = 1;
+				if(_steeringAmount > 1.0f)
+					_steeringAmount = 1.0f;
 				break;
 			default:
 				break;
