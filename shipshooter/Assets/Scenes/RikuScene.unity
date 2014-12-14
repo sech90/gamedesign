@@ -2085,7 +2085,7 @@ MonoBehaviour:
   MaxWaterSec: 10
   MaxHP: 10
   DamageBuffer: 15
-  RepairSound: {fileID: 0}
+  RepairSound: {fileID: 8300000, guid: 1bafb4735e41e4b47bdcb5bf9755e640, type: 3}
 --- !u!1 &107366767
 GameObject:
   m_ObjectHideFlags: 0
@@ -20926,7 +20926,7 @@ MonoBehaviour:
   MaxWaterSec: 10
   MaxHP: 10
   DamageBuffer: 15
-  RepairSound: {fileID: 0}
+  RepairSound: {fileID: 8300000, guid: 1bafb4735e41e4b47bdcb5bf9755e640, type: 3}
 --- !u!1 &975707755
 GameObject:
   m_ObjectHideFlags: 0
@@ -24308,7 +24308,7 @@ MonoBehaviour:
   MaxWaterSec: 10
   MaxHP: 10
   DamageBuffer: 15
-  RepairSound: {fileID: 0}
+  RepairSound: {fileID: 8300000, guid: 1bafb4735e41e4b47bdcb5bf9755e640, type: 3}
 --- !u!1 &1097823430
 GameObject:
   m_ObjectHideFlags: 0
@@ -28367,7 +28367,7 @@ MonoBehaviour:
   MaxWaterSec: 10
   MaxHP: 10
   DamageBuffer: 15
-  RepairSound: {fileID: 0}
+  RepairSound: {fileID: 8300000, guid: 1bafb4735e41e4b47bdcb5bf9755e640, type: 3}
 --- !u!1 &1311650788
 GameObject:
   m_ObjectHideFlags: 0
@@ -33457,7 +33457,7 @@ MonoBehaviour:
   MaxWaterSec: 10
   MaxHP: 10
   DamageBuffer: 15
-  RepairSound: {fileID: 0}
+  RepairSound: {fileID: 8300000, guid: 1bafb4735e41e4b47bdcb5bf9755e640, type: 3}
 --- !u!1 &1654477097
 GameObject:
   m_ObjectHideFlags: 0
@@ -37040,7 +37040,7 @@ MonoBehaviour:
   MaxWaterSec: 10
   MaxHP: 20
   DamageBuffer: 15
-  RepairSound: {fileID: 0}
+  RepairSound: {fileID: 8300000, guid: 1bafb4735e41e4b47bdcb5bf9755e640, type: 3}
 --- !u!1 &2036294062
 GameObject:
   m_ObjectHideFlags: 0
