@@ -2996,6 +2996,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   turnSpeed: .25
   counterSteering: .200000003
+  steerRightSound: {fileID: 0}
+  steerLeftSound: {fileID: 0}
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3119,6 +3121,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   turnSpeed: .25
   counterSteering: .100000001
+  steerRightSound: {fileID: 8300000, guid: da36c2c776cd04a2291dbaafce319ddb, type: 3}
+  steerLeftSound: {fileID: 8300000, guid: b70c14a051734415098e0da083af81e0, type: 3}
 --- !u!114 &11400022
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3198,6 +3202,7 @@ MonoBehaviour:
   SteerMaxSpeed: 2
   maxSteeringRoll: 15
   beingHitSound: {fileID: 8300000, guid: 0ff57ecf2c1614a2a9f37c84dee3bd71, type: 3}
+  sinkingSound: {fileID: 8300000, guid: c1748217e089a4dada8feff150fc089d, type: 3}
 --- !u!114 &11400034
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3248,6 +3253,9 @@ MonoBehaviour:
   isRolling: 1
   rollFactor: .75
   rollAdjustment: 0
+  isSinking: 0
+  sinkingAcceleration: .150000006
+  sinkingRollAcceleration: 1
 --- !u!198 &19800000
 ParticleSystem:
   m_ObjectHideFlags: 1

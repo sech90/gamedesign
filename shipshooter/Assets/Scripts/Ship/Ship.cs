@@ -7,6 +7,9 @@ public class Ship : MonoBehaviour {
 	public float SteerMaxSpeed = 0.5f;
 	public float maxSteeringRoll = 0.0f;
 	public AudioClip beingHitSound = null;
+	public AudioClip sinkingSound = null;
+
+
 
 	//components of the ship
 //	private Sailorman 	_player;
@@ -24,6 +27,8 @@ public class Ship : MonoBehaviour {
 		set{_currentHp = Mathf.Clamp(value,0,MaxHp);}
 	}
 
+	private float _floatingHeightEmpty = -0.5f;
+	private float _floatingHeightFull  = -1.2f;
 
 	public static Ship instance { get; private set; }
 	
@@ -62,6 +67,18 @@ public class Ship : MonoBehaviour {
 		}
 
 		_water.SetWaterLevel(1-_currentHp/MaxHp);
+
+		float floatingHeight = Mathf.Lerp( _floatingHeightEmpty, _floatingHeightFull, _water.GetWaterLevel() );
+		_floatingObject.yAdjustment = floatingHeight;
+
+		if (_water.GetWaterLevel() >= 1.0f){
+			_floatingObject.StartSinking();
+			AudioSource.PlayClipAtPoint(sinkingSound, transform.position);
+		}
+
+		if (transform.position.y < -5.0f) {
+			// The ship has sunk. Game over!
+		}
 	} 
 
 

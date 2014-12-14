@@ -13,7 +13,23 @@ public class FloatingObject : MonoBehaviour {
 	public float rollFactor = 1.0f;
 	public float rollAdjustment = 0.0f;
 
+	public bool isSinking;
+	public float sinkingAcceleration = 0.25f;
+	public float sinkingRollAcceleration = 5.0f;
+
+	private float sinkingSpeed = 0.0f;
+	private float sinkingRollSpeed = 0.0f;
+
 	private SeaHandler _sea;  
+
+	public void StartSinking(){
+		isFloating = false;
+		isRolling = false;
+		isSinking = true;
+		sinkingSpeed = 0.0f;
+		sinkingRollSpeed = 0.0f;
+	}
+
 	
 	void Start(){
 		_sea = GameObject.FindObjectOfType<SeaHandler>();
@@ -39,6 +55,18 @@ public class FloatingObject : MonoBehaviour {
 			transform.rotation =  Quaternion.AngleAxis(roll, Vector3.forward);
 		}
 
+		
+		if(isSinking){
+			sinkingSpeed += sinkingAcceleration * Time.deltaTime;
+			sinkingRollSpeed += sinkingRollAcceleration * Time.deltaTime;
 
+			transform.position += new Vector3(0.0f, -sinkingSpeed, 0.0f );
+
+			float angle = Mathf.MoveTowardsAngle(transform.eulerAngles.z, 180.0f, sinkingRollSpeed);
+			transform.eulerAngles = new Vector3(0, 0, angle);
+		}
+
+		
+		
 	}
 }
