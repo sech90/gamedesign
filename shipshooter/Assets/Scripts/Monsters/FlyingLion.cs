@@ -24,14 +24,18 @@ public class FlyingLion : Monster
 	void Start () {
 		// Select at random whether monster comes from left or right
 		if (Random.value > 0.5f){
-			_facing = MonsterFacing.Right;
+			SetFacing( MonsterFacing.Right);
+			//_facing = MonsterFacing.Right;
 		}
 		else{
+				SetFacing( MonsterFacing.Left);
+
+			/*
 			_facing = MonsterFacing.Left;
 			// Mirror the sprite
 			Vector3 scale = transform.localScale;
 			scale.x *= -1;
-			transform.localScale = scale;
+			transform.localScale = scale;*/
 		}
 
 		transform.position = RandomStartPosition();
@@ -39,9 +43,9 @@ public class FlyingLion : Monster
 		_target = RandomWaitPosition();
 
 		if (_facing == MonsterFacing.Right)
-			_shipAttackSpot = GameObject.Find("FlyingLionAttackSpotRight");
-		else
 			_shipAttackSpot = GameObject.Find("FlyingLionAttackSpotLeft");
+		else
+			_shipAttackSpot = GameObject.Find("FlyingLionAttackSpotRight");
 
 		if (_shipAttackSpot == null)
 			Debug.LogError( "ERROR: Attack spot for Flying Lion not found");
@@ -114,6 +118,10 @@ public class FlyingLion : Monster
 		if (transform.position == _target){
 			_mode = MonsterMode.Retreat;
 			_target = RandomWaitPosition();
+			if (_facing == MonsterFacing.Right )
+				Ship.instance.TakeDamage( AttackPower, 0);
+			else
+				Ship.instance.TakeDamage( AttackPower, 1);
 		}
 	}
 	
@@ -126,7 +134,7 @@ public class FlyingLion : Monster
 
 	Vector3 RandomStartPosition(){
 		float x = Ship.instance.transform.position.x;
-		if (_facing == MonsterFacing.Right)
+		if (_facing == MonsterFacing.Left)
 			x += 15.0f;
 		else
 			x -= 15.0f;
@@ -137,7 +145,7 @@ public class FlyingLion : Monster
 
 	Vector3 RandomWaitPosition(){
 		float x = Ship.instance.transform.position.x;
-		if (_facing == MonsterFacing.Right)
+		if (_facing == MonsterFacing.Left)
 		     x += Random.Range (3.0f, 6.0f);
 		else
 			x  -= Random.Range (3.0f, 6.0f);

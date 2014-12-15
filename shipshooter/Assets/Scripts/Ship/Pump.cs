@@ -20,6 +20,7 @@ public class Pump : InteractiveObject {
 			if(!_pumpUp){
 				_pumpUp = true;
 				AudioSource.PlayClipAtPoint(PullSound,transform.position);
+				transform.localEulerAngles = new Vector3(0.0f,0.0f,0.0f);
 			}
 			break;
 		case ButtonDir.DOWN:
@@ -27,6 +28,7 @@ public class Pump : InteractiveObject {
 				AudioSource.PlayClipAtPoint(PushSound,transform.position);
 				OnPump(this);
 				_pumpUp = false;
+				transform.localEulerAngles = new Vector3(0.0f,0.0f,-30.0f);
 			}
 			break;
 		default:
