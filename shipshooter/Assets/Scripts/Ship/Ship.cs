@@ -10,7 +10,6 @@ public class Ship : MonoBehaviour {
 	public AudioClip sinkingSound = null;
 
 
-
 	//components of the ship
 //	private Sailorman 	_player;
 	private Hole[]		_holes;
@@ -114,7 +113,6 @@ public class Ship : MonoBehaviour {
 
 		if(pump.LevelOfActivation < _water.GetWaterLevel()){
 			_currentHp = _currentHp + pump.PumpPower;
-			Debug.Log("pumped "+_currentHp);
 		}
 
 	}

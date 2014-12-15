@@ -17,7 +17,7 @@ public class FlyingLion : Monster
 
 	public float droppingDeadAccelleration = 0.5f;
 	private float droppingDeadSpeed = 0.0f;
-	private float waitingUntil;
+//	private float waitingUntil;
 
 
 	// Use this for initialization
@@ -63,16 +63,15 @@ public class FlyingLion : Monster
 			Wait();
 	}
 	
-	void Wait(){
+	override protected void Wait(){
 		
 		if (Time.time >= waitingUntil){
 			_mode = MonsterMode.Attack;
 			AudioSource.PlayClipAtPoint(AttackSound,transform.position);
-
 		}
 	}
 	
-	virtual protected void Die(){
+	override protected void Die(){
 	
 		droppingDeadSpeed += droppingDeadAccelleration * Time.deltaTime;
 		transform.position += new Vector3(0.0f, -droppingDeadSpeed, 0.0f );
@@ -88,11 +87,6 @@ public class FlyingLion : Monster
 			Destroy(this.gameObject);
 			_headCount--;
 		}
-	}
-	
-	protected void WaitUntil( float time ){
-		waitingUntil = time;
-		_mode = MonsterMode.Wait;
 	}
 	
 	void OnCollisionEnter2D(Collision2D coll) {

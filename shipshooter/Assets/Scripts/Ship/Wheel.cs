@@ -19,7 +19,7 @@ public class Wheel : InteractiveObject {
 	}
 
 
-	override protected void OnButtonHold(ButtonDir key){
+	override protected void OnButtonHold(ButtonDir key, Animator _anim){
 		switch(key){
 		case ButtonDir.LEFT:
 				_steeringAmount -= turnSpeed*Time.deltaTime;
@@ -36,7 +36,7 @@ public class Wheel : InteractiveObject {
 		}
 	}
 
-	override protected void OnButtonPressed(ButtonDir key){
+	override protected void OnButtonPressed(ButtonDir key, Animator _anim){
 		switch(key){
 		case ButtonDir.LEFT:
 			AudioSource.PlayClipAtPoint(steerLeftSound, transform.position);
@@ -51,5 +51,5 @@ public class Wheel : InteractiveObject {
 
 	
 	//empty bodies
-	override protected void OnButtonRelease(ButtonDir key){}
+	override protected void OnButtonRelease(ButtonDir key, Animator _anim){}
 }

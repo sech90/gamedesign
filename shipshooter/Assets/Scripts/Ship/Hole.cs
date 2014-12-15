@@ -51,7 +51,7 @@ public class Hole : InteractiveObject {
 		UpdateParticle();
 	}
 
-	override protected void OnButtonPressed(ButtonDir key){
+	override protected void OnButtonPressed(ButtonDir key, Animator _anim){
 		switch(key){
 		case ButtonDir.LEFT:
 			if(transform.localRotation.eulerAngles.z <= 90 || transform.localRotation.eulerAngles.z >= 270){
@@ -61,6 +61,7 @@ public class Hole : InteractiveObject {
 						_buffer = 0;
 					UpdateParticle();
 					AudioSource.PlayClipAtPoint(RepairSound,transform.position);
+					_anim.SetTrigger("ActivityLeft");
 				}
 			}
 			break;
@@ -72,6 +73,7 @@ public class Hole : InteractiveObject {
 						_buffer = 0;
 					UpdateParticle();
 					AudioSource.PlayClipAtPoint(RepairSound,transform.position);
+					_anim.SetTrigger("ActivityRight");
 				}
 			}
 			break;
@@ -100,8 +102,8 @@ public class Hole : InteractiveObject {
 	}
 	
 	//empty bodies
-	override protected void OnButtonHold(ButtonDir key){}
-	override protected void OnButtonRelease(ButtonDir key){}
+	override protected void OnButtonHold(ButtonDir key, Animator _anim){}
+	override protected void OnButtonRelease(ButtonDir key, Animator _anim){}
 
 
 }

@@ -14,7 +14,7 @@ public class Pump : InteractiveObject {
 	private bool _pumpUp = false;
 
 	
-	override protected void OnButtonPressed(ButtonDir key){
+	override protected void OnButtonPressed(ButtonDir key, Animator _anim){
 		switch(key){
 		case ButtonDir.UP:
 			if(!_pumpUp){
@@ -35,6 +35,6 @@ public class Pump : InteractiveObject {
 	}
 	
 	//empty bodies
-	override protected void OnButtonHold(ButtonDir key){}
-	override protected void OnButtonRelease(ButtonDir key){}
+	override protected void OnButtonHold(ButtonDir key, Animator _anim){}
+	override protected void OnButtonRelease(ButtonDir key, Animator _anim){}
 }

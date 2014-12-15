@@ -36,22 +36,26 @@ public class Cannon : InteractiveObject {
 			_remainCooldown = Mathf.Clamp(_remainCooldown - Time.deltaTime, 0, _remainCooldown);
 	}
 	
-	override protected void OnButtonPressed(ButtonDir key){
+	override protected void OnButtonPressed(ButtonDir key, Animator _anim){
 		switch(key){
 		case ButtonDir.LEFT:
-				if(!_isRightSide)
-					Shoot();
-				break;
+			if(!_isRightSide){
+				Shoot();
+				_anim.SetTrigger("ActivityLeft");
+			}
+			break;
 		case ButtonDir.RIGHT:
-				if(_isRightSide)
-					Shoot();
-				break;
-			default:
-				break;
+			if(_isRightSide){
+				Shoot();
+				_anim.SetTrigger("ActivityRight");
+			}
+			break;
+		default:
+			break;
 		}
 	}
 
-	override protected void OnButtonHold(ButtonDir key){
+	override protected void OnButtonHold(ButtonDir key, Animator _anim){
 		switch(key){
 		case ButtonDir.UP:
 			_curAngle -= RotateSpeed * Time.deltaTime;
@@ -83,6 +87,6 @@ public class Cannon : InteractiveObject {
 		}
 	}
 
-	override protected void OnButtonRelease(ButtonDir key){}
+	override protected void OnButtonRelease(ButtonDir key, Animator _anim){}
 
 }

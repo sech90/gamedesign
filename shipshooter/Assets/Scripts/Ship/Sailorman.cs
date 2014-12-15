@@ -3,7 +3,7 @@ using System.Collections;
 
 
 
-public delegate void ButtonEvent(ButtonDir dir);
+public delegate void ButtonEvent(ButtonDir dir, Animator _animr);
 
 public class Sailorman : MonoBehaviour {
 	
@@ -21,47 +21,61 @@ public class Sailorman : MonoBehaviour {
 	private bool lastMoveOnLadder = false;
 
 	private UserInput _input;	
+	private Animator _anim;
 
 	void Awake(){
+		_anim = gameObject.GetComponent<Animator>();
 		_input = gameObject.AddComponent<UserInput>();
+
 		_input.PlayerNumber = PlayerNumber;
+		_anim.SetBool("Idle",true);
 	}
 
 
 	// Update is called once per frame
 	void Update () 
 	{
+		if(_input.PlayerHold == ButtonDir.NONE){
+			_anim.SetBool("Idle",true);
+			_anim.SetBool("Move",false);
+			_anim.SetBool("Climb",false);
+			return;
+		}
 
 		if(OnButtonPressed != null && _input.PlayerPressed != ButtonDir.NONE)
-			OnButtonPressed(_input.PlayerPressed);
+			OnButtonPressed(_input.PlayerPressed,_anim);
 		else if(OnButtonRelease != null && _input.PlayerRelease != ButtonDir.NONE)
-			OnButtonRelease(_input.PlayerRelease);
+			OnButtonRelease(_input.PlayerRelease, _anim);
 		else if(OnButtonHold != null && _input.PlayerHold != ButtonDir.NONE)
-			OnButtonHold(_input.PlayerHold);
+			OnButtonHold(_input.PlayerHold, _anim);
 
 		
 		if ( _input.PlayerLeft && !LeftObstructed() && !FeetInsideFloorOnStairs() )
 		{
 			Move( new Vector3(-sidewaysSpeed * Time.deltaTime, 0.0f) );
 			lastMoveOnLadder = false;
+			_anim.SetBool("Move",true);
 		}
 		
 		if ( _input.PlayerRight && !RightObstructed() && !FeetInsideFloorOnStairs())
 		{
 			Move( new Vector3(sidewaysSpeed * Time.deltaTime, 0.0f) );
 			lastMoveOnLadder = false;
+			_anim.SetBool("Move",true);
 		}
 		
 		if ( _input.PlayerUp && ( HandsOnLadder() || FeetOnLadder()) )
 		{
 			Move( new Vector3(0.0f, climbSpeed * Time.deltaTime ) );
 			lastMoveOnLadder = true;
+			_anim.SetBool("Climb",true);
 		}
 		
 		if ( _input.PlayerDown && FeetOnLadder() )
 		{
 			Move( new Vector3(0.0f, -climbSpeed * Time.deltaTime ) );
 			lastMoveOnLadder = true;
+			_anim.SetBool("Climb",true);
 		}
 		
 		if (!StandingOnFloor () && !FeetOnLadder () && !HandsOnLadder ()) 

@@ -25,12 +25,12 @@ public class Monster : MonoBehaviour {
 	protected MonsterFacing _facing;				// Is monster facing left or right
 
 	private float droppingDeadSpeed = 15.0f;
-	private float waitingUntil;
+	protected float waitingUntil;
 
 	public MonsterMode Mode{get{return _mode;}}
 	public MonsterFacing Direction{get{return _facing;}}
 
-	static protected int _headCount = 0;
+	static public int _headCount = 0;
 
 	static public int GetNumberOf()
 	{
@@ -44,7 +44,7 @@ public class Monster : MonoBehaviour {
 			Wait();
 	}
 
-	void Wait(){
+	virtual protected void Wait(){
 
 		if (Time.time >= waitingUntil){
 			_mode = MonsterMode.Attack;
@@ -65,6 +65,10 @@ public class Monster : MonoBehaviour {
 	protected void WaitUntil( float time ){
 		waitingUntil = time;
 		_mode = MonsterMode.Wait;
+	}
+
+	public void StopAttacking(){
+		WaitUntil(Time.time + 9999);
 	}
 
 	void OnCollisionEnter2D(Collision2D coll) {
