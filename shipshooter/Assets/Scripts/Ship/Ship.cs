@@ -30,7 +30,11 @@ public class Ship : MonoBehaviour {
 	private float _floatingHeightFull  = -1.2f;
 
 	public static Ship instance { get; private set; }
-	
+
+	public void Steer( float amount ){
+		_wheel.Steer(amount);
+	}
+
 	void Awake() {
 		instance = this;
 	}

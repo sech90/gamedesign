@@ -12,6 +12,10 @@ public class Wheel : InteractiveObject {
 	private float _steeringAmount = 0;
 	public float SteeringAmount{ get{return _steeringAmount;} }
 
+	public void Steer( float amount ){
+		_steeringAmount += amount;
+		_steeringAmount = Mathf.Clamp( _steeringAmount, -1.0f, 1.0f);
+	}
 
 	void FixedUpdate(){
 		if(_steeringAmount != 0)
@@ -22,14 +26,10 @@ public class Wheel : InteractiveObject {
 	override protected void OnButtonHold(ButtonDir key, Animator _anim){
 		switch(key){
 		case ButtonDir.LEFT:
-				_steeringAmount -= turnSpeed*Time.deltaTime;
-				if(_steeringAmount < -1.0f)
-					_steeringAmount = -1.0f;
+				Steer ( -turnSpeed*Time.deltaTime );
 				break;
 		case ButtonDir.RIGHT:
-				_steeringAmount += turnSpeed*Time.deltaTime;
-				if(_steeringAmount > 1.0f)
-					_steeringAmount = 1.0f;
+				Steer ( turnSpeed*Time.deltaTime );
 				break;
 			default:
 				break;
