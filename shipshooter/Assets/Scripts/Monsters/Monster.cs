@@ -40,15 +40,17 @@ public class Monster : MonoBehaviour {
 	protected void MonsterUpdate (){
 		if (_mode == MonsterMode.Dying)
 			Die();
-		else if (_mode == MonsterMode.Wait)
-			Wait();
 	}
 
-	virtual protected void Wait(){
+	/*virtual protected void Wait(){
 
 		if (Time.time >= waitingUntil){
 			_mode = MonsterMode.Attack;
 		}
+	}*/
+
+	protected bool FinishedWaiting(){
+		return (Time.time >= waitingUntil);
 	}
 
 	virtual protected void Die(){

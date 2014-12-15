@@ -59,18 +59,13 @@ public class FlyingLion : Monster
 			Retreat();
 		else if (_mode == MonsterMode.Dying)
 			Die();
-		else if (_mode == MonsterMode.Wait)
-			Wait();
-	}
-	
-	override protected void Wait(){
-		
-		if (Time.time >= waitingUntil){
+
+		if (_mode == MonsterMode.Wait && FinishedWaiting()){
 			_mode = MonsterMode.Attack;
 			AudioSource.PlayClipAtPoint(AttackSound,transform.position);
 		}
 	}
-	
+
 	override protected void Die(){
 	
 		droppingDeadSpeed += droppingDeadAccelleration * Time.deltaTime;

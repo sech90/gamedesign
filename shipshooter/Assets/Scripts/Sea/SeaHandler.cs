@@ -40,7 +40,7 @@ public class SeaHandler : MonoBehaviour {
 			seaSlice[i] = Instantiate (seaSlicePrefab) as GameObject;
 			seaSlice[i].transform.parent = transform;
 			SpriteRenderer seaSprite = seaSlice[i].GetComponent<SpriteRenderer>();
-			seaSprite.sortingOrder = 5;
+			seaSprite.sortingOrder = 7;
 
 
 
