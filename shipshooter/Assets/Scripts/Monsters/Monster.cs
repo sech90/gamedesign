@@ -80,7 +80,8 @@ public class Monster : MonoBehaviour {
 	}
 
 	public void StopAttacking(){
-		WaitUntil(Time.time + 9999);
+		if (GetComponent<Kraken>() == null)
+			WaitUntil(Time.time + 9999);
 	}
 
 

@@ -10,6 +10,7 @@ public class Kraken : Monster {
 	public float swimHeight = -3.0f;
 	public float upWaitTime = 2.0f;
 	public float attackRotation = 10.0f;
+	public float attackWaitRotation = -10.0f;
 	public float retreatRotation = -30.0f;
 	public float restRotation = 0.0f;
 	public float rotationSpeed = 50.0f;
@@ -44,7 +45,7 @@ public class Kraken : Monster {
 
 		if ( IsUnderShip() && _mode == MonsterMode.Approach) {
 			_mode = MonsterMode.Attack;
-			AudioSource.PlayClipAtPoint(AttackSound, transform.position);
+			AudioSource.PlayClipAtPoint(AttackSound, Ship.instance.transform.position);
 		}
 
 		if ( _height == attackHeight ) {
@@ -54,6 +55,7 @@ public class Kraken : Monster {
 			if (_mode == MonsterMode.Wait && FinishedWaiting()) {
 				_mode = MonsterMode.Retreat;
 			}
+			MoveTentacRotationTowards( attackWaitRotation );
 		}
 
 		if ( _height == swimHeight && _mode == MonsterMode.Retreat ) {
