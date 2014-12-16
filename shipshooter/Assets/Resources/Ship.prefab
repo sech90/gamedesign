@@ -2943,8 +2943,8 @@ BoxCollider2D:
   m_Enabled: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Size: {x: 2.07680917, y: 2.69033933}
-  m_Center: {x: .538402915, y: .845164776}
+  m_Size: {x: 1.77375233, y: 2.69033933}
+  m_Center: {x: .689929008, y: .845164776}
 --- !u!61 &6100014
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -2976,8 +2976,8 @@ BoxCollider2D:
   m_Enabled: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Size: {x: .249695197, y: 1}
-  m_Center: {x: -.168174803, y: -2.23517418e-06}
+  m_Size: {x: .249695182, y: 1.82999957}
+  m_Center: {x: -.168174803, y: .414993614}
 --- !u!61 &6100020
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -2998,8 +2998,8 @@ BoxCollider2D:
   m_Enabled: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Size: {x: 1, y: 2.74826312}
-  m_Center: {x: -2.08616257e-06, y: .768812478}
+  m_Size: {x: .549499273, y: 2.74826312}
+  m_Center: {x: .225249231, y: .768812478}
 --- !u!61 &6100024
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -3009,8 +3009,8 @@ BoxCollider2D:
   m_Enabled: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Size: {x: .197948962, y: 1}
-  m_Center: {x: .401027203, y: -2.23517418e-06}
+  m_Size: {x: .197949007, y: 2.38332701}
+  m_Center: {x: .401026905, y: .691658258}
 --- !u!61 &6100026
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -3020,8 +3020,8 @@ BoxCollider2D:
   m_Enabled: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Size: {x: 2.10185337, y: 3.03467131}
-  m_Center: {x: -.550925434, y: 1.01733208}
+  m_Size: {x: 1.70182025, y: 3.03467131}
+  m_Center: {x: -.750942826, y: 1.01733208}
 --- !u!61 &6100028
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -3302,7 +3302,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MinWaterSec: .100000001
-  MaxWaterSec: 3
+  MaxWaterSec: 2
   MaxHP: 10
   DamageBuffer: 0
   RepairSound: {fileID: 8300000, guid: 1bafb4735e41e4b47bdcb5bf9755e640, type: 3}
@@ -3394,7 +3394,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MinWaterSec: .100000001
-  MaxWaterSec: 3
+  MaxWaterSec: 2
   MaxHP: 10
   DamageBuffer: 0
   RepairSound: {fileID: 8300000, guid: 1bafb4735e41e4b47bdcb5bf9755e640, type: 3}
@@ -3410,7 +3410,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MinWaterSec: .100000001
-  MaxWaterSec: 3
+  MaxWaterSec: 2
   MaxHP: 10
   DamageBuffer: 0
   RepairSound: {fileID: 8300000, guid: 1bafb4735e41e4b47bdcb5bf9755e640, type: 3}
@@ -3487,7 +3487,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MinWaterSec: .100000001
-  MaxWaterSec: 3
+  MaxWaterSec: 2
   MaxHP: 10
   DamageBuffer: 0
   RepairSound: {fileID: 8300000, guid: 1bafb4735e41e4b47bdcb5bf9755e640, type: 3}

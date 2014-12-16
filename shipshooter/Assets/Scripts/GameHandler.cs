@@ -18,6 +18,8 @@ public class GameHandler : MonoBehaviour {
 
 	public int ScorePerSecond = 50;
 	public Text ScoreText;
+	public Text SecondScoreText;
+	public GameObject TextDecor;
 
 	public float Score{get{return _score;}}
 
@@ -84,7 +86,9 @@ public class GameHandler : MonoBehaviour {
 
 		Monster._headCount = 0; //HACK!!!!!
 		float loadAfter = _gameOverEffect.FadeTime + _gameOverEffect.Delay + _blackPanelEffect.FadeTime + _blackPanelEffect.Delay;
-		Invoke("ToTitleScreen",loadAfter);
+		Invoke("ToTitleScreen",13);
+		SecondScoreText.text = ScoreText.text;
+		//TextDecor.SetActive(false);
 
 		_gameOverEffect.Fade();
 		_blackPanelEffect.Fade();

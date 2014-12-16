@@ -53,7 +53,7 @@ public class StartScreen : MonoBehaviour {
 	}
 
 	private void LoadGame(){
-		Application.LoadLevel("MainScene");
+		Application.LoadLevel("RikuScene");
 	}
 
 	private void showInstructionPanel(){
