@@ -9,7 +9,8 @@ public class GameHandler : MonoBehaviour {
 	private float spawnRate = 3.0f;
 	private int maxFlyingMonsters = 4;
 	private GameObject flyingLionPrefab;
-	private GameObject _gameOverPanel;
+	private FadeEffect _gameOverEffect;
+	private FadeEffect _blackPanelEffect;
 	private bool _gameover = false;
 
 
@@ -33,8 +34,10 @@ public class GameHandler : MonoBehaviour {
 		Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Markers"), LayerMask.NameToLayer("InteractiveObj"), true); 
 
 		flyingLionPrefab = Resources.Load<GameObject>("FlyingLion");
-		_gameOverPanel = GameObject.Find("/InGameUI/GameOverPanel");
+		_gameOverEffect = GameObject.Find("/InGameUI/GameOverPanel").GetComponent<FadeEffect>();
+		_blackPanelEffect = GameObject.Find("/InGameUI/BlackPanel").GetComponent<FadeEffect>();
 		_score = 0;
+
 	}
 
 	public static void AddScore(int amount){
@@ -60,7 +63,7 @@ public class GameHandler : MonoBehaviour {
 		}
 
 		_score += ScorePerSecond * Time.deltaTime;
-		ScoreText.text = ((int)_score).ToString();
+		ScoreText.text = "Score: "+((int)_score).ToString("D6");
 		
 		if (Time.time > lastSpawn + spawnRate && Monster.GetNumberOf() < maxFlyingMonsters)
 		{
@@ -76,9 +79,17 @@ public class GameHandler : MonoBehaviour {
 			monsters[i].StopAttacking();
 
 		Monster._headCount = 0; //HACK!!!!!
-		_gameOverPanel.GetComponent<FadeEffect>().Fade();
+		float loadAfter = _gameOverEffect.FadeTime + _gameOverEffect.Delay + _blackPanelEffect.FadeTime + _blackPanelEffect.Delay;
+		Invoke("ToTitleScreen",loadAfter);
+
+		_gameOverEffect.Fade();
+		_blackPanelEffect.Fade();
+
 		AudioSource audio = GameObject.FindWithTag("SoundTrack").GetComponent<AudioSource>();
 		audio.Stop();
 	}
-	
+
+	private void ToTitleScreen(){
+		Application.LoadLevel("StartScreen");
+	}
 }
