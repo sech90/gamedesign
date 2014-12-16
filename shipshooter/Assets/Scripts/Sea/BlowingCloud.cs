@@ -8,6 +8,8 @@ public class BlowingCloud : MonoBehaviour {
 	private Transform _tail;
 	private Transform _wind;
 
+	public AudioClip blowSound;
+
 	// Use this for initialization
 	void Start () {
 		_body = transform.FindChild("Body");
@@ -40,6 +42,7 @@ public class BlowingCloud : MonoBehaviour {
 		Ship ship = coll.GetComponent<Ship>();
 		if(ship != null){
 			_wind.gameObject.renderer.enabled = true;
+			AudioSource.PlayClipAtPoint(blowSound, transform.position);
 		}
 	}
 

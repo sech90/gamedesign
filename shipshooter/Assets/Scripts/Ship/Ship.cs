@@ -89,7 +89,7 @@ public class Ship : MonoBehaviour {
 
 
 
-
+	/*
 	//create holes depending by the strength of the monster
 	void OnTriggerEnter2D(Collider2D coll){
 		Monster monster = coll.GetComponent<Monster>();
@@ -102,6 +102,13 @@ public class Ship : MonoBehaviour {
 
 			AudioSource.PlayClipAtPoint(beingHitSound, monster.transform.position);
 		}
+	}*/
+
+	// HACK
+	public void TakeDamage( int attackPower, int holeIndex ){
+		_holes[holeIndex].TakeDamage( attackPower );
+		AudioSource.PlayClipAtPoint(beingHitSound, transform.position);
+
 	}
 
 	private void doSteering(){

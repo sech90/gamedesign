@@ -125,8 +125,8 @@ BoxCollider2D:
   m_Enabled: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Size: {x: 8.37079239, y: 4.37791824}
-  m_Center: {x: 3.6853981, y: -.609417677}
+  m_Size: {x: 7.10443115, y: 4.37791824}
+  m_Center: {x: 3.05222106, y: -.609417677}
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -139,6 +139,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   steerAmountPerSec: .5
+  blowSound: {fileID: 8300000, guid: f6480c9d5eac949f9aa651d3d2df5fed, type: 3}
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -67,8 +67,12 @@ public class GameHandler : MonoBehaviour {
 		
 		if (Time.time > lastSpawn + spawnRate && Monster.GetNumberOf() < maxFlyingMonsters)
 		{
-			Instantiate (flyingLionPrefab);
+			FlyingLion lion = Instantiate (flyingLionPrefab) as FlyingLion;
 			lastSpawn = Time.time;
+
+			if (Time.time > 240.0f) {
+				lion.GetComponent<FlyingLion>()._approachSpeed *= 1.5f;
+			}
 		}
 	}
 

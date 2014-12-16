@@ -336,10 +336,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17ab480337cf24397af7b1b7e5adc841, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AttackPower: 5
+  dyingSound: {fileID: 8300000, guid: 8fd5f054375d0448eb5ff27bbd4e008a, type: 3}
+  AttackPower: 1
   PointsWhenKilled: 200
   MaxHp: 1
-  AttackSound: {fileID: 8300000, guid: 505812d99a8cf4878a7d08c46db73322, type: 3}
+  AttackSound: {fileID: 8300000, guid: d855e69a4fa9b4e9794b4254ad666f19, type: 3}
+  _attackSpeed: 4
+  _approachSpeed: .75
+  _retreatSpeed: 3
   droppingDeadAccelleration: .5
 --- !u!212 &21200000
 SpriteRenderer:

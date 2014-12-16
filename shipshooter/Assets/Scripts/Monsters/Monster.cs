@@ -15,7 +15,9 @@ public enum MonsterMode{
 };
 
 public class Monster : MonoBehaviour {
-	
+
+	public AudioClip dyingSound = null;
+
 	public int AttackPower;
 	public int PointsWhenKilled;
 	public int MaxHp;
@@ -54,8 +56,18 @@ public class Monster : MonoBehaviour {
 	}
 
 	virtual protected void Die(){
-		float step = droppingDeadSpeed * Time.deltaTime;
-		transform.position = transform.position - new Vector3(0.0f, step, 0.0f);
+
+
+		FloatingObject fo = this.GetComponent<FloatingObject>();
+
+		if (fo==null){
+			float step = droppingDeadSpeed * Time.deltaTime;
+			transform.position = transform.position - new Vector3(0.0f, step, 0.0f);
+		}
+		else{
+			fo.isFloating = false;
+			fo.isSinking = true;
+		}
 
 		if (transform.position.y < -5.0f)
 		{
@@ -70,13 +82,30 @@ public class Monster : MonoBehaviour {
 	}
 
 	public void StopAttacking(){
-		WaitUntil(Time.time + 9999);
+		if (GetComponent<Kraken>() == null)
+			WaitUntil(Time.time + 9999);
+	}
+
+
+
+	protected void SetFacing( MonsterFacing facing) {
+		_facing = facing;
+		Vector3 scale = transform.localScale;
+
+		if (_facing == MonsterFacing.Left) {
+			scale.x = Mathf.Abs( scale.x );
+		}else {
+			scale.x = -Mathf.Abs( scale.x );
+		}
+		transform.localScale = scale;
 	}
 
 	void OnCollisionEnter2D(Collision2D coll) {
 		_mode = MonsterMode.Dying;
 		Destroy( coll.gameObject );
 		GameHandler.AddScore(PointsWhenKilled);
+		if (dyingSound != null)
+			AudioSource.PlayClipAtPoint(dyingSound,transform.position);
 	}
 
 

@@ -20,6 +20,8 @@ public class Wheel : InteractiveObject {
 	void FixedUpdate(){
 		if(_steeringAmount != 0)
 			_steeringAmount = Mathf.Lerp(_steeringAmount,0,counterSteering*Time.deltaTime);
+		transform.localEulerAngles = new Vector3(0.0f,0.0f, -200.0f * _steeringAmount); 
+
 	}
 
 
