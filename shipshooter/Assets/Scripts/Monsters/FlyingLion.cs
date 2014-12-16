@@ -6,9 +6,9 @@ public class FlyingLion : Monster
 	public AudioClip AttackSound = null;
 
 
-	float _attackSpeed = 5.0f;
-	float _approachSpeed = 1.0f;
-	float _retreatSpeed = 2.0f;
+	public float _attackSpeed = 4.0f;
+	public float _approachSpeed = 0.4f;
+	public float _retreatSpeed = 2.0f;
 	float _waitTime = 6.0f;
 
 
@@ -97,16 +97,29 @@ public class FlyingLion : Monster
 
 
 	void Approach(){
-		MoveStraightTowards(_target, _approachSpeed);
-		if (transform.position == _target){
-			WaitUntil( Time.time + _waitTime );
+//		MoveStraightTowards(_target, _approachSpeed);
+
+		float x = Mathf.MoveTowards( transform.position.x, Ship.instance.transform.position.x, 
+		                            _approachSpeed * Time.deltaTime );
+		transform.position = new Vector3(x, transform.position.y, transform.position.z );
+
+		if ( Mathf.Abs( Ship.instance.transform.position.x - x) < 4.0f )
+		{
+			_mode = MonsterMode.Attack;
+			AudioSource.PlayClipAtPoint(AttackSound,transform.position);
 		}
+
+//		if (transform.position == _target){
+//			WaitUntil( Time.time + _waitTime );
+	//	}
 	}
 
 	void Retreat(){
 		MoveStraightTowards(_target, _retreatSpeed);
 		if (transform.position == _target){
-			WaitUntil( Time.time + _waitTime );
+			//WaitUntil( Time.time + _waitTime );
+			Destroy(this.gameObject);
+			_headCount--;
 		}
 	}
 
@@ -118,11 +131,15 @@ public class FlyingLion : Monster
 		
 		if (transform.position == _target){
 			_mode = MonsterMode.Retreat;
-			_target = RandomWaitPosition();
-			if (_facing == MonsterFacing.Right )
+			_target = RetreatPosition();
+			if (_facing == MonsterFacing.Right ) {
+				SetFacing( MonsterFacing.Left);
 				Ship.instance.TakeDamage( AttackPower, 0);
-			else
+			}
+			else {
+				SetFacing( MonsterFacing.Right);
 				Ship.instance.TakeDamage( AttackPower, 1);
+			}
 		}
 	}
 	
@@ -140,8 +157,17 @@ public class FlyingLion : Monster
 		else
 			x -= 15.0f;
 
-		float y = Random.Range (5.0f, 8.0f);
+		float y = Random.Range (5.0f, 9.0f);
 		return new Vector3(x, y, 0.0f);
+	}
+
+	Vector3 RetreatPosition(){
+		float x = Ship.instance.transform.position.x;
+
+		if (_facing == MonsterFacing.Right)
+			return new Vector3(x-15.0f, 15.0f, 0.0f);
+		else
+			return new Vector3(x+15.0f, 15.0f, 0.0f);
 	}
 
 	Vector3 RandomWaitPosition(){

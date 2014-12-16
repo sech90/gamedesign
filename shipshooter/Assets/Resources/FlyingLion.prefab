@@ -341,6 +341,9 @@ MonoBehaviour:
   PointsWhenKilled: 200
   MaxHp: 1
   AttackSound: {fileID: 8300000, guid: d855e69a4fa9b4e9794b4254ad666f19, type: 3}
+  _attackSpeed: 4
+  _approachSpeed: .75
+  _retreatSpeed: 3
   droppingDeadAccelleration: .5
 --- !u!212 &21200000
 SpriteRenderer:

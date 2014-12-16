@@ -112,7 +112,8 @@ public class Kraken : Monster {
 	void OnTriggerStay2D(Collider2D coll){
 		Ship ship = coll.GetComponent<Ship>();
 		if(ship != null && _mode == MonsterMode.Retreat){
-			ship.CurrentHp -= damagePerSec * Time.deltaTime;
+				ship.CurrentHp -= damagePerSec * Time.deltaTime;
+
 		}
 		
 	}
