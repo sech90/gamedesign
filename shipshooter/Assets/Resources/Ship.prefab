@@ -2954,8 +2954,8 @@ BoxCollider2D:
   m_Enabled: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Size: {x: 1, y: 1.05636752}
-  m_Center: {x: -1.24176339e-07, y: -.0281833336}
+  m_Size: {x: 1.47742999, y: 1.0563674}
+  m_Center: {x: .0702115372, y: -.0281833336}
 --- !u!61 &6100016
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -2987,8 +2987,8 @@ BoxCollider2D:
   m_Enabled: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Size: {x: 1, y: 1.06937468}
-  m_Center: {x: 1.24176336e-06, y: -.0346876383}
+  m_Size: {x: 1.44934702, y: 1.06937456}
+  m_Center: {x: 1.1796752e-05, y: -.0346873328}
 --- !u!61 &6100022
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -2998,8 +2998,8 @@ BoxCollider2D:
   m_Enabled: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Size: {x: 1, y: 1}
-  m_Center: {x: 0, y: 0}
+  m_Size: {x: 1, y: 2.74826312}
+  m_Center: {x: -2.08616257e-06, y: .768812478}
 --- !u!61 &6100024
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -3031,8 +3031,8 @@ BoxCollider2D:
   m_Enabled: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Size: {x: 1, y: 1}
-  m_Center: {x: 0, y: 0}
+  m_Size: {x: 1, y: 2.1339283}
+  m_Center: {x: -2.53319718e-06, y: -.0239573419}
 --- !u!61 &6100030
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -3086,8 +3086,8 @@ BoxCollider2D:
   m_Enabled: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Size: {x: 1, y: 1}
-  m_Center: {x: 0, y: 0}
+  m_Size: {x: 1, y: 2.24572158}
+  m_Center: {x: 2.68220879e-06, y: .111794472}
 --- !u!61 &6100040
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -3152,8 +3152,8 @@ BoxCollider2D:
   m_Enabled: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Size: {x: 1, y: 1.07804656}
-  m_Center: {x: 2.48352717e-06, y: -.0390235744}
+  m_Size: {x: 1.44934762, y: 1.07804656}
+  m_Center: {x: .0561739057, y: -.0390235744}
 --- !u!61 &6100052
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -3163,8 +3163,8 @@ BoxCollider2D:
   m_Enabled: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Size: {x: 1, y: 1}
-  m_Center: {x: 0, y: 0}
+  m_Size: {x: 1.42125213, y: 1}
+  m_Center: {x: -.0421302989, y: 0}
 --- !u!61 &6100054
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -3455,8 +3455,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   turnSpeed: .25
   counterSteering: .100000001
-  steerRightSound: {fileID: 8300000, guid: da36c2c776cd04a2291dbaafce319ddb, type: 3}
-  steerLeftSound: {fileID: 8300000, guid: b70c14a051734415098e0da083af81e0, type: 3}
+  steerRightSound: {fileID: 8300000, guid: e9c359314089f40b191b10a82d422a6e, type: 3}
+  steerLeftSound: {fileID: 8300000, guid: 9f81b535c0754400a92f761f769a1484, type: 3}
 --- !u!114 &11400022
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3539,7 +3539,7 @@ MonoBehaviour:
   SteerMaxSpeed: 2
   maxSteeringRoll: 15
   beingHitSound: {fileID: 8300000, guid: 0ff57ecf2c1614a2a9f37c84dee3bd71, type: 3}
-  sinkingSound: {fileID: 8300000, guid: c1748217e089a4dada8feff150fc089d, type: 3}
+  sinkingSound: {fileID: 8300000, guid: b5c6b466af52345dfb1829f1784d7aed, type: 3}
 --- !u!114 &11400032
 MonoBehaviour:
   m_ObjectHideFlags: 1

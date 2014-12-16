@@ -15,7 +15,9 @@ public enum MonsterMode{
 };
 
 public class Monster : MonoBehaviour {
-	
+
+	public AudioClip dyingSound = null;
+
 	public int AttackPower;
 	public int PointsWhenKilled;
 	public int MaxHp;
@@ -102,6 +104,8 @@ public class Monster : MonoBehaviour {
 		_mode = MonsterMode.Dying;
 		Destroy( coll.gameObject );
 		GameHandler.AddScore(PointsWhenKilled);
+		if (dyingSound != null)
+			AudioSource.PlayClipAtPoint(dyingSound,transform.position);
 	}
 
 
