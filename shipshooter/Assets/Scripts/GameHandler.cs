@@ -7,8 +7,13 @@ public class GameHandler : MonoBehaviour {
 
 	private float lastSpawn = 0.0f;
 	private float spawnRate = 3.0f;
+	private float lastLizSpawn = 0.0f;
+	private float lizSpawnRate = 6.0f;
 	private int maxFlyingMonsters = 4;
+	private int maxSwimmingMonsters = 4;
+
 	private GameObject flyingLionPrefab;
+	private GameObject lizPrefab;
 	private FadeEffect _gameOverEffect;
 	private FadeEffect _blackPanelEffect;
 	private bool _gameover = false;
@@ -20,12 +25,15 @@ public class GameHandler : MonoBehaviour {
 	public Text ScoreText;
 	public Text SecondScoreText;
 	public GameObject TextDecor;
+	public AudioClip StartGameSound;
 
 	public float Score{get{return _score;}}
 
 	// Use this for initialization
 	void Awake () 
 	{
+		AudioSource.PlayClipAtPoint(StartGameSound,Vector3.zero);
+
 		Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Sailorman"), LayerMask.NameToLayer("WaterInteract"), true); 
 		Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Ship"), LayerMask.NameToLayer("Sailorman"), true); 
 		Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Ship"), LayerMask.NameToLayer("InteractiveObj"), true); 
@@ -36,6 +44,7 @@ public class GameHandler : MonoBehaviour {
 		Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Markers"), LayerMask.NameToLayer("InteractiveObj"), true); 
 
 		flyingLionPrefab = Resources.Load<GameObject>("FlyingLion");
+		lizPrefab = Resources.Load<GameObject>("Lizard_monster");
 		_gameOverEffect = GameObject.Find("/InGameUI/GameOverPanel").GetComponent<FadeEffect>();
 		_blackPanelEffect = GameObject.Find("/InGameUI/BlackPanel").GetComponent<FadeEffect>();
 		_score = 0;
@@ -67,15 +76,32 @@ public class GameHandler : MonoBehaviour {
 		_score += ScorePerSecond * Time.deltaTime;
 		ScoreText.text = "Score: "+((int)_score).ToString("D6");
 		
-		if (Time.time > lastSpawn + spawnRate && Monster.GetNumberOf() < maxFlyingMonsters)
+		if (Time.time > lastSpawn + spawnRate && FlyingLion.GetNumberOf() < maxFlyingMonsters)
 		{
 			FlyingLion lion = Instantiate (flyingLionPrefab) as FlyingLion;
 			lastSpawn = Time.time;
 
-			if (Time.time > 240.0f) {
+			if (Time.time > 180.0f) {
 				lion.GetComponent<FlyingLion>()._approachSpeed *= 1.5f;
 			}
+			if (Time.time > 360.0f) {
+				lion.GetComponent<FlyingLion>()._approachSpeed *= 1.5f;
+			}
+
 		}
+
+		if (Time.time > lastLizSpawn + lizSpawnRate && LizardMonster.GetNumberOf() < maxSwimmingMonsters)
+		{
+			LizardMonster liz = Instantiate (lizPrefab) as LizardMonster;
+			lastLizSpawn = Time.time;
+			
+			if (Time.time > 240.0f) {
+				liz.xSpeed *= 2.0f;
+			}
+		}
+
+
+
 	}
 
 	private void setGameOver(){
@@ -84,7 +110,9 @@ public class GameHandler : MonoBehaviour {
 		for(int i=0; i<monsters.Length; i++)
 			monsters[i].StopAttacking();
 
-		Monster._headCount = 0; //HACK!!!!!
+		FlyingLion	._headCount = 0; //HACK!!!!!
+		LizardMonster._headCount = 0;
+
 		float loadAfter = _gameOverEffect.FadeTime + _gameOverEffect.Delay + _blackPanelEffect.FadeTime + _blackPanelEffect.Delay;
 		Invoke("ToTitleScreen",13);
 		SecondScoreText.text = ScoreText.text;

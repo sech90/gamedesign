@@ -5,6 +5,7 @@ public class FlyingLion : Monster
 {
 	public AudioClip AttackSound = null;
 
+	static public int _headCount = 0;
 
 	public float _attackSpeed = 4.0f;
 	public float _approachSpeed = 0.4f;
@@ -19,6 +20,11 @@ public class FlyingLion : Monster
 	public float droppingDeadAccelleration = 0.5f;
 	private float droppingDeadSpeed = 0.0f;
 //	private float waitingUntil;
+
+	static public int GetNumberOf()
+	{
+		return _headCount;
+	}
 
 
 	// Use this for initialization
@@ -51,7 +57,7 @@ public class FlyingLion : Monster
 		if (_shipAttackSpot == null)
 			Debug.LogError( "ERROR: Attack spot for Flying Lion not found");
 
-		Monster._headCount++;
+		_headCount++;
 	}
 
 	void Update () {

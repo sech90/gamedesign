@@ -337,7 +337,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dyingSound: {fileID: 8300000, guid: 8fd5f054375d0448eb5ff27bbd4e008a, type: 3}
-  AttackPower: 1
+  AttackPower: 2
   PointsWhenKilled: 200
   MaxHp: 1
   AttackSound: {fileID: 8300000, guid: d855e69a4fa9b4e9794b4254ad666f19, type: 3}

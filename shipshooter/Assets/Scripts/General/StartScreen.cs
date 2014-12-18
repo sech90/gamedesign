@@ -9,6 +9,7 @@ public class StartScreen : MonoBehaviour {
 	public Sprite NewGameSprite;
 	public Sprite HowtoSprite;
 	public AudioClip TransitionSound;
+	//public AudioClip StartGameSound;
 
 	private GameObject _panel;
 	private bool _newGameSelected = true;
@@ -28,13 +29,13 @@ public class StartScreen : MonoBehaviour {
 
 	void Update(){
 
-		if(Input.GetKeyDown(KeyCode.A) && !_instructionVisible){
+		if(Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow) && !_instructionVisible){
 			_newGameSelected = true;
 			StartButtons.sprite = NewGameSprite;
 			return;
 		}
 
-		if(Input.GetKeyDown(KeyCode.D) && !_instructionVisible){
+		if(Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow) && !_instructionVisible){
 			_newGameSelected = false;
 			StartButtons.sprite = HowtoSprite;
 			return;
@@ -53,8 +54,11 @@ public class StartScreen : MonoBehaviour {
 	}
 
 	private void LoadGame(){
+	//	AudioSource.PlayClipAtPoint(StartGameSound,Vector3.zero);
+
 		Application.LoadLevel("RikuScene");
 	}
+
 
 	private void showInstructionPanel(){
 		_instructionVisible = true;
@@ -64,7 +68,7 @@ public class StartScreen : MonoBehaviour {
 
 	private void hideInstructionPanel(){
 		_instructionVisible = false;
-		AudioSource.PlayClipAtPoint(TransitionSound,Vector3.zero);
+		//AudioSource.PlayClipAtPoint(TransitionSound,Vector3.zero);
 		_panel.SetActive(false);
 	}
 }

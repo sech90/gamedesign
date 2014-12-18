@@ -265,7 +265,7 @@ MonoBehaviour:
   AttackPower: 5
   PointsWhenKilled: 200
   MaxHp: 1
-  xSpeed: .5
+  xSpeed: .899999976
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1

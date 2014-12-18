@@ -32,12 +32,7 @@ public class Monster : MonoBehaviour {
 	public MonsterMode Mode{get{return _mode;}}
 	public MonsterFacing Direction{get{return _facing;}}
 
-	static public int _headCount = 0;
 
-	static public int GetNumberOf()
-	{
-		return _headCount;
-	}
 
 	protected void MonsterUpdate (){
 		if (_mode == MonsterMode.Dying)
@@ -57,7 +52,7 @@ public class Monster : MonoBehaviour {
 
 	virtual protected void Die(){
 
-
+		/*
 		FloatingObject fo = this.GetComponent<FloatingObject>();
 
 		if (fo==null){
@@ -68,12 +63,7 @@ public class Monster : MonoBehaviour {
 			fo.isFloating = false;
 			fo.isSinking = true;
 		}
-
-		if (transform.position.y < -5.0f)
-		{
-			Destroy(this.gameObject);
-			_headCount--;
-		}
+*/
 	}
 
 	protected void WaitUntil( float time ){
