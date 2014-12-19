@@ -25,15 +25,13 @@ public class GameHandler : MonoBehaviour {
 	public Text ScoreText;
 	public Text SecondScoreText;
 	public GameObject TextDecor;
-	public AudioClip StartGameSound;
 
 	public float Score{get{return _score;}}
 
 	// Use this for initialization
 	void Awake () 
 	{
-		AudioSource.PlayClipAtPoint(StartGameSound,Vector3.zero);
-
+	
 		Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Sailorman"), LayerMask.NameToLayer("WaterInteract"), true); 
 		Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Ship"), LayerMask.NameToLayer("Sailorman"), true); 
 		Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Ship"), LayerMask.NameToLayer("InteractiveObj"), true); 
@@ -46,7 +44,7 @@ public class GameHandler : MonoBehaviour {
 		flyingLionPrefab = Resources.Load<GameObject>("FlyingLion");
 		lizPrefab = Resources.Load<GameObject>("Lizard_monster");
 		_gameOverEffect = GameObject.Find("/InGameUI/GameOverPanel").GetComponent<FadeEffect>();
-		_blackPanelEffect = GameObject.Find("/InGameUI/BlackPanel").GetComponent<FadeEffect>();
+		_blackPanelEffect = GameObject.Find("/InGameUI/BlackEndPanel").GetComponent<FadeEffect>();
 		_score = 0;
 
 	}
@@ -68,8 +66,8 @@ public class GameHandler : MonoBehaviour {
 			return;
 		}
 		else if(_gameover){
-			if(Input.GetKeyDown(KeyCode.R))
-				Application.LoadLevel("MainScene");
+			if(Input.GetKeyDown(KeyCode.Return))
+				Application.LoadLevel("StartScreen");
 			return;
 		}
 

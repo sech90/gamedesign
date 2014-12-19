@@ -9,7 +9,8 @@ public class StartScreen : MonoBehaviour {
 	public Sprite NewGameSprite;
 	public Sprite HowtoSprite;
 	public AudioClip TransitionSound;
-	//public AudioClip StartGameSound;
+	public FadeEffect StartFade;
+	public AudioClip StartGameSound;
 
 	private GameObject _panel;
 	private bool _newGameSelected = true;
@@ -54,8 +55,16 @@ public class StartScreen : MonoBehaviour {
 	}
 
 	private void LoadGame(){
-	//	AudioSource.PlayClipAtPoint(StartGameSound,Vector3.zero);
+		AudioSource.PlayClipAtPoint(StartGameSound,Vector3.zero);
+		StartFade.Fade();
+		AudioSource[] sources = GetComponents<AudioSource>();
+		for(int i=0;i<sources.Length;i++)
+			sources[i].volume = 0.5f;
+		transform.GetChild(0).GetComponent<AudioSource>().Stop();
+		Invoke("StartGame",2);
+	}
 
+	private void StartGame(){
 		Application.LoadLevel("RikuScene");
 	}
 
