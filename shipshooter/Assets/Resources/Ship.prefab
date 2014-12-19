@@ -3301,9 +3301,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa3f2246c2a59d940850ce67e37b8b32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MinWaterSec: .100000001
-  MaxWaterSec: 2
-  MaxHP: 10
+  MinWaterSec: .300000012
+  MaxWaterSec: 3
+  MaxHP: 20
   DamageBuffer: 0
   RepairSound: {fileID: 8300000, guid: 1bafb4735e41e4b47bdcb5bf9755e640, type: 3}
 --- !u!114 &11400002
@@ -3363,7 +3363,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4584fbb8cc2203e4d83dedcee005bdf4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PumpPower: 1
+  PumpPower: .75
   LevelOfActivation: 0
   PullSound: {fileID: 8300000, guid: f892c9bad3f834c0ea9929f774069907, type: 3}
   PushSound: {fileID: 8300000, guid: c6780b6f40cda4cc895a79d3ab834cad, type: 3}
@@ -3393,9 +3393,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa3f2246c2a59d940850ce67e37b8b32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MinWaterSec: .100000001
-  MaxWaterSec: 2
-  MaxHP: 10
+  MinWaterSec: .300000012
+  MaxWaterSec: 3
+  MaxHP: 20
   DamageBuffer: 0
   RepairSound: {fileID: 8300000, guid: 1bafb4735e41e4b47bdcb5bf9755e640, type: 3}
 --- !u!114 &11400014
@@ -3409,9 +3409,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa3f2246c2a59d940850ce67e37b8b32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MinWaterSec: .100000001
-  MaxWaterSec: 2
-  MaxHP: 10
+  MinWaterSec: .300000012
+  MaxWaterSec: 3
+  MaxHP: 20
   DamageBuffer: 0
   RepairSound: {fileID: 8300000, guid: 1bafb4735e41e4b47bdcb5bf9755e640, type: 3}
 --- !u!114 &11400016
@@ -3472,7 +3472,7 @@ MonoBehaviour:
   RotateSpeed: 25
   Cooldown: 1.5
   ShootAngle: 90
-  Explosion: {fileID: 100000, guid: aedd180f817255546b113bb139eb9f24, type: 2}
+  Explosion: {fileID: 100000, guid: 67e5b9f09995840449c988b145cc1d7b, type: 2}
   ExplosionSound1: {fileID: 8300000, guid: f049cb32e79ff4ba8aab2f54c1d8b093, type: 3}
   ExplosionSound2: {fileID: 8300000, guid: 449efba5ba5d14cadaaa1a80e53a9261, type: 3}
 --- !u!114 &11400024
@@ -3486,9 +3486,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa3f2246c2a59d940850ce67e37b8b32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MinWaterSec: .100000001
-  MaxWaterSec: 2
-  MaxHP: 10
+  MinWaterSec: .300000012
+  MaxWaterSec: 3
+  MaxHP: 20
   DamageBuffer: 0
   RepairSound: {fileID: 8300000, guid: 1bafb4735e41e4b47bdcb5bf9755e640, type: 3}
 --- !u!114 &11400026
@@ -3506,7 +3506,7 @@ MonoBehaviour:
   RotateSpeed: 25
   Cooldown: 1.5
   ShootAngle: 90
-  Explosion: {fileID: 100000, guid: aedd180f817255546b113bb139eb9f24, type: 2}
+  Explosion: {fileID: 100000, guid: 67e5b9f09995840449c988b145cc1d7b, type: 2}
   ExplosionSound1: {fileID: 8300000, guid: f049cb32e79ff4ba8aab2f54c1d8b093, type: 3}
   ExplosionSound2: {fileID: 8300000, guid: 449efba5ba5d14cadaaa1a80e53a9261, type: 3}
 --- !u!114 &11400028

@@ -15,7 +15,6 @@ public class StartScreen : MonoBehaviour {
 	private GameObject _panel;
 	private bool _newGameSelected = true;
 	private bool _instructionVisible = false;
-	private float cooldown = 0.2f;
 
 
 	void Start(){

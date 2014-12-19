@@ -111,7 +111,7 @@ public class GameHandler : MonoBehaviour {
 		FlyingLion	._headCount = 0; //HACK!!!!!
 		LizardMonster._headCount = 0;
 
-		float loadAfter = _gameOverEffect.FadeTime + _gameOverEffect.Delay + _blackPanelEffect.FadeTime + _blackPanelEffect.Delay;
+//		float loadAfter = _gameOverEffect.FadeTime + _gameOverEffect.Delay + _blackPanelEffect.FadeTime + _blackPanelEffect.Delay;
 		Invoke("ToTitleScreen",13);
 		SecondScoreText.text = ScoreText.text;
 		//TextDecor.SetActive(false);
