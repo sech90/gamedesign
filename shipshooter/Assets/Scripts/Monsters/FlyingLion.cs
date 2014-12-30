@@ -14,7 +14,8 @@ public class FlyingLion : Monster
 	float _waitTime = 6.0f;
 
 
-	GameObject _shipAttackSpot; //GameObject towards which the monster is attacking
+	GameObject _shipAttackSpotRight;
+	GameObject _shipAttackSpotLeft;
 	Vector3 _target;			// Position towards which the monster is moving
 	Damageable _damageable;
 	Facing _facing;
@@ -32,20 +33,12 @@ public class FlyingLion : Monster
 		_damageable = GetComponent<Damageable>();
 		_facing = GetComponent<Facing>();
 		_deathBehaviour = GetComponent<DiesByFalling>();
-	
-
 		_facing.SetRandom();
-
-	//	transform.position = RandomStartPosition();
 		_mode = MonsterMode.Approach;
-	//	_target = RandomWaitPosition();
+		_shipAttackSpotLeft = GameObject.Find("FlyingLionAttackSpotLeft");
+		_shipAttackSpotRight = GameObject.Find("FlyingLionAttackSpotRight");
 
-		if ( _facing.IsRight() )
-			_shipAttackSpot = GameObject.Find("FlyingLionAttackSpotLeft");
-		else
-			_shipAttackSpot = GameObject.Find("FlyingLionAttackSpotRight");
-
-		if (_shipAttackSpot == null)
+		if (_shipAttackSpotRight == null || _shipAttackSpotLeft == null)
 			Debug.LogError( "ERROR: Attack spot for Flying Lion not found");
 
 		_headCount++;
@@ -75,8 +68,6 @@ public class FlyingLion : Monster
 
 
 	void Approach(){
-
-
 		float x = Mathf.MoveTowards( transform.position.x, Ship.instance.transform.position.x, 
 		                            _approachSpeed * Time.deltaTime );
 		transform.position = new Vector3(x, transform.position.y, transform.position.z );
@@ -104,7 +95,11 @@ public class FlyingLion : Monster
 
 	void Attack()
 	{
-		_target = _shipAttackSpot.transform.position;
+		if ( _facing.IsLeft() ) 
+			_target = _shipAttackSpotRight.transform.position;
+		else
+			_target = _shipAttackSpotLeft.transform.position;
+
 
 		MoveStraightTowards(_target, _attackSpeed);
 		
