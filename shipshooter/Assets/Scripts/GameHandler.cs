@@ -5,15 +5,7 @@ using System.Collections;
 
 public class GameHandler : MonoBehaviour {
 
-	private float lastSpawn = 0.0f;
-	private float spawnRate = 3.0f;
-	private float lastLizSpawn = 0.0f;
-	private float lizSpawnRate = 6.0f;
-	private int maxFlyingMonsters = 4;
-	private int maxSwimmingMonsters = 4;
-
-	private GameObject flyingLionPrefab;
-	private GameObject lizPrefab;
+	
 	private FadeEffect _gameOverEffect;
 	private FadeEffect _blackPanelEffect;
 	private bool _gameover = false;
@@ -41,8 +33,6 @@ public class GameHandler : MonoBehaviour {
 		Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Monsters"), LayerMask.NameToLayer("WaterInteract"), true); 
 		Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Markers"), LayerMask.NameToLayer("InteractiveObj"), true); 
 
-		flyingLionPrefab = Resources.Load<GameObject>("FlyingLion");
-		lizPrefab = Resources.Load<GameObject>("Lizard_monster");
 		_gameOverEffect = GameObject.Find("/InGameUI/GameOverPanel").GetComponent<FadeEffect>();
 		_blackPanelEffect = GameObject.Find("/InGameUI/BlackEndPanel").GetComponent<FadeEffect>();
 		_score = 0;
@@ -70,34 +60,6 @@ public class GameHandler : MonoBehaviour {
 				Application.LoadLevel("StartScreen");
 			return;
 		}
-
-		_score += ScorePerSecond * Time.deltaTime;
-		ScoreText.text = "Score: "+((int)_score).ToString("D6");
-		
-		if (Time.time > lastSpawn + spawnRate && FlyingLion.GetNumberOf() < maxFlyingMonsters)
-		{
-			FlyingLion lion = Instantiate (flyingLionPrefab) as FlyingLion;
-			lastSpawn = Time.time;
-
-			if (Time.time > 180.0f) {
-				lion.GetComponent<FlyingLion>()._approachSpeed *= 1.5f;
-			}
-			if (Time.time > 360.0f) {
-				lion.GetComponent<FlyingLion>()._approachSpeed *= 1.5f;
-			}
-
-		}
-
-		if (Time.time > lastLizSpawn + lizSpawnRate && LizardMonster.GetNumberOf() < maxSwimmingMonsters)
-		{
-			LizardMonster liz = Instantiate (lizPrefab) as LizardMonster;
-			lastLizSpawn = Time.time;
-			
-			if (Time.time > 240.0f) {
-				liz.xSpeed *= 2.0f;
-			}
-		}
-
 
 
 	}

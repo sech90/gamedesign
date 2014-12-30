@@ -21,4 +21,8 @@ public class Util
 		return value % 2 != 0;
 	}
 
+	public static bool RandomBool() {
+		return (Random.value > 0.5f);
+	}
+
 }

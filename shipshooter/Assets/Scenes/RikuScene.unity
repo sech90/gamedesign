@@ -2051,7 +2051,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MinWaterSec: .300000012
-  MaxWaterSec: 3
+  MaxWaterSec: 2
   MaxHP: 20
   DamageBuffer: 0
   RepairSound: {fileID: 8300000, guid: 1bafb4735e41e4b47bdcb5bf9755e640, type: 3}
@@ -3263,6 +3263,45 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 115137362}
+--- !u!1 &123116635
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 123116637}
+  - 114: {fileID: 123116636}
+  m_Layer: 0
+  m_Name: MonsterSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &123116636
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 123116635}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2fc324733eb6b405d8e57865c029a2cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &123116637
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 123116635}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 16.7036877, y: 9.46402168, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 12
 --- !u!1 &127881252
 GameObject:
   m_ObjectHideFlags: 0
@@ -13140,6 +13179,11 @@ GameObject:
   - 60: {fileID: 697007821}
   - 114: {fileID: 697007820}
   - 114: {fileID: 697007824}
+  - 114: {fileID: 697007825}
+  - 114: {fileID: 697007828}
+  - 114: {fileID: 697007827}
+  - 114: {fileID: 697007826}
+  - 114: {fileID: 697007829}
   m_Layer: 0
   m_Name: Lizard_monster
   m_TagString: Untagged
@@ -13172,10 +13216,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9ff632a7ebf648b9b5596171925fd54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dyingSound: {fileID: 8300000, guid: c1748217e089a4dada8feff150fc089d, type: 3}
-  AttackPower: 5
   PointsWhenKilled: 200
-  MaxHp: 1
   xSpeed: .899999976
 --- !u!60 &697007821
 PolygonCollider2D:
@@ -13239,7 +13280,7 @@ SpriteRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 696869928}
   m_GameObject: {fileID: 697007818}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_LightmapIndex: 255
@@ -13276,6 +13317,74 @@ MonoBehaviour:
   isSinking: 0
   sinkingAcceleration: .25
   sinkingRollAcceleration: 5
+--- !u!114 &697007825
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400004, guid: 3bd95e0b1cf934f48af4951e4dc0d440,
+    type: 2}
+  m_PrefabInternal: {fileID: 696869928}
+  m_GameObject: {fileID: 697007818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56a34ce33f2ba40f8a80407f025ecf9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startsFacing: 0
+--- !u!114 &697007826
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400010, guid: 3bd95e0b1cf934f48af4951e4dc0d440,
+    type: 2}
+  m_PrefabInternal: {fileID: 696869928}
+  m_GameObject: {fileID: 697007818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7bfd723a2afa04a27b0e14d39cbf89cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &697007827
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400008, guid: 3bd95e0b1cf934f48af4951e4dc0d440,
+    type: 2}
+  m_PrefabInternal: {fileID: 696869928}
+  m_GameObject: {fileID: 697007818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08df1dca4efdb42b199a2ef2cc17bf1f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageToShip: 5
+  damageToSelf: 10
+--- !u!114 &697007828
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400006, guid: 3bd95e0b1cf934f48af4951e4dc0d440,
+    type: 2}
+  m_PrefabInternal: {fileID: 696869928}
+  m_GameObject: {fileID: 697007818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a63ddf9af47d4a66a6db2ab6831315f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitPoints: 1
+  maxHitPoints: 1
+--- !u!114 &697007829
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400012, guid: 3bd95e0b1cf934f48af4951e4dc0d440,
+    type: 2}
+  m_PrefabInternal: {fileID: 696869928}
+  m_GameObject: {fileID: 697007818}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 203ff0d1e8ffd4da3a91b0396f32bdc0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  droppingDeadAccelleration: .5
+  divesHeadFirst: 0
+  _dyingSound: {fileID: 8300000, guid: c1748217e089a4dada8feff150fc089d, type: 3}
 --- !u!1 &697198049
 GameObject:
   m_ObjectHideFlags: 0
@@ -17169,7 +17278,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 6
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -21793,7 +21902,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MinWaterSec: .300000012
-  MaxWaterSec: 3
+  MaxWaterSec: 2
   MaxHP: 20
   DamageBuffer: 0
   RepairSound: {fileID: 8300000, guid: 1bafb4735e41e4b47bdcb5bf9755e640, type: 3}
@@ -25250,6 +25359,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PumpPower: .75
   LevelOfActivation: 0
+  PumpIntereval: .200000003
   PullSound: {fileID: 8300000, guid: f892c9bad3f834c0ea9929f774069907, type: 3}
   PushSound: {fileID: 8300000, guid: c6780b6f40cda4cc895a79d3ab834cad, type: 3}
 --- !u!1 &1088409736
@@ -29458,10 +29568,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b3160d4d25d74211aba49cb1b3d73f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dyingSound: {fileID: 0}
-  AttackPower: 0
   PointsWhenKilled: 0
-  MaxHp: 10000
   AttackSound: {fileID: 8300000, guid: 14093d8264b5643dda98de8dd39db51e, type: 3}
   xSpeed: .5
   attackYSpeed: 1.5
@@ -29679,7 +29786,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MinWaterSec: .300000012
-  MaxWaterSec: 3
+  MaxWaterSec: 2
   MaxHP: 20
   DamageBuffer: 0
   RepairSound: {fileID: 8300000, guid: 1bafb4735e41e4b47bdcb5bf9755e640, type: 3}
@@ -30215,6 +30322,26 @@ Prefab:
       propertyPath: Explosion
       value: 
       objectReference: {fileID: 100000, guid: 9201e354e13ee6c4c9386f5e94dda090, type: 2}
+    - target: {fileID: 11400014, guid: 2ef08934a6a8c49eba1833de5fa72bde, type: 2}
+      propertyPath: MaxWaterSec
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400024, guid: 2ef08934a6a8c49eba1833de5fa72bde, type: 2}
+      propertyPath: MaxWaterSec
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 2ef08934a6a8c49eba1833de5fa72bde, type: 2}
+      propertyPath: MaxWaterSec
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400012, guid: 2ef08934a6a8c49eba1833de5fa72bde, type: 2}
+      propertyPath: MaxWaterSec
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400008, guid: 2ef08934a6a8c49eba1833de5fa72bde, type: 2}
+      propertyPath: PumpIntereval
+      value: .200000003
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2ef08934a6a8c49eba1833de5fa72bde, type: 2}
   m_RootGameObject: {fileID: 2059893669}
@@ -39245,7 +39372,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MinWaterSec: .300000012
-  MaxWaterSec: 3
+  MaxWaterSec: 2
   MaxHP: 20
   DamageBuffer: 0
   RepairSound: {fileID: 8300000, guid: 1bafb4735e41e4b47bdcb5bf9755e640, type: 3}

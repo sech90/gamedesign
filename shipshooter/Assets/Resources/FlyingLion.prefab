@@ -141,6 +141,10 @@ GameObject:
   - 114: {fileID: 11400000}
   - 60: {fileID: 6000000}
   - 50: {fileID: 5000000}
+  - 114: {fileID: 11400002}
+  - 114: {fileID: 11400004}
+  - 114: {fileID: 11400006}
+  - 114: {fileID: 11400008}
   m_Layer: 10
   m_Name: FlyingLion
   m_TagString: Untagged
@@ -336,15 +340,62 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17ab480337cf24397af7b1b7e5adc841, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dyingSound: {fileID: 8300000, guid: 8fd5f054375d0448eb5ff27bbd4e008a, type: 3}
-  AttackPower: 2
   PointsWhenKilled: 200
-  MaxHp: 1
   AttackSound: {fileID: 8300000, guid: d855e69a4fa9b4e9794b4254ad666f19, type: 3}
   _attackSpeed: 4
   _approachSpeed: .75
   _retreatSpeed: 3
+  _attackPower: 2
+--- !u!114 &11400002
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100016}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a63ddf9af47d4a66a6db2ab6831315f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitPoints: 1
+  maxHitPoints: 1
+--- !u!114 &11400004
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100016}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7bfd723a2afa04a27b0e14d39cbf89cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &11400006
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100016}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 203ff0d1e8ffd4da3a91b0396f32bdc0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   droppingDeadAccelleration: .5
+  divesHeadFirst: 1
+  _dyingSound: {fileID: 8300000, guid: 8fd5f054375d0448eb5ff27bbd4e008a, type: 3}
+--- !u!114 &11400008
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100016}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56a34ce33f2ba40f8a80407f025ecf9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startsFacing: 0
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1
